@@ -4,14 +4,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.google.android.gms.ads.AdView;
 import com.koceeng.freedonation.R;
 import com.koceeng.freedonation.base.BaseActivity;
+import com.koceeng.freedonation.util.AdUtil;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class HomeActivity extends BaseActivity {
 
     public static final String IX_FROM_SPLASH = "IX_FROM_SPLASH";
+
+    @BindView(R.id.home_adview_bottom) AdView adViewBottom;
 
     HomeActivity homeActivity;
 
@@ -43,5 +48,7 @@ public class HomeActivity extends BaseActivity {
 
         homeActivity = this;
         setTag("HomeActivity");
+
+        adViewBottom.loadAd(AdUtil.getInstance().getAdRequest());
     }
 }
