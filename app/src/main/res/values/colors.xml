@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#2c8c53</color>
+    <color name="colorPrimaryDark">#00a759</color>
+    <color name="colorAccent">#c1d464</color>
+    <color name="colorBase">#eeeeee</color>
+
+    <color name="colorDivider">#484848</color>
+
+    <color name="colorThemeWhite">#ffffff</color>
+    <color name="colorThemeGray">#eeeeee</color>
+    <color name="colorThemeGrayDark">#9f9f9f</color>
+    <color name="colorThemeGrayDarker">#636363</color>
+    <color name="colorThemeBlack">#333333</color>
+</resources>

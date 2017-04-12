@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Free Donation</string>
+
+    <!--Actions-->
+    <string name="ok" translatable="false">OK</string>
+    <string name="cancel" translatable="false">Cancel</string>
+    <string name="yes" translatable="false">Yes</string>
+    <string name="no" translatable="false">No</string>
+    <string name="understand" translatable="false">I Understand</string>
+    <string name="exit" translatable="false">Exit</string>
+    <string name="dismiss" translatable="false">Dismiss</string>
+    <string name="next" translatable="false">Next</string>
+    <string name="or" translatable="false">Or</string>
+    <string name="refresh" translatable="false">Refresh</string>
+    <string name="edit" translatable="false">Edit</string>
+    <string name="save" translatable="false">Save</string>
+    <string name="add" translatable="false">Add</string>
+    <string name="back" translatable="false">Go Back</string>
+    <string name="but" translatable="false">But </string>
+    <string name="and" translatable="false">And </string>
+    <string name="not_ready" translatable="false">Currently getting data from the web. Try again in a few second</string>
+
+    <!--Others-->
+    <string name="double_back_to_exit" translatable="false">Press \"Back\" again to exit this app</string>
+    <string name="ellipsize" translatable="false">&#8230;</string>
+    <string name="loading_message" translatable="false">Loading &#8230;</string>
+    <string name="sorry_title" translatable="false">Sorry,</string>
+    <string name="error_title" translatable="false">Oops :(</string>
+
+</resources>

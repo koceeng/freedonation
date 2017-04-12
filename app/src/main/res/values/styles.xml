@@ -1,0 +1,45 @@
+<resources>
+
+    <style name="AppButton" parent="Base.Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button_default_mtrl_shape</item>
+        <item name="android:textColor">@color/colorThemeWhite</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="AppButtonAlt" parent="AppButton">
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+    <style name="AppButtonBorderless" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:textColor">@color/colorThemeWhite</item>
+    </style>
+    <style name="AppButtonBorderlessColored" parent="Base.Widget.AppCompat.Button.Borderless.Colored">
+
+    </style>
+
+    <style name="AppTextMarquee">
+        <item name="android:lines">1</item>
+        <item name="android:minLines">1</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:marqueeRepeatLimit">marquee_forever</item>
+        <item name="android:scrollHorizontally">true</item>
+    </style>
+
+    <style name="AppFab">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">bottom|end</item>
+        <item name="android:layout_margin">16dp</item>
+    </style>
+
+    <style name="layout_inner">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginTop">@dimen/toolbar</item>
+        <item name="android:paddingStart">@dimen/space_default</item>
+        <item name="android:paddingEnd">@dimen/space_default</item>
+    </style>
+
+</resources>

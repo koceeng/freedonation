@@ -1,0 +1,157 @@
+package com.koceeng.freedonation.base;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDialog;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.koceeng.freedonation.R;
+import com.koceeng.freedonation.util.DebugUtil;
+
+import org.greenrobot.eventbus.EventBus;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
+public class BaseActivity extends AppCompatActivity {
+
+    public String TAG = "BaseActivity";
+
+    protected Activity thisActivity;
+    protected AppCompatActivity thisAppCompatActivity;
+    protected BaseActivity thisBaseActivity;
+    protected Context thisContext;
+
+    protected Boolean isActivityVisible = false;
+    private Boolean isRegisterEventBus = false;
+
+    AppCompatDialog progressDialog;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        DebugUtil.getInstance().v(TAG, "onCreate");
+        super.onCreate(savedInstanceState);
+
+        thisActivity = this;
+        thisAppCompatActivity = this;
+        thisBaseActivity = this;
+        thisContext = this;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (isRegisterEventBus)
+            EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onResume() {
+        DebugUtil.getInstance().v(TAG, "onResume");
+        super.onResume();
+        isActivityVisible = true;
+    }
+
+    @Override
+    protected void onPause() {
+        DebugUtil.getInstance().v(TAG, "onPause");
+        super.onPause();
+        isActivityVisible = false;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (isRegisterEventBus && EventBus.getDefault().isRegistered(this))
+            EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        DebugUtil.getInstance().v(TAG, "onDestroy");
+        super.onDestroy();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        DebugUtil.getInstance().v(TAG, "onOptionsItemSelected");
+        switch (item.getItemId()) {
+            case android.R.id.home :
+                onBackPressed();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        DebugUtil.getInstance().v(TAG, "onActivityResult");
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        DebugUtil.getInstance().v(TAG, "attachBaseContext");
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
+    public void setTag(String tag) {
+        this.TAG = tag;
+    }
+
+    public Toolbar initToolbar(Toolbar toolbar, String title) {
+        DebugUtil.getInstance().v(TAG, "initToolbar");
+
+        Boolean isTitleValid = (title != null && !title.isEmpty());
+
+        if (isTitleValid) {
+            toolbar.setTitle(title);
+            toolbar.setTitleTextColor(ContextCompat.getColor(thisContext, R.color.colorThemeWhite));
+        }
+
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+            if (isTitleValid) {
+                getSupportActionBar().setDisplayShowTitleEnabled(true);
+            } else {
+                getSupportActionBar().setDisplayShowTitleEnabled(false);
+            }
+
+        }
+
+        return toolbar;
+    }
+
+    protected void registerEventBus() {
+        isRegisterEventBus = true;
+    }
+
+    protected FirebaseUser getUser() {
+        DebugUtil.getInstance().v(TAG, "getUser");
+
+        return FirebaseAuth.getInstance().getCurrentUser();
+    }
+
+    public void inputFieldAction() {
+        // super first
+        DebugUtil.getInstance().v(TAG, "inputFieldAction");
+    }
+
+    public void dismissProgress() {
+        DebugUtil.getInstance().v(TAG, "dismissProgress");
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+    }
+}

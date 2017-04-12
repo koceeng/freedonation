@@ -1,0 +1,12 @@
+<resources>
+
+    <style name="AppButton" parent="Base.Widget.AppCompat.Button">
+        <item name="android:backgroundTint">@color/colorAccent</item>
+        <item name="android:textColor">@color/colorThemeWhite</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="AppButtonAlt" parent="AppButton">
+        <item name="android:backgroundTint">@color/colorThemeWhite</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+</resources>
