@@ -3,10 +3,12 @@ package com.koceeng.freedonation.home;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.google.android.gms.ads.AdView;
 import com.koceeng.freedonation.R;
 import com.koceeng.freedonation.base.BaseActivity;
+import com.koceeng.freedonation.setting.SettingActivity;
 import com.koceeng.freedonation.util.AdUtil;
 
 import butterknife.BindView;
@@ -50,5 +52,9 @@ public class HomeActivity extends BaseActivity {
         setTag("HomeActivity");
 
         adViewBottom.loadAd(AdUtil.getInstance().getAdRequest());
+    }
+
+    public void actionSetting(View view) {
+        startActivity(SettingActivity.Factory.getIntent(homeActivity));
     }
 }

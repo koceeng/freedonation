@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="PREFERENCE_LANGUAGE">PREFERENCE_LANGUAGE</string>
+    <string name="PREFERENCE_LANGUAGE_EN">en</string>
+    <string name="PREFERENCE_LANGUAGE_IN">in</string>
+    <string name="PREFERENCE_SHOW_INTERSTITIAL_AD">PREFERENCE_SHOW_INTERSTITIAL_AD</string>
+</resources>

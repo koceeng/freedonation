@@ -108,6 +108,10 @@ public class BaseActivity extends AppCompatActivity {
         this.TAG = tag;
     }
 
+    public Toolbar initToolbar(String title) {
+        return initToolbar((Toolbar) findViewById(R.id.appbar_toolbar), title);
+    }
+
     public Toolbar initToolbar(Toolbar toolbar, String title) {
         DebugUtil.getInstance().v(TAG, "initToolbar");
 
