@@ -22,7 +22,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             ads:adSize="SMART_BANNER"
-            ads:adUnitId="@string/ad_unit_native_medium"/>
+            ads:adUnitId="@string/ad_unit_banner"/>
 
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
