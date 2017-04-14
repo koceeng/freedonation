@@ -3,6 +3,7 @@ package com.koceeng.freedonation.base;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -15,8 +16,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.koceeng.freedonation.R;
 import com.koceeng.freedonation.util.DebugUtil;
+import com.koceeng.freedonation.util.PreferenceUtil;
 
 import org.greenrobot.eventbus.EventBus;
+
+import java.util.Locale;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -29,10 +33,12 @@ public class BaseActivity extends AppCompatActivity {
     protected BaseActivity thisBaseActivity;
     protected Context thisContext;
 
+    protected Integer layoutId;
+
     protected Boolean isActivityVisible = false;
     private Boolean isRegisterEventBus = false;
 
-    AppCompatDialog progressDialog;
+    private String appliedLang;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,6 +49,16 @@ public class BaseActivity extends AppCompatActivity {
         thisAppCompatActivity = this;
         thisBaseActivity = this;
         thisContext = this;
+
+        // language
+        String lang = PreferenceUtil.getInstance().getString(thisContext, getString(R.string.PREFERENCE_LANGUAGE));
+        if (lang == null)
+            lang = getString(R.string.PREFERENCE_LANGUAGE_EN);
+        Resources res = getResources();
+        android.content.res.Configuration conf = res.getConfiguration();
+        conf.setLocale(new Locale(lang));
+        res.updateConfiguration(conf, res.getDisplayMetrics());
+        appliedLang = lang;
     }
 
     @Override
@@ -57,6 +73,12 @@ public class BaseActivity extends AppCompatActivity {
         DebugUtil.getInstance().v(TAG, "onResume");
         super.onResume();
         isActivityVisible = true;
+
+        if (appliedLang != null && layoutId != null) {
+            String lang = PreferenceUtil.getInstance().getString(thisContext, getString(R.string.PREFERENCE_LANGUAGE));
+            if (lang != null && !lang.equals(appliedLang))
+                setContentView(getLayoutId());
+        }
     }
 
     @Override
@@ -108,6 +130,14 @@ public class BaseActivity extends AppCompatActivity {
         this.TAG = tag;
     }
 
+    public Integer getLayoutId() {
+        return layoutId;
+    }
+
+    public void setLayoutId(Integer layoutId) {
+        this.layoutId = layoutId;
+    }
+
     public Toolbar initToolbar(String title) {
         return initToolbar((Toolbar) findViewById(R.id.appbar_toolbar), title);
     }
@@ -150,12 +180,5 @@ public class BaseActivity extends AppCompatActivity {
     public void inputFieldAction() {
         // super first
         DebugUtil.getInstance().v(TAG, "inputFieldAction");
-    }
-
-    public void dismissProgress() {
-        DebugUtil.getInstance().v(TAG, "dismissProgress");
-        if (progressDialog != null) {
-            progressDialog.dismiss();
-        }
     }
 }

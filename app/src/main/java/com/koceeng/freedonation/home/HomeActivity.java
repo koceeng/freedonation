@@ -2,6 +2,7 @@ package com.koceeng.freedonation.home;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 
@@ -10,6 +11,9 @@ import com.koceeng.freedonation.R;
 import com.koceeng.freedonation.base.BaseActivity;
 import com.koceeng.freedonation.setting.SettingActivity;
 import com.koceeng.freedonation.util.AdUtil;
+import com.koceeng.freedonation.util.PreferenceUtil;
+
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,13 +49,18 @@ public class HomeActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home);
+        setLayoutId(R.layout.home);
+        setContentView(getLayoutId());
         ButterKnife.bind(this);
 
         homeActivity = this;
         setTag("HomeActivity");
 
         adViewBottom.loadAd(AdUtil.getInstance().getAdRequest());
+    }
+
+    public void actionHome(View view) {
+        recreate();
     }
 
     public void actionSetting(View view) {

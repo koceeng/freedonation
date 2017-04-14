@@ -35,7 +35,8 @@ public class SettingActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.setting);
+        setLayoutId(R.layout.setting);
+        setContentView(getLayoutId());
         ButterKnife.bind(this);
 
         settingActivity = this;

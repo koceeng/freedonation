@@ -29,9 +29,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".home.HomeActivity" />
+            android:name=".home.HomeActivity"
+            android:configChanges="locale|layoutDirection"/>
         <activity
-            android:name=".setting.SettingActivity" />
+            android:name=".setting.SettingActivity"
+            android:configChanges="locale|layoutDirection"/>
 
         <activity
             android:name="com.google.android.gms.ads.AdActivity"

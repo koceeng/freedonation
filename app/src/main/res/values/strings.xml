@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Free Donation</string>
-    
+    <string name="title">Free Donation</string>
+
     <!--Setting-->
     <string name="setting_title">Setting</string>
 

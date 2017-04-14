@@ -1,5 +1,6 @@
 package com.koceeng.freedonation.home;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -11,6 +12,8 @@ import com.google.android.gms.ads.MobileAds;
 import com.koceeng.freedonation.R;
 import com.koceeng.freedonation.base.BaseActivity;
 import com.koceeng.freedonation.util.AdUtil;
+
+import java.util.Locale;
 
 public class SplashActivity extends BaseActivity {
 
@@ -31,6 +34,7 @@ public class SplashActivity extends BaseActivity {
         MobileAds.initialize(thisContext);
 
         // TODO: 12-Apr-17 show interstitial ads
+        // TODO: 14-Apr-17 activate this
         interstitialAd = new InterstitialAd(thisContext);
         interstitialAd.setAdUnitId(getString(R.string.ad_unit_interstitial));
         interstitialAd.loadAd(AdUtil.getInstance().getAdRequest());
