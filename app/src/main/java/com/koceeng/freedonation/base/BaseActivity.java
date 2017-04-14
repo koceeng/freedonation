@@ -53,7 +53,7 @@ public class BaseActivity extends AppCompatActivity {
         // language
         String lang = PreferenceUtil.getInstance().getString(thisContext, getString(R.string.PREFERENCE_LANGUAGE));
         if (lang == null)
-            lang = getString(R.string.PREFERENCE_LANGUAGE_EN);
+            lang = getString(R.string.PREFERENCE_LANGUAGE_IN);
         Resources res = getResources();
         android.content.res.Configuration conf = res.getConfiguration();
         conf.setLocale(new Locale(lang));
