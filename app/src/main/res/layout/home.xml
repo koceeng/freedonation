@@ -46,18 +46,15 @@
 
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="50dp"
+                        android:layout_height="60dp"
                         android:src="@drawable/icon_vector"
                         android:contentDescription="@null"/>
 
-                    <android.support.v7.widget.AppCompatTextView
+                    <TextSwitcher
+                        android:id="@+id/home_text_app_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:textSize="38sp"
-                        android:textColor="@color/colorThemeWhite"
-                        android:text="@string/title"
-                        fontPath="fonts/default.ttf"/>
+                        android:gravity="center_horizontal"/>
 
                 </LinearLayout>
 
@@ -69,62 +66,77 @@
                     <LinearLayout
                         android:layout_width="60dp"
                         android:layout_height="wrap_content"
-                        android:paddingTop="@dimen/space_default"
                         android:orientation="vertical">
 
                         <RelativeLayout
+                            android:id="@+id/home_layout_feed"
                             android:layout_width="match_parent"
-                            android:layout_height="70dp"
-                            android:background="?attr/selectableItemBackground"
-                            android:onClick="actionHome">
+                            android:layout_height="60dp"
+                            android:layout_marginTop="@dimen/space_small"
+                            android:background="?attr/selectableItemBackground">
 
                             <View
-                                android:layout_width="match_parent"
+                                android:id="@+id/home_layout_feed_indicator"
+                                android:layout_width="3dp"
                                 android:layout_height="match_parent"
-                                android:background="@color/colorSecondary"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentEnd="true"
+                                android:paddingTop="@dimen/space_tiny"
+                                android:paddingBottom="@dimen/space_tiny"
+                                android:background="@color/colorThemeWhite"
                                 android:visibility="gone"/>
 
-                            <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
+                            <android.support.v7.widget.AppCompatImageView
+                                android:id="@+id/home_image_feed"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
                                 android:layout_centerVertical="true"
                                 android:layout_centerHorizontal="true"
-                                android:src="@drawable/home"
-                                android:contentDescription="@null"/>
+                                android:src="@drawable/feed"/>
 
                         </RelativeLayout>
 
                         <RelativeLayout
+                            android:id="@+id/home_layout_setting"
                             android:layout_width="match_parent"
-                            android:layout_height="70dp"
-                            android:background="?attr/selectableItemBackground"
-                            android:onClick="actionSetting">
+                            android:layout_height="60dp"
+                            android:background="?attr/selectableItemBackground">
 
                             <View
-                                android:layout_width="match_parent"
+                                android:id="@+id/home_layout_setting_indicator"
+                                android:layout_width="3dp"
                                 android:layout_height="match_parent"
-                                android:background="@color/colorSecondary"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentEnd="true"
+                                android:paddingTop="@dimen/space_tiny"
+                                android:paddingBottom="@dimen/space_tiny"
+                                android:background="@color/colorThemeWhite"
                                 android:visibility="gone"/>
 
-                            <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
+                            <android.support.v7.widget.AppCompatImageView
+                                android:id="@+id/home_image_setting"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
                                 android:layout_centerVertical="true"
                                 android:layout_centerHorizontal="true"
                                 android:src="@drawable/setting"
-                                android:adjustViewBounds="true"
-                                android:contentDescription="@null"/>
+                                android:adjustViewBounds="true"/>
 
                         </RelativeLayout>
 
                     </LinearLayout>
 
-                    <Button
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="500dp"
-                        android:text="PENGATURAN"
-                        android:onClick="actionSetting"/>
+                        android:animateLayoutChanges="true"
+                        android:orientation="vertical">
+
+                        <include layout="@layout/feed" />
+
+                        <include layout="@layout/setting" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 

@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/setting_layout_parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".setting.SettingActivity">
+    android:background="@color/colorSecondary"
+    android:visibility="gone">
 
-    <include layout="@layout/appbar" />
-
-    <android.support.v7.widget.SwitchCompat
-        android:id="@+id/setting_switch_ad_interstitial"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/space_default"
-        android:text="WHAT THE HELL" />
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/setting_switch_ad_interstitial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:paddingBottom="500dp"/>
+
+    </RelativeLayout>
 
 </LinearLayout>
