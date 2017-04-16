@@ -2,10 +2,12 @@ package com.koceeng.freedonation.home;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatImageView;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
@@ -34,6 +36,9 @@ public class HomeActivity extends BaseActivity {
 
     // report page
     @BindView(R.id.report_text_title) TextView textReportTitle;
+    @BindView(R.id.report_text_note) TextView textReportNote;
+    @BindView(R.id.report_text_note_future_release) TextView textReportNoteFutureRelease;
+    @BindView(R.id.report_button) Button buttonReport;
 
     // setting page
     @BindView(R.id.setting_text_title) TextSwitcher textSettingTitle;
@@ -89,6 +94,11 @@ public class HomeActivity extends BaseActivity {
                 (AppCompatImageView) findViewById(R.id.home_image_setting),
                 findViewById(R.id.setting_layout_parent)
         ));
+        homeMenuList.putItem(HomeMenuList.Name.OTHER_APP, new HomeMenu(
+                findViewById(R.id.home_layout_other_app),
+                findViewById(R.id.home_layout_other_app_indicator),
+                (AppCompatImageView) findViewById(R.id.home_image_other_app)
+        ));
 
         homeMenuList.setActive(HomeMenuList.Name.FEED, false);
 
@@ -105,6 +115,10 @@ public class HomeActivity extends BaseActivity {
         LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textLanguageValue, R.dimen.text_small, R.color.colorPrimary, Gravity.CENTER_VERTICAL | Gravity.END);
         LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textAdInterstitialLabel, R.dimen.text_small);
         LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textAdInterstitialValue, R.dimen.text_small, R.color.colorPrimary, Gravity.CENTER_VERTICAL | Gravity.END);
+    }
+
+    public void actionReport(View view) {
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://freedonation.koceeng.com/report")));
     }
 
     public void actionSettingLanguage(View view) {
@@ -129,8 +143,14 @@ public class HomeActivity extends BaseActivity {
     public void onLanguageChange(SettingHelper.Type type) {
         if (type == null) {
             LayoutUtil.getInstance().setText(textAppName, getString(R.string.title));
+
             LayoutUtil.getInstance().setText(textFeedTitle, getString(R.string.feed_title));
+
             LayoutUtil.getInstance().setText(textReportTitle, getString(R.string.report_title));
+            LayoutUtil.getInstance().setText(textReportNote, getString(R.string.report_note));
+            LayoutUtil.getInstance().setText(textReportNoteFutureRelease, getString(R.string.report_note_future_release));
+            LayoutUtil.getInstance().setText(buttonReport, getString(R.string.report_button_text));
+
             LayoutUtil.getInstance().setText(textSettingTitle, getString(R.string.setting_title));
             LayoutUtil.getInstance().setText(textLanguageLabel, getString(R.string.setting_language_label));
             LayoutUtil.getInstance().setText(textAdInterstitialLabel, getString(R.string.setting_ad_interstitial_label));

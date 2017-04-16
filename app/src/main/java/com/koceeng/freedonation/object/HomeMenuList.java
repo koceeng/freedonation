@@ -4,11 +4,13 @@ import android.content.Context;
 import android.view.View;
 import android.widget.ViewFlipper;
 
+import com.koceeng.freedonation.util.IntentUtil;
+
 import java.util.HashMap;
 
 public class HomeMenuList {
 
-    public enum Name { FEED, REPORT, SETTING }
+    public enum Name { FEED, REPORT, SETTING, OTHER_APP }
 
     private Context context;
     private ViewFlipper viewFlipper;
@@ -24,13 +26,22 @@ public class HomeMenuList {
         if (itemMap == null)
             itemMap = new HashMap<>();
 
-        item.setViewFlipper(viewFlipper);
-        item.getLayout().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setActive(name);
-            }
-        });
+        if (item.getContent() != null) {
+            item.setViewFlipper(viewFlipper);
+            item.getLayout().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setActive(name);
+                }
+            });
+        } else {
+            item.getLayout().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    IntentUtil.getInstance().goToMarket(context, true);
+                }
+            });
+        }
         itemMap.put(name, item);
     }
 

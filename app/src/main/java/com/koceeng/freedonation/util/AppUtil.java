@@ -111,21 +111,6 @@ public class AppUtil {
         return dateFormat.format(date);
     }
 
-    public void setLocale(Activity activity) {
-        Locale locale = getLocale();
-        Locale.setDefault(locale);
-
-        Configuration config = new Configuration();
-        config.locale = locale;
-        activity.getBaseContext().getResources().updateConfiguration(config,
-                activity.getBaseContext().getResources().getDisplayMetrics());
-    }
-
-    public Locale getLocale() {
-        // return new Locale("in_ID");
-        return new Locale("en_US");
-    }
-
     public boolean checkGooglePlayServices(Activity activity) {
         GoogleApiAvailability googleApiAvailability = GoogleApiAvailability.getInstance();
         int status = googleApiAvailability.isGooglePlayServicesAvailable(activity);

@@ -7,6 +7,9 @@
 
     <!--Report-->
     <string name="report_title">Laporan</string>
+    <string name="report_button_text">Lihat Laporan</string>
+    <string name="report_note">Anda dapat melihat penghasilan dari aplikasi ini serta detail dan bukti donasi disini</string>
+    <string name="report_note_future_release">Fitur lihat laporan dari aplikasi (tidak melalui web) akan ditambahkan pada perbaruan aplikasi selanjutnya</string>
 
     <!--Setting-->
     <string name="setting_title">Pengaturan</string>

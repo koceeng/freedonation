@@ -1,6 +1,7 @@
 package com.koceeng.freedonation.util;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
@@ -24,14 +25,23 @@ public class IntentUtil {
                 && i.getBooleanExtra(key, false));
     }
 
-    public void goToMarket(Activity activity) {
-        final String appPackageName = activity.getPackageName();
+    public void goToMarket(Context context, boolean showDeveloperPage) {
+        String link;
+        String alternateLink;
+        if (showDeveloperPage) {
+            link = "market://dev?id=Koceeng+Dev";
+            alternateLink = "https://play.google.com/store/apps/developer?id=Koceeng+Dev";
+        } else {
+            link = "market://details?id=" + context.getPackageName();
+            alternateLink = "https://play.google.com/store/apps/details?id=" + context.getPackageName();
+        }
+
         try {
-            Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName));
+            Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
             i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
-            activity.startActivity(i);
+            context.startActivity(i);
         } catch (android.content.ActivityNotFoundException e) {
-            activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(alternateLink)));
         }
     }
 

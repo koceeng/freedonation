@@ -7,7 +7,8 @@
     <dimen name="space_double">32dp</dimen>
     <dimen name="space_triple">48dp</dimen>
 
-    <dimen name="height_small">40dp</dimen>
+    <dimen name="height_mini">40dp</dimen>
+    <dimen name="height_small">50dp</dimen>
     <dimen name="height_default">60dp</dimen>
 
     <dimen name="text_tiny">8sp</dimen>

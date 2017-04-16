@@ -4,17 +4,48 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:visibility="gone">
+    android:visibility="visible">
 
     <TextView
         android:id="@+id/report_text_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/space_small"
+        android:paddingBottom="@dimen/space_small"
         android:paddingStart="@dimen/space_default"
         android:paddingEnd="@dimen/space_default"
         android:textSize="@dimen/text_extra_big"
         android:textColor="@color/colorPrimary"
         android:text="@string/report_title"/>
+
+    <TextView
+        android:id="@+id/report_text_note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/space_small"
+        android:layout_marginStart="@dimen/space_default"
+        android:layout_marginEnd="@dimen/space_default"
+        android:text="@string/report_note"/>
+
+    <Button
+        android:id="@+id/report_button"
+        style="@style/AppButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_default"
+        android:layout_marginEnd="@dimen/space_default"
+        android:text="@string/report_button_text"
+        android:onClick="actionReport"/>
+
+    <TextView
+        android:id="@+id/report_text_note_future_release"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_double"
+        android:layout_marginStart="@dimen/space_default"
+        android:layout_marginEnd="@dimen/space_default"
+        android:padding="@dimen/space_default"
+        android:background="@color/colorPrimaryLight"
+        android:text="@string/report_note_future_release"/>
 
 </LinearLayout>

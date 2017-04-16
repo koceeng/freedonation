@@ -17,14 +17,14 @@
         <RadioButton
             android:id="@+id/setting_language_radio_in"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/height_mini"
             android:layout_weight="1"
             android:text="@string/PREFERENCE_LANGUAGE_IN_LABEL" />
 
         <RadioButton
             android:id="@+id/setting_language_radio_en"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/height_mini"
             android:layout_weight="1"
             android:text="@string/PREFERENCE_LANGUAGE_EN_LABEL" />
     </RadioGroup>

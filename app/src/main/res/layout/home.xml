@@ -151,6 +151,34 @@
 
                         </RelativeLayout>
 
+                        <RelativeLayout
+                            android:id="@+id/home_layout_other_app"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/height_default"
+                            android:background="?attr/selectableItemBackground">
+
+                            <View
+                                android:id="@+id/home_layout_other_app_indicator"
+                                android:layout_width="3dp"
+                                android:layout_height="match_parent"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentEnd="true"
+                                android:paddingTop="@dimen/space_tiny"
+                                android:paddingBottom="@dimen/space_tiny"
+                                android:background="@color/colorThemeWhite"
+                                android:visibility="gone"/>
+
+                            <android.support.v7.widget.AppCompatImageView
+                                android:id="@+id/home_image_other_app"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_centerVertical="true"
+                                android:layout_centerHorizontal="true"
+                                android:src="@drawable/other_app"
+                                android:adjustViewBounds="true"/>
+
+                        </RelativeLayout>
+
                     </LinearLayout>
 
                     <ViewFlipper

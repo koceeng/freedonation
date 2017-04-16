@@ -8,6 +8,9 @@
 
     <!--Report-->
     <string name="report_title">Report</string>
+    <string name="report_button_text">See Report</string>
+    <string name="report_note">You can see income from this app and donation detail here</string>
+    <string name="report_note_future_release">In-app report will be added in future release</string>
 
     <!--Setting-->
     <string name="setting_title">Setting</string>
