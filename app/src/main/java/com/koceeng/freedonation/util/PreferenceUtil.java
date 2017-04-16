@@ -24,8 +24,12 @@ public class PreferenceUtil {
     }
 
     public String getString(Context context, String preferenceKey) {
+        return getString(context, preferenceKey, true);
+    }
+
+    public String getString(Context context, String preferenceKey, Boolean allowNull) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return (preferences != null) ? preferences.getString(preferenceKey, null) : null;
+        return (preferences != null) ? preferences.getString(preferenceKey, allowNull ? null : "") : allowNull ? null : "";
     }
 
     private static PreferenceUtil preferenceUtil;

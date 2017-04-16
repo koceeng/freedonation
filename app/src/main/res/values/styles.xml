@@ -42,4 +42,13 @@
         <item name="android:paddingEnd">@dimen/space_default</item>
     </style>
 
+    <style name="settingEntry">
+        <item name="android:paddingTop">@dimen/space_small</item>
+        <item name="android:paddingBottom">@dimen/space_small</item>
+        <item name="android:paddingStart">@dimen/space_default</item>
+        <item name="android:paddingEnd">@dimen/space_default</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
 </resources>

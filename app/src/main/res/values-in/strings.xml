@@ -3,7 +3,7 @@
     <string name="title">Donasi Gratis</string>
 
     <!--Feed-->
-    <string name="feed_title">Harian</string>
+    <string name="feed_title">Hadits Harian</string>
 
     <!--Report-->
     <string name="report_title">Laporan</string>
@@ -11,7 +11,7 @@
     <!--Setting-->
     <string name="setting_title">Pengaturan</string>
     <string name="setting_language_label">Bahasa</string>
-    <string name="setting_ad_interstitial_label">Tampilkan iklan saat membuka aplikasi (saat internet lancar)</string>
+    <string name="setting_ad_interstitial_label">Tampilkan iklan saat membuka aplikasi (pada internet lancar)</string>
 
     <!--Actions-->
     <string name="ok">OK</string>

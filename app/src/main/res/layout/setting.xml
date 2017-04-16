@@ -11,58 +11,48 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/space_small"
+        android:paddingBottom="@dimen/space_small"
         android:paddingStart="@dimen/space_default"
         android:paddingEnd="@dimen/space_default"/>
 
-    <RelativeLayout
+    <LinearLayout
+        style="@style/settingEntry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/space_small"
-        android:paddingBottom="@dimen/space_small"
-        android:paddingStart="@dimen/space_default"
-        android:paddingEnd="@dimen/space_default">
-
-        <android.support.v7.widget.AppCompatSpinner
-            android:id="@+id/setting_spinner_language"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"/>
+        android:onClick="actionSettingLanguage">
 
         <TextSwitcher
-            android:id="@+id/setting_text_language"
+            android:id="@+id/setting_text_language_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/space_tiny"/>
+
+        <TextSwitcher
+            android:id="@+id/setting_text_language_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_alignParentStart="true"
-            android:layout_toStartOf="@id/setting_spinner_language"
-            android:foregroundGravity="bottom"/>
+            android:layout_gravity="end"/>
 
-    </RelativeLayout>
+    </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
+        style="@style/settingEntry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/space_small"
-        android:paddingBottom="@dimen/space_small"
-        android:paddingStart="@dimen/space_default"
-        android:paddingEnd="@dimen/space_default">
-
-        <android.support.v7.widget.SwitchCompat
-            android:id="@+id/setting_switch_ad_interstitial"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"/>
+        android:onClick="actionSettingAdInterstitial">
 
         <TextSwitcher
-            android:id="@+id/setting_text_ad_interstitial"
+            android:id="@+id/setting_text_ad_interstitial_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/space_tiny"/>
+
+        <TextSwitcher
+            android:id="@+id/setting_text_ad_interstitial_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_alignParentStart="true"
-            android:layout_toStartOf="@id/setting_switch_ad_interstitial"/>
+            android:layout_gravity="end"/>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </LinearLayout>

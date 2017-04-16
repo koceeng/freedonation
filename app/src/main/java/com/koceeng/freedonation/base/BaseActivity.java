@@ -3,24 +3,17 @@ package com.koceeng.freedonation.base;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.AppCompatDialog;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.koceeng.freedonation.R;
 import com.koceeng.freedonation.util.DebugUtil;
-import com.koceeng.freedonation.util.PreferenceUtil;
+import com.koceeng.freedonation.util.LanguageUtil;
 
 import org.greenrobot.eventbus.EventBus;
-
-import java.util.Locale;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -33,12 +26,8 @@ public class BaseActivity extends AppCompatActivity {
     protected BaseActivity thisBaseActivity;
     protected Context thisContext;
 
-    protected Integer layoutId;
-
     protected Boolean isActivityVisible = false;
     private Boolean isRegisterEventBus = false;
-
-    private String appliedLang;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,15 +39,7 @@ public class BaseActivity extends AppCompatActivity {
         thisBaseActivity = this;
         thisContext = this;
 
-        // language
-        String lang = PreferenceUtil.getInstance().getString(thisContext, getString(R.string.PREFERENCE_LANGUAGE));
-        if (lang == null)
-            lang = getString(R.string.PREFERENCE_LANGUAGE_IN);
-        Resources res = getResources();
-        android.content.res.Configuration conf = res.getConfiguration();
-        conf.setLocale(new Locale(lang));
-        res.updateConfiguration(conf, res.getDisplayMetrics());
-        appliedLang = lang;
+        LanguageUtil.getInstance().updateLanguageResource(thisContext);
     }
 
     @Override
@@ -73,12 +54,6 @@ public class BaseActivity extends AppCompatActivity {
         DebugUtil.getInstance().v(TAG, "onResume");
         super.onResume();
         isActivityVisible = true;
-
-        if (appliedLang != null && layoutId != null) {
-            String lang = PreferenceUtil.getInstance().getString(thisContext, getString(R.string.PREFERENCE_LANGUAGE));
-            if (lang != null && !lang.equals(appliedLang))
-                setContentView(getLayoutId());
-        }
     }
 
     @Override
@@ -128,43 +103,6 @@ public class BaseActivity extends AppCompatActivity {
 
     public void setTag(String tag) {
         this.TAG = tag;
-    }
-
-    public Integer getLayoutId() {
-        return layoutId;
-    }
-
-    public void setLayoutId(Integer layoutId) {
-        this.layoutId = layoutId;
-    }
-
-    public Toolbar initToolbar(String title) {
-        return initToolbar((Toolbar) findViewById(R.id.appbar_toolbar), title);
-    }
-
-    public Toolbar initToolbar(Toolbar toolbar, String title) {
-        DebugUtil.getInstance().v(TAG, "initToolbar");
-
-        Boolean isTitleValid = (title != null && !title.isEmpty());
-
-        if (isTitleValid) {
-            toolbar.setTitle(title);
-            toolbar.setTitleTextColor(ContextCompat.getColor(thisContext, R.color.colorThemeWhite));
-        }
-
-        setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-            if (isTitleValid) {
-                getSupportActionBar().setDisplayShowTitleEnabled(true);
-            } else {
-                getSupportActionBar().setDisplayShowTitleEnabled(false);
-            }
-
-        }
-
-        return toolbar;
     }
 
     protected void registerEventBus() {
