@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/feed_layout_parent"
+    android:id="@+id/report_layout_parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:visibility="gone">
 
     <TextView
-        android:id="@+id/feed_text_title"
+        android:id="@+id/report_text_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/space_small"
@@ -15,7 +15,6 @@
         android:paddingEnd="@dimen/space_default"
         android:textSize="@dimen/text_extra_big"
         android:textColor="@color/colorPrimary"
-        android:text="@string/feed_title"
-        android:paddingBottom="800dp"/>
+        android:text="@string/report_title"/>
 
 </LinearLayout>

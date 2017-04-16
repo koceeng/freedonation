@@ -2,11 +2,14 @@ package com.koceeng.freedonation.util;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.TextSwitcher;
@@ -67,14 +70,22 @@ public class LayoutUtil {
     }
 
     public void prepareTextSwitcher(final Context context, TextSwitcher textSwitcher) {
-        prepareTextSwitcher(context, textSwitcher, null, null, null, null, null);
+        prepareTextSwitcher(context, textSwitcher, null, null, null, null, null, null);
     }
 
     public void prepareTextSwitcher(final Context context, TextSwitcher textSwitcher, Integer size) {
-        prepareTextSwitcher(context, textSwitcher, size, null, null, null, null);
+        prepareTextSwitcher(context, textSwitcher, size, null, null, null, null, null);
     }
 
-    public void prepareTextSwitcher(final Context context, TextSwitcher textSwitcher, Integer size,
+    public void prepareTextSwitcher(final Context context, TextSwitcher textSwitcher, Integer size, Integer color) {
+        prepareTextSwitcher(context, textSwitcher, size, color, null, null, null, null);
+    }
+
+    public void prepareTextSwitcher(final Context context, TextSwitcher textSwitcher, Integer size, Integer color, Integer gravity) {
+        prepareTextSwitcher(context, textSwitcher, size, color, gravity, null, null, null);
+    }
+
+    public void prepareTextSwitcher(final Context context, TextSwitcher textSwitcher, Integer size, Integer color,
                                     Integer gravity, String fontPath,
                                     Integer animationIn, Integer animationOut) {
         Log.e("NOTE", "prepareTextSwitcher: do");
@@ -84,8 +95,10 @@ public class LayoutUtil {
         Log.e("NOTE", "prepareTextSwitcher: do ok");
         if (size == null)
             size = R.dimen.text_default;
+        if (color == null)
+            color = R.color.colorReadable;
         if (gravity == null)
-            gravity = Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL;
+            gravity = Gravity.CENTER_VERTICAL | Gravity.START;
         if (fontPath == null)
             fontPath = "fonts/default.ttf";
         if (animationIn == null)
@@ -94,6 +107,7 @@ public class LayoutUtil {
             animationOut = R.anim.fast_transition_out;
 
         final int finalSize = size;
+        final int finalColor = color;
         final int finalGravity = gravity;
         final String finalFontPath = fontPath;
         final int finalAnimationIn = animationIn;
@@ -102,9 +116,10 @@ public class LayoutUtil {
         textSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
             public View makeView() {
                 TextView textView = new TextView(context);
+                textView.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
                 textView.setGravity(finalGravity);
                 textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(finalSize));
-                textView.setTextColor(ContextCompat.getColor(context, R.color.colorThemeWhite));
+                textView.setTextColor(ContextCompat.getColor(context, finalColor));
                 CalligraphyUtils.applyFontToTextView(context, textView, finalFontPath);
                 return textView;
             }

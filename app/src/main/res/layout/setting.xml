@@ -4,20 +4,64 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorSecondary"
     android:visibility="gone">
+
+    <TextSwitcher
+        android:id="@+id/setting_text_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/space_small"
+        android:paddingStart="@dimen/space_default"
+        android:paddingEnd="@dimen/space_default"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/space_small"
+        android:paddingBottom="@dimen/space_small"
+        android:paddingStart="@dimen/space_default"
+        android:paddingEnd="@dimen/space_default">
+
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/setting_spinner_language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"/>
+
+        <TextSwitcher
+            android:id="@+id/setting_text_language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@id/setting_spinner_language"
+            android:foregroundGravity="bottom"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/space_small"
+        android:paddingBottom="@dimen/space_small"
+        android:paddingStart="@dimen/space_default"
+        android:paddingEnd="@dimen/space_default">
 
         <android.support.v7.widget.SwitchCompat
             android:id="@+id/setting_switch_ad_interstitial"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"
-            android:paddingBottom="500dp"/>
+            android:layout_alignParentEnd="true"/>
+
+        <TextSwitcher
+            android:id="@+id/setting_text_ad_interstitial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@id/setting_switch_ad_interstitial"/>
 
     </RelativeLayout>
 

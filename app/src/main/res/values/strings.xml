@@ -3,8 +3,16 @@
     <string name="app_name_in">Donasi Gratis</string>
     <string name="title">Free Donation</string>
 
+    <!--Feed-->
+    <string name="feed_title">Feed</string>
+
+    <!--Report-->
+    <string name="report_title">Report</string>
+
     <!--Setting-->
     <string name="setting_title">Setting</string>
+    <string name="setting_language_label">Language</string>
+    <string name="setting_ad_interstitial_label">Show ad on startup (on stable connection)</string>
 
     <!--Actions-->
     <string name="ok">OK</string>

@@ -1,13 +1,16 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="space_tiny">4dp</dimen>
-    <dimen name="space_extra_small">8dp</dimen>
+    <dimen name="space_mini">8dp</dimen>
     <dimen name="space_small">11dp</dimen>
     <dimen name="space_default">16dp</dimen>
     <dimen name="space_double">32dp</dimen>
     <dimen name="space_triple">48dp</dimen>
 
-    <dimen name="text_extra_mini">8sp</dimen>
+    <dimen name="height_small">40dp</dimen>
+    <dimen name="height_default">60dp</dimen>
+
+    <dimen name="text_tiny">8sp</dimen>
     <dimen name="text_mini">12sp</dimen>
     <dimen name="text_small">14sp</dimen>
     <dimen name="text_default">16sp</dimen>
@@ -23,7 +26,7 @@
     <dimen name="activity_space_bottom">48dp</dimen>
     <dimen name="toolbar">56dp</dimen>
     <dimen name="toolbar_icon">40dp</dimen>
-    <dimen name="toolbar_icon_padding">@dimen/space_extra_small</dimen>
+    <dimen name="toolbar_icon_padding">@dimen/space_mini</dimen>
     <dimen name="nav_bar">56dp</dimen>
     <dimen name="nav_bar_subtraction">-48dp</dimen>
 

@@ -6,6 +6,7 @@
     <color name="colorSecondary">#c1d464</color>
     <color name="colorBase">#eeeeee</color>
 
+    <color name="colorReadable">#333333</color>
     <color name="colorDivider">#484848</color>
 
     <color name="colorThemeWhite">#ffffff</color>
