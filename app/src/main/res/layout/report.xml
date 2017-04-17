@@ -3,8 +3,9 @@
     android:id="@+id/report_layout_parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="@dimen/space_triple"
     android:orientation="vertical"
-    android:visibility="visible">
+    android:visibility="gone">
 
     <TextView
         android:id="@+id/report_text_title"

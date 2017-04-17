@@ -17,6 +17,14 @@
     <string name="setting_language_label">Language</string>
     <string name="setting_ad_interstitial_label">Show ad on startup (on stable connection)</string>
 
+    <!--Share-->
+    <string name="share_subject">Free Donation App</string>
+    <string name="share_text">\nLet me recommend you this free donation Android app. \n\nhttps://play.google.com/store/apps/details?id=com.koceeng.freedonation\n\n</string>
+    <string name="share_choose_app">Share via …</string>
+
+    <!--Help-->
+    <string name="help_title">Help</string>
+
     <!--Actions-->
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>

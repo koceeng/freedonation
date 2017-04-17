@@ -1,16 +1,21 @@
 package com.koceeng.freedonation.object;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.ViewFlipper;
 
+import com.koceeng.freedonation.R;
+import com.koceeng.freedonation.util.DebugUtil;
 import com.koceeng.freedonation.util.IntentUtil;
 
 import java.util.HashMap;
 
 public class HomeMenuList {
 
-    public enum Name { FEED, REPORT, SETTING, OTHER_APP }
+    private final String TAG = "HomeMenuList";
+
+    public enum Name { FEED, REPORT, SETTING, OTHER_APP, SHARE, HELP }
 
     private Context context;
     private ViewFlipper viewFlipper;
@@ -26,21 +31,42 @@ public class HomeMenuList {
         if (itemMap == null)
             itemMap = new HashMap<>();
 
-        if (item.getContent() != null) {
-            item.setViewFlipper(viewFlipper);
-            item.getLayout().setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    setActive(name);
-                }
-            });
-        } else {
-            item.getLayout().setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    IntentUtil.getInstance().goToMarket(context, true);
-                }
-            });
+        switch (name) {
+            case OTHER_APP:
+                item.getLayout().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        IntentUtil.getInstance().goToMarket(context, true);
+                    }
+                });
+                break;
+
+            case SHARE:
+                item.getLayout().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        try {
+                            Intent intent = new Intent(Intent.ACTION_SEND);
+                            intent.setType("text/plain");
+                            intent.putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.share_subject));;
+                            intent.putExtra(Intent.EXTRA_TEXT, context.getString(R.string.share_text));
+                            context.startActivity(Intent.createChooser(intent, context.getString(R.string.share_choose_app)));
+                        } catch(Exception e) {
+                            DebugUtil.getInstance().e(TAG, e.toString());
+                        }
+                    }
+                });
+                break;
+
+            default:
+                item.setViewFlipper(viewFlipper);
+                item.getLayout().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        setActive(name);
+                    }
+                });
+                break;
         }
         itemMap.put(name, item);
     }

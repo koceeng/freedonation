@@ -71,7 +71,7 @@ public class LanguageBottomSheet extends BaseBottomSheet implements View.OnClick
         PreferenceUtil.getInstance().putString(thisAppCompatActivity, thisAppCompatActivity.getString(R.string.PREFERENCE_LANGUAGE), newLang);
 
         if (homeActivity != null && !homeActivity.isFinishing())
-            homeActivity.onLanguageChange(null);
+            homeActivity.onLanguageChange(null, true);
 
         dismiss();
     }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.widget.AppCompatImageView;
 import android.view.Gravity;
 import android.view.View;
@@ -99,6 +100,17 @@ public class HomeActivity extends BaseActivity {
                 findViewById(R.id.home_layout_other_app_indicator),
                 (AppCompatImageView) findViewById(R.id.home_image_other_app)
         ));
+        homeMenuList.putItem(HomeMenuList.Name.SHARE, new HomeMenu(
+                findViewById(R.id.home_layout_share),
+                findViewById(R.id.home_layout_share_indicator),
+                (AppCompatImageView) findViewById(R.id.home_image_share)
+        ));
+        homeMenuList.putItem(HomeMenuList.Name.HELP, new HomeMenu(
+                findViewById(R.id.home_layout_help),
+                findViewById(R.id.home_layout_help_indicator),
+                (AppCompatImageView) findViewById(R.id.home_image_help),
+                findViewById(R.id.help_layout_parent)
+        ));
 
         homeMenuList.setActive(HomeMenuList.Name.FEED, false);
 
@@ -138,6 +150,19 @@ public class HomeActivity extends BaseActivity {
         settingHelper.changeAdInterstitial();
         onLanguageChange(SettingHelper.Type.AD_INTERSTITAL);
         settingHoldChange = false;
+    }
+
+    public void onLanguageChange(final SettingHelper.Type type, boolean handle) {
+        if (handle) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    onLanguageChange(type);
+                }
+            }, 500);
+        } else {
+            onLanguageChange(type);
+        }
     }
 
     public void onLanguageChange(SettingHelper.Type type) {

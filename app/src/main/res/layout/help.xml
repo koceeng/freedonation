@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/feed_layout_parent"
+    android:id="@+id/help_layout_parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/space_triple"
@@ -8,7 +8,7 @@
     android:visibility="gone">
 
     <TextView
-        android:id="@+id/feed_text_title"
+        android:id="@+id/help_text_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/space_small"
@@ -16,7 +16,6 @@
         android:paddingEnd="@dimen/space_default"
         android:textSize="@dimen/text_extra_big"
         android:textColor="@color/colorPrimary"
-        android:text="@string/feed_title"
-        android:paddingBottom="800dp"/>
+        android:text="@string/help_title"/>
 
 </LinearLayout>

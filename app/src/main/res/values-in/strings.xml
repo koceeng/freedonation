@@ -16,6 +16,14 @@
     <string name="setting_language_label">Bahasa</string>
     <string name="setting_ad_interstitial_label">Tampilkan iklan saat membuka aplikasi (pada internet lancar)</string>
 
+    <!--Share-->
+    <string name="share_subject">Aplikasi untuk Donasi Gratis</string>
+    <string name="share_text">\nDonasi tanpa mengeluarkan uang dengan menggunakan aplikasi Android ini. \n\nhttps://play.google.com/store/apps/details?id=com.koceeng.freedonation\n\n</string>
+    <string name="share_choose_app">Share/bagikan dengan …</string>
+
+    <!--Help-->
+    <string name="help_title">Bantuan</string>
+
     <!--Actions-->
     <string name="ok">OK</string>
     <string name="cancel">Batal</string>
