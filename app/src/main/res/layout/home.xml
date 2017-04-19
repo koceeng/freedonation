@@ -249,6 +249,8 @@
 
                         <include layout="@layout/setting" />
 
+                        <include layout="@layout/help" />
+
                     </ViewFlipper>
 
                 </LinearLayout>

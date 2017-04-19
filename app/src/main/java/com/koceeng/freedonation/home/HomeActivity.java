@@ -3,11 +3,17 @@ package com.koceeng.freedonation.home;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.ViewStubCompat;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewStub;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
@@ -20,11 +26,13 @@ import com.koceeng.freedonation.helper.SettingHelper;
 import com.koceeng.freedonation.object.HomeMenu;
 import com.koceeng.freedonation.object.HomeMenuList;
 import com.koceeng.freedonation.util.AdUtil;
+import com.koceeng.freedonation.util.AppUtil;
 import com.koceeng.freedonation.util.LayoutUtil;
 import com.koceeng.freedonation.util.PreferenceUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Optional;
 
 public class HomeActivity extends BaseActivity {
 
@@ -71,6 +79,8 @@ public class HomeActivity extends BaseActivity {
         setTag("HomeActivity");
 
         adViewBottom.loadAd(AdUtil.getInstance().getAdRequest());
+        AppUtil.getInstance().checkVersion(this);
+
         settingHelper = new SettingHelper(this);
 
         viewFlipper.setInAnimation(thisContext, R.anim.activity_reversed_in);
@@ -159,7 +169,7 @@ public class HomeActivity extends BaseActivity {
                 public void run() {
                     onLanguageChange(type);
                 }
-            }, 500);
+            }, 300);
         } else {
             onLanguageChange(type);
         }

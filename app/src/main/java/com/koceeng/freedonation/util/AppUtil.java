@@ -1,7 +1,8 @@
 package com.koceeng.freedonation.util;
 
 import android.app.Activity;
-import android.content.res.Configuration;
+import android.content.Intent;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -11,8 +12,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.koceeng.freedonation.BuildConfig;
+import com.koceeng.freedonation.R;
 import com.koceeng.freedonation.base.BaseActivity;
-import com.koceeng.freedonation.update.VersionData;
+import com.koceeng.freedonation.object.VersionData;
+import com.koceeng.freedonation.update.UpdateActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,35 +31,23 @@ public class AppUtil {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
+                if (activity == null || activity.isFinishing())
+                    return;
+
                 VersionData versionData = dataSnapshot.getValue(VersionData.class);
                 String appVersion = BuildConfig.VERSION_NAME.replace(".", "-");
 
                 boolean updateCritical = (!versionData.getSupported().containsKey(appVersion) || !versionData.getSupported().get(appVersion));
                 boolean updateNotLatest = (versionCompare(versionData.getCurrent(), appVersion) > 0);
 
-                if (updateCritical || updateNotLatest) {
-                    // TODO: 31/03/17
-//                    Intent i = new Intent(activity, UpdateDialog.class);
-//                    i.putExtra(UpdateDialog.IX_UPDATE_CRITICAL, updateCritical);
-//                    activity.startActivity(i);
-                }
+                if (updateCritical || updateNotLatest)
+                    activity.startActivity(UpdateActivity.Factory.getIntent(activity, updateCritical));
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
-                if (FirebaseAuth.getInstance().getCurrentUser() == null) {
-                    DebugUtil.getInstance().e(TAG, "check version on user null");
-                    return;
-                }
-
                 DebugUtil.getInstance().e(TAG, databaseError.getMessage());
-
-                // TODO: 31/03/17
-//                Intent i = new Intent(activity, SimpleDialog.class);
-//                i.putExtra(SimpleDialog.IX_TITLE, activity.getString(R.string.update_title));
-//                i.putExtra(SimpleDialog.IX_MESSAGE, activity.getString(R.string.update_check_fail_message));
-//                activity.startActivity(i);
+                Toast.makeText(activity, activity.getString(R.string.update_check_fail_message), Toast.LENGTH_SHORT).show();
             }
         });
     }

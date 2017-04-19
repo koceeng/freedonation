@@ -24,6 +24,10 @@
     <!--Help-->
     <string name="help_title">Bantuan</string>
 
+    <!--Update-->
+    <string name="update_check_fail_message">Tidak bisa melakukan pengecekan versi terbaru. Beberapa fitur mungkin tidak maksimal.</string>
+    <string name="update_message">Aplikasi siap di update</string>
+
     <!--Actions-->
     <string name="ok">OK</string>
     <string name="cancel">Batal</string>

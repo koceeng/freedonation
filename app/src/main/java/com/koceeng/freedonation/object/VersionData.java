@@ -1,4 +1,4 @@
-package com.koceeng.freedonation.update;
+package com.koceeng.freedonation.object;
 
 import java.util.Map;
 

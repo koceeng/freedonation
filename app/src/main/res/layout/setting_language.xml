@@ -2,16 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="bottom"
     android:orientation="vertical"
-    android:paddingTop="@dimen/space_default">
+    android:padding="@dimen/space_default">
 
     <RadioGroup
         android:id="@+id/setting_language_radio_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/space_tiny"
-        android:paddingEnd="@dimen/space_default"
-        android:paddingStart="@dimen/space_default"
         android:paddingTop="@dimen/space_tiny">
 
         <RadioButton

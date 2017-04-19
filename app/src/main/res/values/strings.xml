@@ -25,6 +25,10 @@
     <!--Help-->
     <string name="help_title">Help</string>
 
+    <!--Update-->
+    <string name="update_check_fail_message">Cannot check latest version of this application. Some features may cause errors</string>
+    <string name="update_message">Application ready to update</string>
+
     <!--Actions-->
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
