@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.InterstitialAd;
@@ -13,6 +14,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.koceeng.freedonation.R;
 import com.koceeng.freedonation.base.BaseActivity;
+import com.koceeng.freedonation.impression.ImpressionActivity;
 import com.koceeng.freedonation.util.AdUtil;
 import com.koceeng.freedonation.util.DataPathUtil;
 import com.koceeng.freedonation.util.DebugUtil;
@@ -36,7 +38,11 @@ public class SplashActivity extends BaseActivity {
 
         checkIfActive();
 
-        Boolean preferenceAdInterstitial = !PreferenceUtil.getInstance().getBoolean(thisContext, getString(R.string.PREFERENCE_SHOW_INTERSTITIAL_AD));
+        if (!PreferenceUtil.getInstance().getBoolean(thisContext, getString(R.string.PREFERENCE_NOT_FIRST_LAUNCH))) {
+            startActivity(ImpressionActivity.Factory.getIntent(this));
+        }
+
+        Boolean preferenceAdInterstitial = !PreferenceUtil.getInstance().getBoolean(thisContext, getString(R.string.PREFERENCE_HIDE_INTERSTITIAL_AD));
 
         if (!preferenceAdInterstitial) {
             showHomeActivity();
@@ -79,13 +85,16 @@ public class SplashActivity extends BaseActivity {
         DataPathUtil.getInstance().getIsActive().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (!dataSnapshot.exists() || !dataSnapshot.getValue(Boolean.class))
+                if (!dataSnapshot.exists() || !dataSnapshot.getValue(Boolean.class)) {
+                    Toast.makeText(thisContext, getString(R.string.application_not_active), Toast.LENGTH_SHORT).show();
                     System.exit(0);
+                }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 DebugUtil.getInstance().f(TAG, databaseError);
+                Toast.makeText(thisContext, getString(R.string.application_not_active), Toast.LENGTH_SHORT).show();
                 System.exit(0);
             }
         });

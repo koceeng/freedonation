@@ -2,9 +2,9 @@
 <resources>
     <string-array name="content">
         <item>
-            INSERT INTO content (key, title, subtitle, text, footer) VALUES
-            (1, null, "Narrated by 'Umar bin Al-Khattab", "I heard Allah's Apostle saying, \"The reward of deeds depends upon the intentions and every person will get the reward according to what he has intended. So whoever emigrated for worldly benefits or for a woman to marry, his emigration was for what he emigrated for.\""),
-            (6, \"Other\");
+            INSERT INTO content (key, lang, text) VALUES
+            (1, "en", "Narrated by 'Umar bin Al-Khattab", "I heard Allah's Apostle saying, \"The reward of deeds depends upon the intentions and every person will get the reward according to what he has intended. So whoever emigrated for worldly benefits or for a woman to marry, his emigration was for what he emigrated for.\""),
+            (2, "en", "Narrated by 'Umar bin Al-Khattab", "I heard Allah's Apostle saying, \"The reward of deeds depends upon the intentions and every person will get the reward according to what he has intended. So whoever emigrated for worldly benefits or for a woman to marry, his emigration was for what he emigrated for.\"");
         </item>
     </string-array>
 </resources>

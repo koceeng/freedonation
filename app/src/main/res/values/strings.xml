@@ -28,6 +28,8 @@
     <!--Update-->
     <string name="update_check_fail_message">Cannot check latest version of this application. Some features may cause errors</string>
     <string name="update_message">Application ready to update</string>
+    <string name="update_button_text">Update</string>
+    <string name="update_button_later">Later</string>
 
     <!--Actions-->
     <string name="ok">OK</string>
@@ -50,6 +52,7 @@
     <string name="not_ready">Currently getting data from the web. Try again in a few second</string>
 
     <!--Others-->
+    <string name="application_not_active">Something wrong when checking online data. Try again later</string>
     <string name="double_back_to_exit">Press \"Back\" again to exit this app</string>
     <string name="ellipsize">&#8230;</string>
     <string name="loading_message">Loading &#8230;</string>

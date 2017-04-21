@@ -3,17 +3,11 @@ package com.koceeng.freedonation.home;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.AppCompatImageView;
-import android.support.v7.widget.ViewStubCompat;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewStub;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
@@ -32,7 +26,6 @@ import com.koceeng.freedonation.util.PreferenceUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.Optional;
 
 public class HomeActivity extends BaseActivity {
 
@@ -199,7 +192,7 @@ public class HomeActivity extends BaseActivity {
 
         if (type == null || type.equals(SettingHelper.Type.AD_INTERSTITAL)) {
             LayoutUtil.getInstance().setText(textAdInterstitialValue, getString(
-                    !PreferenceUtil.getInstance().getBoolean(thisContext, getString(R.string.PREFERENCE_SHOW_INTERSTITIAL_AD)) ?
+                    !PreferenceUtil.getInstance().getBoolean(thisContext, getString(R.string.PREFERENCE_HIDE_INTERSTITIAL_AD)) ?
                             R.string.yes : R.string.no));
         }
     }

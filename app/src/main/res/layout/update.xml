@@ -9,15 +9,56 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="@dimen/space_default"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true">
+
+        <!--todo icon-->
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:src="@drawable/share"
+            android:contentDescription="@null"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:text="@string/update_message" />
+            android:layout_marginTop="@dimen/space_double"
+            android:layout_marginBottom="@dimen/space_default"
+            android:textSize="@dimen/text_extra_big"
+            android:textColor="@color/colorThemeWhite"
+            android:text="@string/update_message"
+            android:gravity="center_horizontal" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/update_button_main"
+                style="@style/AppButtonAlt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:textStyle="bold"
+                android:text="@string/update_button_text"
+                android:onClick="actionUpdate"/>
+
+            <Button
+                android:id="@+id/update_button_later"
+                style="@style/AppButtonBorderless"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@id/update_button_main"
+                android:textStyle="bold"
+                android:text="@string/update_button_later"
+                android:onClick="actionUpdateLater"/>
+
+        </RelativeLayout>
+
     </LinearLayout>
 
 </RelativeLayout>

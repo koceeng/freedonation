@@ -27,6 +27,8 @@
     <!--Update-->
     <string name="update_check_fail_message">Tidak bisa melakukan pengecekan versi terbaru. Beberapa fitur mungkin tidak maksimal.</string>
     <string name="update_message">Aplikasi siap di update</string>
+    <string name="update_button_text">Perbarui</string>
+    <string name="update_button_later">Lain Kali</string>
 
     <!--Actions-->
     <string name="ok">OK</string>
@@ -49,6 +51,7 @@
     <string name="not_ready">Sedang menghubungkan ke web. Cobalah beberapa saat lagi.</string>
 
     <!--Others-->
+    <string name="application_not_active">Terjadi kesalahan saat menlakukan pengecekan online. Silakan coba beberapa saat lagi.</string>
     <string name="double_back_to_exit">Tekan \"Kembali\/Back\" sekali lagi untuk menutup aplikasi</string>
     <string name="ellipsize">&#8230;</string>
     <string name="loading_message">Memproses &#8230;</string>

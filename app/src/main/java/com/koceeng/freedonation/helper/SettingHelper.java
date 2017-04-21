@@ -23,7 +23,7 @@ public class SettingHelper {
     }
 
     public void changeAdInterstitial() {
-        PreferenceUtil.getInstance().putBoolean(context, context.getString(R.string.PREFERENCE_SHOW_INTERSTITIAL_AD),
-                !PreferenceUtil.getInstance().getBoolean(context, context.getString(R.string.PREFERENCE_SHOW_INTERSTITIAL_AD)));
+        PreferenceUtil.getInstance().putBoolean(context, context.getString(R.string.PREFERENCE_HIDE_INTERSTITIAL_AD),
+                !PreferenceUtil.getInstance().getBoolean(context, context.getString(R.string.PREFERENCE_HIDE_INTERSTITIAL_AD)));
     }
 }

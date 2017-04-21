@@ -29,6 +29,8 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".impression.ImpressionActivity"/>
+        <activity
             android:name=".home.HomeActivity"/>
         <activity
             android:name=".update.UpdateActivity"/>

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="PREFERENCE_NOT_FIRST_LAUNCH">PREFERENCE_NOT_FIRST_LAUNCH</string>
     <string name="PREFERENCE_LANGUAGE">PREFERENCE_LANGUAGE</string>
     <string name="PREFERENCE_LANGUAGE_EN">en</string>
     <string name="PREFERENCE_LANGUAGE_EN_LABEL">English</string>
     <string name="PREFERENCE_LANGUAGE_IN">in</string>
     <string name="PREFERENCE_LANGUAGE_IN_LABEL">Indonesia</string>
-    <string name="PREFERENCE_SHOW_INTERSTITIAL_AD">PREFERENCE_SHOW_INTERSTITIAL_AD</string>
+    <string name="PREFERENCE_HIDE_INTERSTITIAL_AD">PREFERENCE_HIDE_INTERSTITIAL_AD</string>
 </resources>
