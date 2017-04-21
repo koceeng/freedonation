@@ -45,10 +45,12 @@ public class BaseActivity extends AppCompatActivity {
         LanguageUtil.getInstance().updateLanguageResource(thisContext);
 
         // transparent status bar
+        /*
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window window = getWindow();
             window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
+        */
     }
 
     @Override

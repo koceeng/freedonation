@@ -50,4 +50,10 @@ public class UpdateActivity extends BaseActivity {
     public void actionUpdateLater(View view) {
         finish();
     }
+
+    @Override
+    public void onBackPressed() {
+        if (!isCritical)
+            super.onBackPressed();
+    }
 }

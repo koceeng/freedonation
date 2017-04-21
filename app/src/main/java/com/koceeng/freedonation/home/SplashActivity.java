@@ -39,7 +39,8 @@ public class SplashActivity extends BaseActivity {
         checkIfActive();
 
         if (!PreferenceUtil.getInstance().getBoolean(thisContext, getString(R.string.PREFERENCE_NOT_FIRST_LAUNCH))) {
-            startActivity(ImpressionActivity.Factory.getIntent(this));
+//            startActivity(ImpressionActivity.Factory.getIntent(this));
+//            return;
         }
 
         Boolean preferenceAdInterstitial = !PreferenceUtil.getInstance().getBoolean(thisContext, getString(R.string.PREFERENCE_HIDE_INTERSTITIAL_AD));

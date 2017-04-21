@@ -18,6 +18,7 @@
     <string name="setting_ad_interstitial_label">Show ad on startup (on stable connection)</string>
 
     <!--Share-->
+    <string name="share_title">Give words to others</string>
     <string name="share_subject">Free Donation App</string>
     <string name="share_text">\nLet me recommend you this free donation Android app. \n\nhttps://play.google.com/store/apps/details?id=com.koceeng.freedonation\n\n</string>
     <string name="share_choose_app">Share via …</string>
@@ -28,7 +29,9 @@
     <!--Update-->
     <string name="update_check_fail_message">Cannot check latest version of this application. Some features may cause errors</string>
     <string name="update_message">Application ready to update</string>
-    <string name="update_button_text">Update</string>
+    <string name="update_message_critical">This version is no longer supported. You must update to continue using this app</string>
+    <string name="update_message_optional">New app will have latest feature and bug fixes. Go on, try it</string>
+    <string name="update_button_text">Update Now</string>
     <string name="update_button_later">Later</string>
 
     <!--Actions-->

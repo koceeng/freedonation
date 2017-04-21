@@ -106,7 +106,8 @@ public class HomeActivity extends BaseActivity {
         homeMenuList.putItem(HomeMenuList.Name.SHARE, new HomeMenu(
                 findViewById(R.id.home_layout_share),
                 findViewById(R.id.home_layout_share_indicator),
-                (AppCompatImageView) findViewById(R.id.home_image_share)
+                (AppCompatImageView) findViewById(R.id.home_image_share),
+                findViewById(R.id.share_layout_parent)
         ));
         homeMenuList.putItem(HomeMenuList.Name.HELP, new HomeMenu(
                 findViewById(R.id.home_layout_help),

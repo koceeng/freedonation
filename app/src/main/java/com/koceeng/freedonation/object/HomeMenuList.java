@@ -41,6 +41,7 @@ public class HomeMenuList {
                 });
                 break;
 
+            /*
             case SHARE:
                 item.getLayout().setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -57,6 +58,7 @@ public class HomeMenuList {
                     }
                 });
                 break;
+            */
 
             default:
                 item.setViewFlipper(viewFlipper);

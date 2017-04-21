@@ -17,6 +17,7 @@
     <string name="setting_ad_interstitial_label">Tampilkan iklan saat membuka aplikasi (pada internet lancar)</string>
 
     <!--Share-->
+    <string name="share_title">Bagikan kabar ke teman</string>
     <string name="share_subject">Aplikasi untuk Donasi Gratis</string>
     <string name="share_text">\nDonasi tanpa mengeluarkan uang dengan menggunakan aplikasi Android ini. \n\nhttps://play.google.com/store/apps/details?id=com.koceeng.freedonation\n\n</string>
     <string name="share_choose_app">Share/bagikan dengan …</string>
@@ -26,8 +27,10 @@
 
     <!--Update-->
     <string name="update_check_fail_message">Tidak bisa melakukan pengecekan versi terbaru. Beberapa fitur mungkin tidak maksimal.</string>
-    <string name="update_message">Aplikasi siap di update</string>
-    <string name="update_button_text">Perbarui</string>
+    <string name="update_message">Aplikasi siap diperbarui/update</string>
+    <string name="update_message_critical">Versi aplikasi ini sudah tidak bisa digunakan lagi. Silakan update aplikasi agar mendapatkan versi terbaru.</string>
+    <string name="update_message_optional">Segera perbarui/update aplikasi untuk menggunakan fitur-fitur terbaru dan beberapa perbaikan lainnya.</string>
+    <string name="update_button_text">Perbarui Sekarang</string>
     <string name="update_button_later">Lain Kali</string>
 
     <!--Actions-->
