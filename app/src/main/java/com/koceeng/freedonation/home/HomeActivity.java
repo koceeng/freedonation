@@ -9,8 +9,10 @@ import android.support.v7.widget.AppCompatImageView;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.google.android.gms.ads.AdView;
@@ -21,6 +23,8 @@ import com.koceeng.freedonation.object.HomeMenu;
 import com.koceeng.freedonation.object.HomeMenuList;
 import com.koceeng.freedonation.util.AdUtil;
 import com.koceeng.freedonation.util.AppUtil;
+import com.koceeng.freedonation.util.DebugUtil;
+import com.koceeng.freedonation.util.IntentUtil;
 import com.koceeng.freedonation.util.LayoutUtil;
 import com.koceeng.freedonation.util.PreferenceUtil;
 
@@ -49,6 +53,9 @@ public class HomeActivity extends BaseActivity {
     @BindView(R.id.setting_text_ad_interstitial_label) TextSwitcher textAdInterstitialLabel;
     @BindView(R.id.setting_text_ad_interstitial_value) TextSwitcher textAdInterstitialValue;
 
+    // share page
+    @BindView(R.id.share_edittext_comment) EditText editTextShareComment;
+
     HomeActivity homeActivity;
     HomeMenuList homeMenuList;
 
@@ -72,7 +79,6 @@ public class HomeActivity extends BaseActivity {
         setTag("HomeActivity");
 
         adViewBottom.loadAd(AdUtil.getInstance().getAdRequest());
-        AppUtil.getInstance().checkVersion(this);
 
         settingHelper = new SettingHelper(this);
 
@@ -107,7 +113,8 @@ public class HomeActivity extends BaseActivity {
                 findViewById(R.id.home_layout_share),
                 findViewById(R.id.home_layout_share_indicator),
                 (AppCompatImageView) findViewById(R.id.home_image_share),
-                findViewById(R.id.share_layout_parent)
+                findViewById(R.id.share_layout_parent),
+                editTextShareComment
         ));
         homeMenuList.putItem(HomeMenuList.Name.HELP, new HomeMenu(
                 findViewById(R.id.home_layout_help),
@@ -154,6 +161,27 @@ public class HomeActivity extends BaseActivity {
         settingHelper.changeAdInterstitial();
         onLanguageChange(SettingHelper.Type.AD_INTERSTITAL);
         settingHoldChange = false;
+    }
+
+    public void actionShare(View view) {
+        String shareText = "";
+        if (editTextShareComment != null && editTextShareComment.getText() != null
+                && !editTextShareComment.getText().toString().trim().isEmpty())
+            shareText += editTextShareComment.getText().toString().trim() + "\n\n";
+
+        shareText += IntentUtil.getInstance().getMarketUrl(thisContext);
+
+        try {
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/plain");
+            intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_subject));
+            intent.putExtra(Intent.EXTRA_TEXT, shareText);
+            startActivity(Intent.createChooser(intent, getString(R.string.share_choose_app)));
+
+        } catch(Exception e) {
+            DebugUtil.getInstance().e(TAG, e.toString());
+            Toast.makeText(thisContext, getString(R.string.share_fail), Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void onLanguageChange(final SettingHelper.Type type, boolean handle) {

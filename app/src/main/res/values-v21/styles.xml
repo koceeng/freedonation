@@ -8,5 +8,7 @@
     <style name="AppButtonAlt" parent="AppButton">
         <item name="android:backgroundTint">@color/colorThemeWhite</item>
         <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:paddingStart">@dimen/space_double</item>
+        <item name="android:paddingEnd">@dimen/space_double</item>
     </style>
 </resources>

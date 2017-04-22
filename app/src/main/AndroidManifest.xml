@@ -29,11 +29,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".impression.ImpressionActivity"/>
+            android:name=".impression.ImpressionActivity"
+            android:noHistory="true"/>
         <activity
             android:name=".home.HomeActivity"/>
         <activity
             android:name=".update.UpdateActivity"/>
+        <activity
+            android:name=".home.NotActiveActivity"/>
 
         <activity
             android:name="com.google.android.gms.ads.AdActivity"

@@ -4,18 +4,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/space_triple"
+    android:paddingStart="@dimen/space_default"
+    android:paddingEnd="@dimen/space_default"
     android:orientation="vertical"
-    android:visibility="gone">
+    android:visibility="visible">
 
     <TextView
-        android:id="@+id/share_text_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/space_small"
-        android:paddingStart="@dimen/space_default"
-        android:paddingEnd="@dimen/space_default"
         android:textSize="@dimen/text_extra_big"
         android:textColor="@color/colorPrimary"
         android:text="@string/share_title"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/space_default"
+        android:textSize="@dimen/text_default"
+        android:text="@string/share_hint"/>
+
+    <EditText
+        android:id="@+id/share_edittext_comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:minLines="3"
+        android:maxLines="3"
+        android:hint="@string/share_hint"
+        android:text="@string/share_text_default"/>
+
+    <Button
+        style="@style/AppButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:text="@string/share_button_text"
+        android:onClick="actionShare"/>
 
 </LinearLayout>

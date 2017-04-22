@@ -31,8 +31,10 @@ public class AppUtil {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
+                /* no problem
                 if (activity == null || activity.isFinishing())
                     return;
+                */
 
                 VersionData versionData = dataSnapshot.getValue(VersionData.class);
                 String appVersion = BuildConfig.VERSION_NAME.replace(".", "-");

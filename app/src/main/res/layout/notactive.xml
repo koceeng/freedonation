@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
@@ -11,8 +12,10 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/space_default"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        tools:ignore="UseCompoundDrawables">
 
+        <!--todo icon-->
         <ImageView
             android:layout_width="150dp"
             android:layout_height="150dp"
@@ -25,38 +28,18 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_double"
             android:layout_marginBottom="@dimen/space_small"
-            android:textSize="@dimen/text_extra_big"
+            android:textSize="@dimen/text_big"
             android:textColor="@color/colorThemeWhite"
-            android:text="@string/update_message"
+            android:text="@string/application_not_active"
             android:gravity="center_horizontal" />
 
         <TextView
-            android:id="@+id/update_text_sub"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/space_default"
             android:textSize="@dimen/text_default"
             android:textColor="@color/colorThemeWhite"
-            android:text="@string/update_message_optional"
+            android:text="@string/application_not_active_sub"
             android:gravity="center_horizontal" />
-
-        <Button
-            style="@style/AppButtonAlt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/update_button_text"
-            android:onClick="actionUpdate"/>
-
-        <Button
-            android:id="@+id/update_button_later"
-            style="@style/AppButtonBorderless"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:textStyle="bold"
-            android:text="@string/update_button_later"
-            android:onClick="actionUpdateLater"/>
 
     </LinearLayout>
 

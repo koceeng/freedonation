@@ -16,7 +16,17 @@ public class HomeMenu {
     private View indicator;
     private AppCompatImageView image;
     private View content;
+    private View selectable;
+
     private ViewFlipper viewFlipper;
+
+    public HomeMenu(View layout, View indicator, AppCompatImageView image, View content, View selectable) {
+        this.layout = layout;
+        this.indicator = indicator;
+        this.image = image;
+        this.content = content;
+        this.selectable = selectable;
+    }
 
     public HomeMenu(View layout, View indicator, AppCompatImageView image, View content) {
         this.layout = layout;
@@ -29,7 +39,6 @@ public class HomeMenu {
         this.layout = layout;
         this.indicator = indicator;
         this.image = image;
-        this.content = null;
     }
 
     public void setViewFlipper(ViewFlipper viewFlipper) {
@@ -46,6 +55,9 @@ public class HomeMenu {
         } else {
             LayoutUtil.getInstance().toggleVisibility(content, active);
         }
+
+        if (selectable != null)
+            selectable.requestFocus();
     }
 
     public View getLayout() {

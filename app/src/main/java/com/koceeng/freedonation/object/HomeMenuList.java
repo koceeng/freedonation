@@ -41,25 +41,6 @@ public class HomeMenuList {
                 });
                 break;
 
-            /*
-            case SHARE:
-                item.getLayout().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        try {
-                            Intent intent = new Intent(Intent.ACTION_SEND);
-                            intent.setType("text/plain");
-                            intent.putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.share_subject));;
-                            intent.putExtra(Intent.EXTRA_TEXT, context.getString(R.string.share_text));
-                            context.startActivity(Intent.createChooser(intent, context.getString(R.string.share_choose_app)));
-                        } catch(Exception e) {
-                            DebugUtil.getInstance().e(TAG, e.toString());
-                        }
-                    }
-                });
-                break;
-            */
-
             default:
                 item.setViewFlipper(viewFlipper);
                 item.getLayout().setOnClickListener(new View.OnClickListener() {
@@ -89,11 +70,4 @@ public class HomeMenuList {
 
         selected = name;
     }
-
-//    public HomeMenu getActiveItem() {
-//        if (itemMap == null || selected == null || itemMap.containsKey(selected))
-//            return null;
-//
-//        return itemMap.get(selected);
-//    }
 }

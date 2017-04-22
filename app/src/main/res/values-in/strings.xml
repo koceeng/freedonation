@@ -19,8 +19,11 @@
     <!--Share-->
     <string name="share_title">Bagikan kabar ke teman</string>
     <string name="share_subject">Aplikasi untuk Donasi Gratis</string>
-    <string name="share_text">\nDonasi tanpa mengeluarkan uang dengan menggunakan aplikasi Android ini. \n\nhttps://play.google.com/store/apps/details?id=com.koceeng.freedonation\n\n</string>
+    <string name="share_hint">Teks yang disertakan</string>
+    <string name="share_text_default">Donasi tanpa mengeluarkan uang dengan menggunakan aplikasi Android ini.</string>
+    <string name="share_button_text">Bagikan</string>
     <string name="share_choose_app">Share/bagikan dengan …</string>
+    <string name="share_fail">Aduh, terjadi kesalahan saat hendak membagikan</string>
 
     <!--Help-->
     <string name="help_title">Bantuan</string>
@@ -42,6 +45,7 @@
     <string name="exit">Keluar</string>
     <string name="dismiss">Tutup</string>
     <string name="next">Selanjutnya</string>
+    <string name="next_uppercase">SELANJUTNYA</string>
     <string name="previous">Sebelumnya</string>
     <string name="or">Atau</string>
     <string name="refresh">Muat Ulang</string>
@@ -54,7 +58,8 @@
     <string name="not_ready">Sedang menghubungkan ke web. Cobalah beberapa saat lagi.</string>
 
     <!--Others-->
-    <string name="application_not_active">Terjadi kesalahan saat menlakukan pengecekan online. Silakan coba beberapa saat lagi.</string>
+    <string name="application_not_active">Aplikasi sudah tidak aktif lagi atau terjadi kesalahan saat menlakukan pengecekan online.</string>
+    <string name="application_not_active_sub">Silakan coba beberapa saat lagi.</string>
     <string name="double_back_to_exit">Tekan \"Kembali\/Back\" sekali lagi untuk menutup aplikasi</string>
     <string name="ellipsize">&#8230;</string>
     <string name="loading_message">Memproses &#8230;</string>

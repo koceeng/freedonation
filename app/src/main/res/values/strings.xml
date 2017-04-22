@@ -1,7 +1,14 @@
 <resources>
     <string name="app_name">Free Donation</string>
-    <string name="app_name_in">Donasi Gratis</string>
+    <string name="app_name_in" translatable="false">Donasi Gratis</string>
     <string name="title">Free Donation</string>
+
+    <!--Impression-->
+    <string name="impression_title" translatable="false">Bagaimana cara kerjanya?</string>
+    <string name="impression_text_1" translatable="false">Darimana aplikasi ini memperoleh uang untuk didonasikan tanpa ada orang yg mengirimkan uang?</string>
+    <string name="impression_text_2" translatable="false">Aplikasi ini diselipi iklan. Penghasilan dari iklan tersebut akan disumbangkan ke salah satu yayasan penyalur donasi di Indonesia.</string>
+    <string name="impression_text_3" translatable="false">Anda juga dapat melihat laporan penghasilan aplikasi ini serta bukti penyaluran donasi dalam menu "Laporan" pada halaman selanjutnya</string>
+    <string name="impression_text_4" translatable="false">Bismillah, semoga aplikasi ini bermanfaat.</string>
 
     <!--Feed-->
     <string name="feed_title">Daily Hadith</string>
@@ -20,8 +27,11 @@
     <!--Share-->
     <string name="share_title">Give words to others</string>
     <string name="share_subject">Free Donation App</string>
-    <string name="share_text">\nLet me recommend you this free donation Android app. \n\nhttps://play.google.com/store/apps/details?id=com.koceeng.freedonation\n\n</string>
+    <string name="share_hint">Text included in share</string>
+    <string name="share_text_default">Let me recommend you this free donation Android app.</string>
+    <string name="share_button_text">Share</string>
     <string name="share_choose_app">Share via …</string>
+    <string name="share_fail">Oops, something gone wrong when try to share</string>
 
     <!--Help-->
     <string name="help_title">Help</string>
@@ -43,6 +53,7 @@
     <string name="exit">Exit</string>
     <string name="dismiss">Dismiss</string>
     <string name="next">Next</string>
+    <string name="next_uppercase">NEXT</string>
     <string name="previous">Previous</string>
     <string name="or">Or</string>
     <string name="refresh">Refresh</string>
@@ -55,7 +66,8 @@
     <string name="not_ready">Currently getting data from the web. Try again in a few second</string>
 
     <!--Others-->
-    <string name="application_not_active">Something wrong when checking online data. Try again later</string>
+    <string name="application_not_active">Application no longer supported or something gone wrong when checking it online.</string>
+    <string name="application_not_active_sub">Please try again later</string>
     <string name="double_back_to_exit">Press \"Back\" again to exit this app</string>
     <string name="ellipsize">&#8230;</string>
     <string name="loading_message">Loading &#8230;</string>

@@ -16,6 +16,7 @@ import com.koceeng.freedonation.R;
 import com.koceeng.freedonation.base.BaseActivity;
 import com.koceeng.freedonation.impression.ImpressionActivity;
 import com.koceeng.freedonation.util.AdUtil;
+import com.koceeng.freedonation.util.AppUtil;
 import com.koceeng.freedonation.util.DataPathUtil;
 import com.koceeng.freedonation.util.DebugUtil;
 import com.koceeng.freedonation.util.PreferenceUtil;
@@ -37,14 +38,14 @@ public class SplashActivity extends BaseActivity {
         splashActivity = this;
 
         checkIfActive();
+        AppUtil.getInstance().checkVersion(this);
 
         if (!PreferenceUtil.getInstance().getBoolean(thisContext, getString(R.string.PREFERENCE_NOT_FIRST_LAUNCH))) {
-//            startActivity(ImpressionActivity.Factory.getIntent(this));
-//            return;
+            startActivity(ImpressionActivity.Factory.getIntent(this));
+            return;
         }
 
         Boolean preferenceAdInterstitial = !PreferenceUtil.getInstance().getBoolean(thisContext, getString(R.string.PREFERENCE_HIDE_INTERSTITIAL_AD));
-
         if (!preferenceAdInterstitial) {
             showHomeActivity();
             return;
@@ -86,17 +87,14 @@ public class SplashActivity extends BaseActivity {
         DataPathUtil.getInstance().getIsActive().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (!dataSnapshot.exists() || !dataSnapshot.getValue(Boolean.class)) {
-                    Toast.makeText(thisContext, getString(R.string.application_not_active), Toast.LENGTH_SHORT).show();
-                    System.exit(0);
-                }
+                if (!dataSnapshot.exists() || !dataSnapshot.getValue(Boolean.class))
+                    startActivity(NotActiveActivity.Factory.getIntent(splashActivity));
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 DebugUtil.getInstance().f(TAG, databaseError);
-                Toast.makeText(thisContext, getString(R.string.application_not_active), Toast.LENGTH_SHORT).show();
-                System.exit(0);
+                startActivity(NotActiveActivity.Factory.getIntent(splashActivity));
             }
         });
     }
