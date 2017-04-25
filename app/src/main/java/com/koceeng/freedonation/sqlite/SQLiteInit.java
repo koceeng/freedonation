@@ -43,6 +43,9 @@ public class SQLiteInit extends SQLiteOpenHelper {
                     "text TEXT, " +
                     "footer TEXT " +
                     "); ");
+
+            // create table notification
+            // TODO: 22-Apr-17
         }
     }
 

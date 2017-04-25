@@ -14,6 +14,8 @@ import com.koceeng.freedonation.util.LanguageUtil;
 
 public class BaseBottomSheet extends BottomSheetDialogFragment {
 
+    protected String TAG = "BaseBottomSheet";
+
     protected AppCompatActivity thisAppCompatActivity;
 
     @Override
@@ -29,6 +31,10 @@ public class BaseBottomSheet extends BottomSheetDialogFragment {
         super.onResume();
         if (thisAppCompatActivity == null || thisAppCompatActivity.isFinishing())
             dismiss();
+    }
+
+    protected void setTag(String tag) {
+        this.TAG = tag;
     }
 
     protected BottomSheetBehavior.BottomSheetCallback bottomSheetCallback = new BottomSheetBehavior.BottomSheetCallback() {

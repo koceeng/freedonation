@@ -18,11 +18,11 @@ import android.widget.ViewFlipper;
 import com.google.android.gms.ads.AdView;
 import com.koceeng.freedonation.R;
 import com.koceeng.freedonation.base.BaseActivity;
+import com.koceeng.freedonation.bottomsheet.NotificationBottomSheet;
 import com.koceeng.freedonation.helper.SettingHelper;
 import com.koceeng.freedonation.object.HomeMenu;
 import com.koceeng.freedonation.object.HomeMenuList;
 import com.koceeng.freedonation.util.AdUtil;
-import com.koceeng.freedonation.util.AppUtil;
 import com.koceeng.freedonation.util.DebugUtil;
 import com.koceeng.freedonation.util.IntentUtil;
 import com.koceeng.freedonation.util.LayoutUtil;
@@ -52,6 +52,8 @@ public class HomeActivity extends BaseActivity {
     @BindView(R.id.setting_text_language_value) TextSwitcher textLanguageValue;
     @BindView(R.id.setting_text_ad_interstitial_label) TextSwitcher textAdInterstitialLabel;
     @BindView(R.id.setting_text_ad_interstitial_value) TextSwitcher textAdInterstitialValue;
+    @BindView(R.id.setting_text_notification_label) TextSwitcher textNotificationLabel;
+    @BindView(R.id.setting_text_notification_value) TextSwitcher textNotificationValue;
 
     // share page
     @BindView(R.id.share_edittext_comment) EditText editTextShareComment;
@@ -138,6 +140,8 @@ public class HomeActivity extends BaseActivity {
         LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textLanguageValue, R.dimen.text_small, R.color.colorPrimary, Gravity.CENTER_VERTICAL | Gravity.END);
         LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textAdInterstitialLabel, R.dimen.text_small);
         LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textAdInterstitialValue, R.dimen.text_small, R.color.colorPrimary, Gravity.CENTER_VERTICAL | Gravity.END);
+        LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textNotificationLabel, R.dimen.text_small);
+        LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textNotificationValue, R.dimen.text_small, R.color.colorPrimary, Gravity.CENTER_VERTICAL | Gravity.END);
     }
 
     public void actionReport(View view) {
@@ -159,7 +163,15 @@ public class HomeActivity extends BaseActivity {
 
         settingHoldChange = true;
         settingHelper.changeAdInterstitial();
-        onLanguageChange(SettingHelper.Type.AD_INTERSTITAL);
+        onLanguageChange(SettingHelper.Type.AD_INTERSTITIAL);
+        settingHoldChange = false;
+    }
+
+    public void actionSettingNotification(View view) {
+        settingHoldChange = true;
+        NotificationBottomSheet notificationBottomSheet = new NotificationBottomSheet();
+        notificationBottomSheet.setHomeActivity(homeActivity);
+        notificationBottomSheet.show(getSupportFragmentManager(), notificationBottomSheet.getTag());
         settingHoldChange = false;
     }
 
@@ -211,6 +223,7 @@ public class HomeActivity extends BaseActivity {
             LayoutUtil.getInstance().setText(textSettingTitle, getString(R.string.setting_title));
             LayoutUtil.getInstance().setText(textLanguageLabel, getString(R.string.setting_language_label));
             LayoutUtil.getInstance().setText(textAdInterstitialLabel, getString(R.string.setting_ad_interstitial_label));
+            LayoutUtil.getInstance().setText(textNotificationLabel, getString(R.string.setting_notification_label));
         }
 
         if (type == null || type.equals(SettingHelper.Type.LANGUAGE)) {
@@ -219,10 +232,15 @@ public class HomeActivity extends BaseActivity {
                             R.string.PREFERENCE_LANGUAGE_EN_LABEL : R.string.PREFERENCE_LANGUAGE_IN_LABEL));
         }
 
-        if (type == null || type.equals(SettingHelper.Type.AD_INTERSTITAL)) {
+        if (type == null || type.equals(SettingHelper.Type.AD_INTERSTITIAL)) {
             LayoutUtil.getInstance().setText(textAdInterstitialValue, getString(
                     !PreferenceUtil.getInstance().getBoolean(thisContext, getString(R.string.PREFERENCE_HIDE_INTERSTITIAL_AD)) ?
                             R.string.yes : R.string.no));
+        }
+
+        if (type == null || type.equals(SettingHelper.Type.NOTIFICATION)) {
+            // TODO: 22-Apr-17 from sqlite
+            LayoutUtil.getInstance().setText(textNotificationValue, "TODO");
         }
     }
 }

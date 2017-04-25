@@ -24,6 +24,8 @@ public class LanguageBottomSheet extends BaseBottomSheet implements View.OnClick
     public void setupDialog(Dialog dialog, int style) {
         super.setupDialog(dialog, style);
 
+        setTag("LanguageBottomSheet");
+
         View view = View.inflate(getContext(), R.layout.setting_language, null);
         setContentView(dialog, view);
 

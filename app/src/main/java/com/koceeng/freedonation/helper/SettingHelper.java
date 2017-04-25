@@ -7,7 +7,7 @@ import com.koceeng.freedonation.util.PreferenceUtil;
 
 public class SettingHelper {
 
-    public enum Type { LANGUAGE, AD_INTERSTITAL }
+    public enum Type {LANGUAGE, AD_INTERSTITIAL, NOTIFICATION}
 
     private HomeActivity context;
 

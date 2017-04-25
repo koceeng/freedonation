@@ -15,6 +15,7 @@
     <string name="setting_title">Pengaturan</string>
     <string name="setting_language_label">Bahasa</string>
     <string name="setting_ad_interstitial_label">Tampilkan iklan saat membuka aplikasi (pada internet lancar)</string>
+    <string name="setting_notification_label">Setel pengingat/notifikasi</string>
 
     <!--Share-->
     <string name="share_title">Bagikan kabar ke teman</string>

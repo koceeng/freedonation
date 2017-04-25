@@ -23,6 +23,7 @@
     <string name="setting_title">Setting</string>
     <string name="setting_language_label">Language</string>
     <string name="setting_ad_interstitial_label">Show ad on startup (on stable connection)</string>
+    <string name="setting_notification_label">Scheduled reminder</string>
 
     <!--Share-->
     <string name="share_title">Give words to others</string>
