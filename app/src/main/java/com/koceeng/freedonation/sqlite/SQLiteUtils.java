@@ -55,6 +55,12 @@ public class SQLiteUtils {
         }
     }
 
+    public void executeQuery(String query) {
+        openWritable();
+
+        sqLiteDatabase.execSQL(query);
+    }
+
     public void putStringParam(String paramName, String value) {
         openWritable();
         if (paramName == null || paramName.isEmpty() || value == null || value.isEmpty())

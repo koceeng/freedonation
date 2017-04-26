@@ -1,72 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark">
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/impression_button_next"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="100dp"
-        android:paddingBottom="@dimen/space_default"
-        android:paddingStart="@dimen/space_default"
-        android:paddingEnd="@dimen/space_default"
-        android:orientation="vertical">
+        android:layout_height="@dimen/height_small"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="?attr/selectableItemBackground"
+        android:onClick="actionImpressionNext">
 
-        <TextView
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorAccentDark">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/colorThemeWhite"
+                android:textAllCaps="true"
+                android:text="@string/next"
+                android:drawableEnd="@drawable/next"/>
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_above="@id/impression_button_next"
+        android:layout_centerHorizontal="true"
+        android:clipToPadding="false">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="@dimen/space_double"
-            android:gravity="center_horizontal"
-            android:textColor="@color/colorThemeWhite"
-            android:textSize="@dimen/text_large"
-            android:text="@string/impression_title"/>
+            android:paddingStart="@dimen/space_default"
+            android:paddingEnd="@dimen/space_default"
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/space_default"
-            android:gravity="center_horizontal"
-            android:textColor="@color/colorThemeWhite"
-            android:textSize="@dimen/text_default"
-            android:text="@string/impression_text_1"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_marginTop="80dp"
+                android:layout_marginBottom="@dimen/space_double"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/icon_vector"
+                android:contentDescription="@null"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/space_default"
-            android:gravity="center_horizontal"
-            android:textColor="@color/colorThemeWhite"
-            android:textSize="@dimen/text_default"
-            android:text="@string/impression_text_2"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/space_double"
+                android:gravity="center_horizontal"
+                android:textColor="@color/colorThemeWhite"
+                android:textSize="@dimen/text_large"
+                android:text="@string/impression_title"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/space_default"
-            android:gravity="center_horizontal"
-            android:textColor="@color/colorThemeWhite"
-            android:textSize="@dimen/text_default"
-            android:text="@string/impression_text_3"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_default"
+                android:gravity="center_horizontal"
+                android:textColor="@color/colorThemeWhite"
+                android:textSize="@dimen/text_default"
+                android:text="@string/impression_text_1"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:textColor="@color/colorThemeWhite"
-            android:textSize="@dimen/text_default"
-            android:text="@string/impression_text_4"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_default"
+                android:gravity="center_horizontal"
+                android:textColor="@color/colorThemeWhite"
+                android:textSize="@dimen/text_default"
+                android:text="@string/impression_text_2"/>
 
-        <Button
-            style="@style/AppButtonAlt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space_double"
-            android:layout_marginBottom="@dimen/space_double"
-            android:layout_gravity="end"
-            android:text="@string/next"
-            android:onClick="actionImpressionNext"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_default"
+                android:gravity="center_horizontal"
+                android:textColor="@color/colorThemeWhite"
+                android:textSize="@dimen/text_default"
+                android:text="@string/impression_text_3"/>
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textColor="@color/colorThemeWhite"
+                android:textSize="@dimen/text_default"
+                android:text="@string/impression_text_4"/>
 
-</ScrollView>
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

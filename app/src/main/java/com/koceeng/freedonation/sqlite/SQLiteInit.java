@@ -37,7 +37,7 @@ public class SQLiteInit extends SQLiteOpenHelper {
             db.execSQL("CREATE TABLE IF NOT EXISTS contents(" +
                     "_id INTEGER PRIMARY KEY, " +
                     "key TEXT NOT NULL UNIQUE, " +
-                    "lang TEXT, " +
+                    "lang TEXT NOT NULL, " +
                     "title TEXT, " +
                     "subtitle TEXT, " +
                     "text TEXT, " +
