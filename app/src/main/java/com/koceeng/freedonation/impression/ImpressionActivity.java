@@ -31,12 +31,6 @@ public class ImpressionActivity extends BaseActivity {
         setContentView(R.layout.impression);
 
         setTag("ImpressionActivity");
-
-        // fill content data
-        DebugUtil.getInstance().v(TAG, "Prepare execute query: content_first");
-        String contentQuery = getString(R.string.content_first);
-        SQLiteUtils.getInstance(thisContext).executeQuery(contentQuery);
-        DebugUtil.getInstance().v(TAG, "Successfully execute query: content_first");
     }
 
     public void actionImpressionNext(View view) {

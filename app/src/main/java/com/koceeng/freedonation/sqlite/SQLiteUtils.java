@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
+import android.provider.BaseColumns;
+import android.provider.SyncStateContract;
 import android.support.v4.app.NavUtils;
 
 import com.koceeng.freedonation.object.Content;
@@ -98,7 +100,9 @@ public class SQLiteUtils {
             return;
 
         ContentValues cv = new ContentValues();
-        cv.put("key", content.getKey());
+        cv.put(BaseColumns._ID, 0);
+        if ((content.getTimestamp() != null ? content.getTimestamp() : 0) == 0)
+            cv.put("timestamp", content.getTimestamp());
         if ((content.getTitle() != null ? content.getTitle() : "").equals(""))
             cv.put("title", content.getTitle());
         if ((content.getSubtitle() != null ? content.getSubtitle() : "").equals(""))
@@ -108,7 +112,26 @@ public class SQLiteUtils {
         if ((content.getFooter() != null ? content.getFooter() : "").equals(""))
             cv.put("footer", content.getFooter());
 
-        sqLiteDatabase.insertWithOnConflict("content", "key", cv, SQLiteDatabase.CONFLICT_REPLACE);
+        sqLiteDatabase.insertWithOnConflict("content-active", "key", cv, SQLiteDatabase.CONFLICT_REPLACE);
+    }
+
+    public Content getContent() {
+        openReadable();
+
+        Content result = null;
+
+        Cursor c = sqLiteDatabase.rawQuery("SELECT timestamp, title, subtitle, text, footer FROM content-active WHERE _id = 0;", null);
+        while (c.moveToNext()) {
+            result = new Content();
+            result.setTimestamp(c.getLong(c.getColumnIndex("timestamp")));
+            result.setTitle(c.getString(c.getColumnIndex("title")));
+            result.setSubtitle(c.getString(c.getColumnIndex("subtitle")));
+            result.setText(c.getString(c.getColumnIndex("text")));
+            result.setFooter(c.getString(c.getColumnIndex("footer")));
+        }
+        c.close();
+
+        return result;
     }
 
     private static SQLiteUtils sqLiteDatabaseHelper = null;

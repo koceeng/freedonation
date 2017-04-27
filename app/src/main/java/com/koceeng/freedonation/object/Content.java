@@ -4,12 +4,21 @@ import com.koceeng.freedonation.base.FirebaseObject;
 
 public class Content extends FirebaseObject {
 
+    private Long timestamp;
     private String title;
     private String subtitle;
     private String text;
     private String footer;
 
     public Content() {
+    }
+
+    public Long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
     }
 
     public String getTitle() {

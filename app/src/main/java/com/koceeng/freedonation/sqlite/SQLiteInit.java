@@ -33,11 +33,10 @@ public class SQLiteInit extends SQLiteOpenHelper {
                     "value TEXT NOT NULL " +
                     "); ");
 
-            // create table content
-            db.execSQL("CREATE TABLE IF NOT EXISTS contents(" +
+            // create table content-active
+            db.execSQL("CREATE TABLE IF NOT EXISTS content-active(" +
                     "_id INTEGER PRIMARY KEY, " +
-                    "key TEXT NOT NULL UNIQUE, " +
-                    "lang TEXT NOT NULL, " +
+                    "timestamp INTEGER, " +
                     "title TEXT, " +
                     "subtitle TEXT, " +
                     "text TEXT, " +

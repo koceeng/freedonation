@@ -19,7 +19,9 @@ import com.google.android.gms.ads.AdView;
 import com.koceeng.freedonation.R;
 import com.koceeng.freedonation.base.BaseActivity;
 import com.koceeng.freedonation.bottomsheet.NotificationBottomSheet;
+import com.koceeng.freedonation.helper.FeedHelper;
 import com.koceeng.freedonation.helper.SettingHelper;
+import com.koceeng.freedonation.object.Content;
 import com.koceeng.freedonation.object.HomeMenu;
 import com.koceeng.freedonation.object.HomeMenuList;
 import com.koceeng.freedonation.util.AdUtil;
@@ -62,6 +64,7 @@ public class HomeActivity extends BaseActivity {
     HomeMenuList homeMenuList;
 
     // setting
+    FeedHelper feedHelper;
     SettingHelper settingHelper;
     boolean settingHoldChange = false;
 
@@ -82,6 +85,7 @@ public class HomeActivity extends BaseActivity {
 
         adViewBottom.loadAd(AdUtil.getInstance().getAdRequest());
 
+        feedHelper = new FeedHelper(this);
         settingHelper = new SettingHelper(this);
 
         viewFlipper.setInAnimation(thisContext, R.anim.activity_reversed_in);
@@ -129,6 +133,8 @@ public class HomeActivity extends BaseActivity {
 
         prepareTextSwitcher();
         onLanguageChange(null);
+
+        feedHelper.get(false);
     }
 
     private void prepareTextSwitcher() {
@@ -142,6 +148,21 @@ public class HomeActivity extends BaseActivity {
         LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textAdInterstitialValue, R.dimen.text_small, R.color.colorPrimary, Gravity.CENTER_VERTICAL | Gravity.END);
         LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textNotificationLabel, R.dimen.text_small);
         LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textNotificationValue, R.dimen.text_small, R.color.colorPrimary, Gravity.CENTER_VERTICAL | Gravity.END);
+    }
+
+    public void onFeedChangeStatus(FeedHelper.FeedStatus feedStatus) {
+        onFeedChangeStatus(feedStatus, null);
+    }
+
+    public void onFeedChangeStatus(FeedHelper.FeedStatus feedStatus, Content content) {
+        if (feedStatus == null) {
+            DebugUtil.getInstance().e(TAG, "FeedChangeStatus: feedStatus is empty");
+            return;
+        }
+
+        DebugUtil.getInstance().v(TAG, "FeedChangeStatus: " + feedStatus + (content != null ? "|content:" + content : ""));
+
+        // TODO: 27-Apr-17
     }
 
     public void actionReport(View view) {

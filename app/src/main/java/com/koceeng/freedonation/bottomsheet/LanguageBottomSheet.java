@@ -29,7 +29,7 @@ public class LanguageBottomSheet extends BaseBottomSheet implements View.OnClick
         View view = View.inflate(getContext(), R.layout.setting_language, null);
         setContentView(dialog, view);
 
-        if (PreferenceUtil.getInstance().getString(thisAppCompatActivity, thisAppCompatActivity.getString(R.string.PREFERENCE_LANGUAGE), false)
+        if (PreferenceUtil.getInstance().getString(thisAppCompatActivity, getString(R.string.PREFERENCE_LANGUAGE), false)
                 .equals(getString(R.string.PREFERENCE_LANGUAGE_EN))) {
             ((RadioButton) view.findViewById(R.id.setting_language_radio_en)).setChecked(true);
         } else {
