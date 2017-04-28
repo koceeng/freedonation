@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark">
@@ -10,7 +11,7 @@
         android:layout_height="@dimen/height_small"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:background="?attr/selectableItemBackground"
+        android:foreground="?attr/selectableItemBackground"
         android:onClick="actionImpressionNext">
 
         <RelativeLayout
@@ -18,15 +19,29 @@
             android:layout_height="match_parent"
             android:background="@color/colorAccentDark">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
-                android:textColor="@color/colorThemeWhite"
-                android:textAllCaps="true"
-                android:text="@string/next"
-                android:drawableEnd="@drawable/next"/>
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                tools:ignore="UseCompoundDrawables,UselessParent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorThemeWhite"
+                    android:text="@string/next_uppercase" />
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginStart="@dimen/space_small"
+                    android:src="@drawable/next"
+                    android:contentDescription="@null"/>
+
+            </LinearLayout>
 
         </RelativeLayout>
 

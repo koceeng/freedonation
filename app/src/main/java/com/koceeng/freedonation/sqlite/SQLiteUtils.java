@@ -112,7 +112,7 @@ public class SQLiteUtils {
         if ((content.getFooter() != null ? content.getFooter() : "").equals(""))
             cv.put("footer", content.getFooter());
 
-        sqLiteDatabase.insertWithOnConflict("content-active", "key", cv, SQLiteDatabase.CONFLICT_REPLACE);
+        sqLiteDatabase.insertWithOnConflict("content_active", "key", cv, SQLiteDatabase.CONFLICT_REPLACE);
     }
 
     public Content getContent() {
@@ -120,7 +120,7 @@ public class SQLiteUtils {
 
         Content result = null;
 
-        Cursor c = sqLiteDatabase.rawQuery("SELECT timestamp, title, subtitle, text, footer FROM content-active WHERE _id = 0;", null);
+        Cursor c = sqLiteDatabase.rawQuery("SELECT timestamp, title, subtitle, text, footer FROM content_active WHERE _id = 0;", null);
         while (c.moveToNext()) {
             result = new Content();
             result.setTimestamp(c.getLong(c.getColumnIndex("timestamp")));

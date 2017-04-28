@@ -1,10 +1,7 @@
 package com.koceeng.freedonation.helper;
 
-import android.widget.RadioButton;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.koceeng.freedonation.R;
 import com.koceeng.freedonation.home.HomeActivity;
@@ -19,7 +16,7 @@ import java.util.Random;
 public class FeedHelper {
 
     private final String TAG = "FeedHelper";
-    public enum FeedStatus { NO_NEED, GETTING_LAST, GENERATING_RANDOM, GETTING_DATA, SUCCESS, SAVING_DATA, FAILED }
+    public enum FeedStatus { START, GETTING_LAST, GENERATING_RANDOM, GETTING_DATA, SUCCESS, SAVING_DATA, FAILED }
 
     HomeActivity activity;
 
@@ -35,11 +32,16 @@ public class FeedHelper {
                 return;
         }
 
+        activity.onFeedChangeStatus(FeedStatus.START);
         activity.onFeedChangeStatus(FeedStatus.GETTING_LAST);
 
         // get language
-        final String currentLang = PreferenceUtil.getInstance().getString(activity, activity.getString(R.string.PREFERENCE_LANGUAGE), false);
-        DataPathUtil.getInstance().getContentLast(currentLang)
+        String currentLang = PreferenceUtil.getInstance().getString(activity, activity.getString(R.string.PREFERENCE_LANGUAGE), false);
+        if (currentLang.isEmpty())
+            currentLang = activity.getString(R.string.PREFERENCE_LANGUAGE_IN);
+        final String finalLang = currentLang;
+
+        DataPathUtil.getInstance().getContentLast(finalLang)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -53,7 +55,7 @@ public class FeedHelper {
                         int randomInt = random.nextInt(dataSnapshot.getValue(Integer.class));
 
                         activity.onFeedChangeStatus(FeedStatus.GETTING_DATA);
-                        DataPathUtil.getInstance().getContentById(currentLang, String.valueOf(randomInt))
+                        DataPathUtil.getInstance().getContentById(finalLang, String.valueOf(randomInt))
                                 .addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -64,7 +66,7 @@ public class FeedHelper {
 
                                         Content content = dataSnapshot.getValue(Content.class);
                                         content.setTimestamp(System.currentTimeMillis());
-                                        activity.onFeedChangeStatus(FeedStatus.SUCCESS, content);
+                                        activity.onFeedChangeStatus(FeedStatus.SUCCESS, null, content);
 
                                         SQLiteUtils.getInstance(activity).putContent(content);
                                         activity.onFeedChangeStatus(FeedStatus.SAVING_DATA);

@@ -12,6 +12,7 @@
 
     <!--Feed-->
     <string name="feed_title">Daily Hadith</string>
+    <string name="feed_reload">Reload</string>
 
     <!--Report-->
     <string name="report_title">Report</string>

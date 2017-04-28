@@ -10,6 +10,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,6 +41,7 @@ public class HomeActivity extends BaseActivity {
     @BindView(R.id.home_viewflipper) ViewFlipper viewFlipper;
 
     // feed page
+    @BindView(R.id.feed_progress) View progressFeed;
     @BindView(R.id.feed_text_title) TextView textFeedTitle;
 
     // report page
@@ -154,7 +156,11 @@ public class HomeActivity extends BaseActivity {
         onFeedChangeStatus(feedStatus, null);
     }
 
-    public void onFeedChangeStatus(FeedHelper.FeedStatus feedStatus, Content content) {
+    public void onFeedChangeStatus(FeedHelper.FeedStatus feedStatus, String message) {
+        onFeedChangeStatus(feedStatus, message, null);
+    }
+
+    public void onFeedChangeStatus(FeedHelper.FeedStatus feedStatus, String message, Content content) {
         if (feedStatus == null) {
             DebugUtil.getInstance().e(TAG, "FeedChangeStatus: feedStatus is empty");
             return;
@@ -162,7 +168,30 @@ public class HomeActivity extends BaseActivity {
 
         DebugUtil.getInstance().v(TAG, "FeedChangeStatus: " + feedStatus + (content != null ? "|content:" + content : ""));
 
+        switch (feedStatus) {
+            case START:
+                LayoutUtil.getInstance().setVisibility(progressFeed, View.VISIBLE);
+                break;
+            case FAILED:
+                LayoutUtil.getInstance().setVisibility(progressFeed, View.INVISIBLE);
+                // TODO: 28/04/17 pake toast?
+                if (message != null)
+                    Toast.makeText(thisContext, message, Toast.LENGTH_SHORT).show();
+                break;
+            case SUCCESS:
+                LayoutUtil.getInstance().setVisibility(progressFeed, View.INVISIBLE);
+                if (content != null) {
+                    // TODO: 28/04/17
+                    Toast.makeText(thisContext, "ULALALA", Toast.LENGTH_SHORT).show();
+                }
+                break;
+        }
+
         // TODO: 27-Apr-17
+    }
+
+    public void actionReload(View view) {
+        feedHelper.get(true);
     }
 
     public void actionReport(View view) {

@@ -4,6 +4,7 @@
 
     <!--Feed-->
     <string name="feed_title">Hadits Harian</string>
+    <string name="feed_reload">Muat Ulang</string>
 
     <!--Report-->
     <string name="report_title">Laporan</string>
