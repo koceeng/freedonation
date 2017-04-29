@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/feed_layout_parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/space_triple"
-    android:orientation="vertical"
     android:visibility="gone">
 
     <FrameLayout
@@ -23,49 +22,95 @@
 
     </FrameLayout>
 
-    <TextView
-        android:id="@+id/feed_text_title"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/space_small"
-        android:paddingStart="@dimen/space_default"
-        android:paddingEnd="@dimen/space_default"
-        android:textSize="@dimen/text_extra_big"
-        android:textColor="@color/colorPrimary"
-        android:text="@string/feed_title"/>
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/feed_progress"
+        android:layout_centerHorizontal="true">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/space_default"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:gravity="center_vertical"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:orientation="horizontal"
-            android:onClick="actionReload"
-            tools:ignore="UseCompoundDrawables,UselessParent">
-            
-            <ImageView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:src="@drawable/reload"
-                android:contentDescription="@null"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/feed_text_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/space_small"
+                android:paddingStart="@dimen/space_default"
+                android:paddingEnd="@dimen/space_default"
+                android:textSize="@dimen/text_extra_big"
+                android:textColor="@color/colorPrimary"
+                android:text="@string/feed_title"/>
+
+            <LinearLayout
+                android:id="@+id/feed_button_reload"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/space_small"
-                android:layout_gravity="center_vertical"
-                android:textSize="@dimen/text_small"
-                android:text="@string/feed_reload"/>
-            
-        </LinearLayout>
+                android:layout_below="@id/feed_text_title"
+                android:layout_alignParentEnd="true"
+                android:padding="@dimen/space_default"
+                android:gravity="center_vertical"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:orientation="horizontal"
+                android:onClick="actionReload"
+                tools:ignore="UseCompoundDrawables,UselessParent">
 
-    </RelativeLayout>
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@drawable/reload"
+                    android:contentDescription="@null"/>
 
-</LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_small"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="@dimen/text_small"
+                    android:text="@string/feed_reload"/>
+
+            </LinearLayout>
+
+            <TextSwitcher
+                android:id="@+id/feed_text_content_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/feed_button_reload"
+                android:layout_centerHorizontal="true"
+                android:paddingStart="@dimen/space_default"
+                android:paddingEnd="@dimen/space_default"/>
+
+            <TextSwitcher
+                android:id="@+id/feed_text_content_subtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/feed_text_content_title"
+                android:layout_centerHorizontal="true"
+                android:paddingStart="@dimen/space_default"
+                android:paddingEnd="@dimen/space_default"/>
+
+            <TextSwitcher
+                android:id="@+id/feed_text_content_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/feed_text_content_subtitle"
+                android:layout_centerHorizontal="true"
+                android:paddingStart="@dimen/space_default"
+                android:paddingEnd="@dimen/space_default"/>
+
+            <TextSwitcher
+                android:id="@+id/feed_text_content_footer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/feed_text_content_text"
+                android:layout_centerHorizontal="true"
+                android:paddingStart="@dimen/space_default"
+                android:paddingEnd="@dimen/space_default"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

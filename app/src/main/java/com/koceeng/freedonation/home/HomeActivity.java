@@ -25,6 +25,7 @@ import com.koceeng.freedonation.helper.SettingHelper;
 import com.koceeng.freedonation.object.Content;
 import com.koceeng.freedonation.object.HomeMenu;
 import com.koceeng.freedonation.object.HomeMenuList;
+import com.koceeng.freedonation.sqlite.SQLiteUtils;
 import com.koceeng.freedonation.util.AdUtil;
 import com.koceeng.freedonation.util.DebugUtil;
 import com.koceeng.freedonation.util.IntentUtil;
@@ -43,6 +44,10 @@ public class HomeActivity extends BaseActivity {
     // feed page
     @BindView(R.id.feed_progress) View progressFeed;
     @BindView(R.id.feed_text_title) TextView textFeedTitle;
+    @BindView(R.id.feed_text_content_title) TextSwitcher textFeedContentTitle;
+    @BindView(R.id.feed_text_content_subtitle) TextSwitcher textFeedContentSubtitle;
+    @BindView(R.id.feed_text_content_text) TextSwitcher textFeedContentText;
+    @BindView(R.id.feed_text_content_footer) TextSwitcher textFeedContentFooter;
 
     // report page
     @BindView(R.id.report_text_title) TextView textReportTitle;
@@ -142,6 +147,12 @@ public class HomeActivity extends BaseActivity {
     private void prepareTextSwitcher() {
         LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textAppName, R.dimen.text_mid_large, R.color.colorThemeWhite, Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
 
+        // feed
+        LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textFeedContentTitle, R.dimen.text_small);
+        LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textFeedContentSubtitle, R.dimen.text_small);
+        LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textFeedContentText, R.dimen.text_small);
+        LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textFeedContentFooter, R.dimen.text_small);
+
         // setting
         LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textSettingTitle, R.dimen.text_extra_big, R.color.colorPrimary);
         LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textLanguageLabel, R.dimen.text_small);
@@ -169,6 +180,9 @@ public class HomeActivity extends BaseActivity {
         DebugUtil.getInstance().v(TAG, "FeedChangeStatus: " + feedStatus + (content != null ? "|content:" + content : ""));
 
         switch (feedStatus) {
+            case NO_NEED:
+                onFeedChange(null);
+                break;
             case START:
                 LayoutUtil.getInstance().setVisibility(progressFeed, View.VISIBLE);
                 break;
@@ -181,8 +195,7 @@ public class HomeActivity extends BaseActivity {
             case SUCCESS:
                 LayoutUtil.getInstance().setVisibility(progressFeed, View.INVISIBLE);
                 if (content != null) {
-                    // TODO: 28/04/17
-                    Toast.makeText(thisContext, "ULALALA", Toast.LENGTH_SHORT).show();
+                    onFeedChange(content);
                 }
                 break;
         }
@@ -291,6 +304,43 @@ public class HomeActivity extends BaseActivity {
         if (type == null || type.equals(SettingHelper.Type.NOTIFICATION)) {
             // TODO: 22-Apr-17 from sqlite
             LayoutUtil.getInstance().setText(textNotificationValue, "TODO");
+        }
+
+        // load new feed based on language
+        feedHelper.get(true);
+    }
+
+    private void onFeedChange(Content content) {
+
+        if (content == null)
+            content = SQLiteUtils.getInstance(thisContext).getContent();
+
+        if (content != null && content.getTitle() != null) {
+            LayoutUtil.getInstance().toggleVisibility(textFeedContentTitle, true);
+            LayoutUtil.getInstance().setText(textFeedContentTitle, content.getTitle());
+        } else {
+            LayoutUtil.getInstance().toggleVisibility(textFeedContentTitle, false);
+        }
+
+        if (content != null && content.getSubtitle() != null) {
+            LayoutUtil.getInstance().toggleVisibility(textFeedContentSubtitle, true);
+            LayoutUtil.getInstance().setText(textFeedContentSubtitle, content.getSubtitle());
+        } else {
+            LayoutUtil.getInstance().toggleVisibility(textFeedContentSubtitle, false);
+        }
+
+        if (content != null && content.getText() != null) {
+            LayoutUtil.getInstance().toggleVisibility(textFeedContentText, true);
+            LayoutUtil.getInstance().setText(textFeedContentText, content.getText());
+        } else {
+            LayoutUtil.getInstance().toggleVisibility(textFeedContentText, false);
+        }
+
+        if (content != null && content.getFooter() != null) {
+            LayoutUtil.getInstance().toggleVisibility(textFeedContentFooter, true);
+            LayoutUtil.getInstance().setText(textFeedContentFooter, content.getFooter());
+        } else {
+            LayoutUtil.getInstance().toggleVisibility(textFeedContentFooter, false);
         }
     }
 }

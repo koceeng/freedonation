@@ -16,7 +16,7 @@ import java.util.Random;
 public class FeedHelper {
 
     private final String TAG = "FeedHelper";
-    public enum FeedStatus { START, GETTING_LAST, GENERATING_RANDOM, GETTING_DATA, SUCCESS, SAVING_DATA, FAILED }
+    public enum FeedStatus {NO_NEED, START, GETTING_LAST, GENERATING_RANDOM, GETTING_DATA, SUCCESS, SAVING_DATA, FAILED}
 
     HomeActivity activity;
 
@@ -28,8 +28,10 @@ public class FeedHelper {
         // check last get data
         if (!force) {
             Content content = SQLiteUtils.getInstance(activity).getContent();
-            if (content != null && System.currentTimeMillis() - content.getTimestamp() < 86400000) // 86400000 is one day
+            if (content != null && System.currentTimeMillis() - content.getTimestamp() < 86400000) { // 86400000 is one day
+                activity.onFeedChangeStatus(FeedStatus.NO_NEED);
                 return;
+            }
         }
 
         activity.onFeedChangeStatus(FeedStatus.START);

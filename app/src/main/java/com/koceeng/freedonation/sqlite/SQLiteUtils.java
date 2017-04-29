@@ -96,7 +96,7 @@ public class SQLiteUtils {
 
     public void putContent(Content content) {
         openWritable();
-        if (content == null || content.getKey() == null)
+        if (content == null)
             return;
 
         ContentValues cv = new ContentValues();
