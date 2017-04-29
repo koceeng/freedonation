@@ -1,5 +1,7 @@
 package com.koceeng.freedonation.helper;
 
+import android.util.Log;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -25,6 +27,7 @@ public class FeedHelper {
     }
 
     public void get(Boolean force) {
+        Log.e(TAG, "get: AAAAA " + force);
         // check last get data
         if (!force) {
             Content content = SQLiteUtils.getInstance(activity).getContent();
@@ -33,6 +36,8 @@ public class FeedHelper {
                 return;
             }
         }
+
+        Log.e(TAG, "get: DATA");
 
         activity.onFeedChangeStatus(FeedStatus.START);
         activity.onFeedChangeStatus(FeedStatus.GETTING_LAST);
@@ -68,6 +73,7 @@ public class FeedHelper {
 
                                         Content content = dataSnapshot.getValue(Content.class);
                                         content.setTimestamp(System.currentTimeMillis());
+                                        Log.e(TAG, "THIS onDataChange: " + System.currentTimeMillis());
                                         activity.onFeedChangeStatus(FeedStatus.SUCCESS, null, content);
 
                                         SQLiteUtils.getInstance(activity).putContent(content);

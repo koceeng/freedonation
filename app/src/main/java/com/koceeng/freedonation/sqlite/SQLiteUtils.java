@@ -101,18 +101,18 @@ public class SQLiteUtils {
 
         ContentValues cv = new ContentValues();
         cv.put(BaseColumns._ID, 0);
-        if ((content.getTimestamp() != null ? content.getTimestamp() : 0) == 0)
+        if ((content.getTimestamp() != null ? content.getTimestamp() : 0) != 0)
             cv.put("timestamp", content.getTimestamp());
-        if ((content.getTitle() != null ? content.getTitle() : "").equals(""))
+        if (!(content.getTitle() != null ? content.getTitle() : "").equals(""))
             cv.put("title", content.getTitle());
-        if ((content.getSubtitle() != null ? content.getSubtitle() : "").equals(""))
+        if (!(content.getSubtitle() != null ? content.getSubtitle() : "").equals(""))
             cv.put("subtitle", content.getSubtitle());
-        if ((content.getText() != null ? content.getText() : "").equals(""))
+        if (!(content.getText() != null ? content.getText() : "").equals(""))
             cv.put("text", content.getText());
-        if ((content.getFooter() != null ? content.getFooter() : "").equals(""))
+        if (!(content.getFooter() != null ? content.getFooter() : "").equals(""))
             cv.put("footer", content.getFooter());
 
-        sqLiteDatabase.insertWithOnConflict("content_active", "key", cv, SQLiteDatabase.CONFLICT_REPLACE);
+        sqLiteDatabase.insertWithOnConflict("content_active", "_id", cv, SQLiteDatabase.CONFLICT_REPLACE);
     }
 
     public Content getContent() {

@@ -22,7 +22,7 @@ public class Content extends FirebaseObject {
     }
 
     public String getTitle() {
-        return title;
+        return trim(title);
     }
 
     public void setTitle(String title) {
@@ -30,7 +30,7 @@ public class Content extends FirebaseObject {
     }
 
     public String getSubtitle() {
-        return subtitle;
+        return trim(subtitle);
     }
 
     public void setSubtitle(String subtitle) {
@@ -38,7 +38,7 @@ public class Content extends FirebaseObject {
     }
 
     public String getText() {
-        return text;
+        return trim(text);
     }
 
     public void setText(String text) {
@@ -46,10 +46,22 @@ public class Content extends FirebaseObject {
     }
 
     public String getFooter() {
-        return footer;
+        return trim(footer);
     }
 
     public void setFooter(String footer) {
         this.footer = footer;
+    }
+
+    private String trim(String value) {
+        if (value != null)
+            value = value
+                    .replaceAll("\n", "")
+                    .replaceAll("\\n", "")
+                    .replaceAll("^\\s+|\\s+$", "")
+                    .replaceAll("\\u00A0", "")
+                    .replaceAll("\\u00A0", "")
+                    .trim();
+        return value;
     }
 }

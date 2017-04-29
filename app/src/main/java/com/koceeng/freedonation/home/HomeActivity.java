@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.AppCompatImageView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -195,9 +196,11 @@ public class HomeActivity extends BaseActivity {
             case SUCCESS:
                 LayoutUtil.getInstance().setVisibility(progressFeed, View.INVISIBLE);
                 if (content != null) {
-                    onFeedChange(content);
+                    // onFeedChange(content);
                 }
                 break;
+            case SAVING_DATA:
+                onFeedChange(null);
         }
 
         // TODO: 27-Apr-17
@@ -270,6 +273,9 @@ public class HomeActivity extends BaseActivity {
         } else {
             onLanguageChange(type);
         }
+
+        // load new feed based on language
+        feedHelper.get(true);
     }
 
     public void onLanguageChange(SettingHelper.Type type) {
@@ -305,9 +311,6 @@ public class HomeActivity extends BaseActivity {
             // TODO: 22-Apr-17 from sqlite
             LayoutUtil.getInstance().setText(textNotificationValue, "TODO");
         }
-
-        // load new feed based on language
-        feedHelper.get(true);
     }
 
     private void onFeedChange(Content content) {
@@ -318,6 +321,7 @@ public class HomeActivity extends BaseActivity {
         if (content != null && content.getTitle() != null) {
             LayoutUtil.getInstance().toggleVisibility(textFeedContentTitle, true);
             LayoutUtil.getInstance().setText(textFeedContentTitle, content.getTitle());
+            Log.e(TAG, "onFeedChange: "+content.getTitle());
         } else {
             LayoutUtil.getInstance().toggleVisibility(textFeedContentTitle, false);
         }
@@ -325,6 +329,7 @@ public class HomeActivity extends BaseActivity {
         if (content != null && content.getSubtitle() != null) {
             LayoutUtil.getInstance().toggleVisibility(textFeedContentSubtitle, true);
             LayoutUtil.getInstance().setText(textFeedContentSubtitle, content.getSubtitle());
+            Log.e(TAG, "onFeedChange: "+content.getSubtitle());
         } else {
             LayoutUtil.getInstance().toggleVisibility(textFeedContentSubtitle, false);
         }
@@ -332,6 +337,7 @@ public class HomeActivity extends BaseActivity {
         if (content != null && content.getText() != null) {
             LayoutUtil.getInstance().toggleVisibility(textFeedContentText, true);
             LayoutUtil.getInstance().setText(textFeedContentText, content.getText());
+            Log.e(TAG, "onFeedChange: "+content.getText());
         } else {
             LayoutUtil.getInstance().toggleVisibility(textFeedContentText, false);
         }
