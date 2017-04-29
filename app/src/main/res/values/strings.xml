@@ -23,6 +23,7 @@
     <!--Setting-->
     <string name="setting_title">Setting</string>
     <string name="setting_language_label">Language</string>
+    <string name="setting_hide_content_detail_label">Show content detail (title, narrator, etc)</string>
     <string name="setting_ad_interstitial_label">Show ad on startup (on stable connection)</string>
     <string name="setting_notification_label">Scheduled reminder</string>
 

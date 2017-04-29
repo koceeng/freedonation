@@ -1,12 +1,9 @@
 package com.koceeng.freedonation.object;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 import android.widget.ViewFlipper;
 
-import com.koceeng.freedonation.R;
-import com.koceeng.freedonation.util.DebugUtil;
 import com.koceeng.freedonation.util.IntentUtil;
 
 import java.util.HashMap;

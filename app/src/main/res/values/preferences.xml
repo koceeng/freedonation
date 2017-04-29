@@ -7,4 +7,5 @@
     <string name="PREFERENCE_LANGUAGE_IN" translatable="false">in</string>
     <string name="PREFERENCE_LANGUAGE_IN_LABEL" translatable="false">Indonesia</string>
     <string name="PREFERENCE_HIDE_INTERSTITIAL_AD" translatable="false">PREFERENCE_HIDE_INTERSTITIAL_AD</string>
+    <string name="PREFERENCE_HIDE_CONTENT_DETAIL" translatable="false">PREFERENCE_HIDE_CONTENT_DETAIL</string>
 </resources>

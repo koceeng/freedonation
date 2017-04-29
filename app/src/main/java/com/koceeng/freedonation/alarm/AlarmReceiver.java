@@ -2,7 +2,6 @@ package com.koceeng.freedonation.alarm;
 
 import android.app.Notification;
 import android.app.NotificationManager;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.WakefulBroadcastReceiver;
@@ -21,7 +20,7 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
 
         Notification.Builder builder = new Notification.Builder(context);
         builder.setContentTitle("Scheduled Notification");
-        builder.setContentText("FUUUCK");
+        builder.setContentText("Test content");
         builder.setSmallIcon(R.drawable.like);
 
         notificationManager.notify(10, builder.build());

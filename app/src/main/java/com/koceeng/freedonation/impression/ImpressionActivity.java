@@ -2,7 +2,6 @@ package com.koceeng.freedonation.impression;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.SQLException;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -10,12 +9,7 @@ import android.view.View;
 import com.koceeng.freedonation.R;
 import com.koceeng.freedonation.base.BaseActivity;
 import com.koceeng.freedonation.home.HomeActivity;
-import com.koceeng.freedonation.sqlite.SQLiteUtils;
-import com.koceeng.freedonation.util.DebugUtil;
 import com.koceeng.freedonation.util.PreferenceUtil;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ImpressionActivity extends BaseActivity {
 

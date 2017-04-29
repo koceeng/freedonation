@@ -40,6 +40,26 @@
         style="@style/settingEntry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="actionSettingHideContentDetail">
+
+        <TextSwitcher
+            android:id="@+id/setting_text_hide_content_detail_labe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/space_tiny"/>
+
+        <TextSwitcher
+            android:id="@+id/setting_text_hide_content_detail_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/settingEntry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:onClick="actionSettingAdInterstitial">
 
         <TextSwitcher

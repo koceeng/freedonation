@@ -7,8 +7,6 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.provider.BaseColumns;
-import android.provider.SyncStateContract;
-import android.support.v4.app.NavUtils;
 
 import com.koceeng.freedonation.object.Content;
 import com.koceeng.freedonation.util.DebugUtil;

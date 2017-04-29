@@ -3,16 +3,11 @@ package com.koceeng.freedonation.base;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.view.Window;
-import android.view.WindowManager;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.koceeng.freedonation.util.DebugUtil;
 import com.koceeng.freedonation.util.LanguageUtil;
 
@@ -118,12 +113,6 @@ public class BaseActivity extends AppCompatActivity {
 
     protected void registerEventBus() {
         isRegisterEventBus = true;
-    }
-
-    protected FirebaseUser getUser() {
-        DebugUtil.getInstance().v(TAG, "getUser");
-
-        return FirebaseAuth.getInstance().getCurrentUser();
     }
 
     public void inputFieldAction() {

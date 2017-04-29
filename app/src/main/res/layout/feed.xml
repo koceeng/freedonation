@@ -50,7 +50,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/feed_text_title"
                 android:layout_alignParentEnd="true"
-                android:padding="@dimen/space_default"
+                android:paddingBottom="@dimen/space_default"
+                android:paddingStart="@dimen/space_default"
+                android:paddingEnd="@dimen/space_default"
                 android:gravity="center_vertical"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:orientation="horizontal"
@@ -79,8 +81,10 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/feed_button_reload"
                 android:layout_centerHorizontal="true"
+                android:paddingBottom="@dimen/space_small"
                 android:paddingStart="@dimen/space_default"
-                android:paddingEnd="@dimen/space_default"/>
+                android:paddingEnd="@dimen/space_default"
+                android:measureAllChildren="false"/>
 
             <TextSwitcher
                 android:id="@+id/feed_text_content_subtitle"
@@ -88,8 +92,10 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/feed_text_content_title"
                 android:layout_centerHorizontal="true"
+                android:paddingBottom="@dimen/space_tiny"
                 android:paddingStart="@dimen/space_default"
-                android:paddingEnd="@dimen/space_default"/>
+                android:paddingEnd="@dimen/space_default"
+                android:measureAllChildren="false"/>
 
             <TextSwitcher
                 android:id="@+id/feed_text_content_text"
@@ -97,8 +103,10 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/feed_text_content_subtitle"
                 android:layout_centerHorizontal="true"
+                android:paddingBottom="@dimen/space_small"
                 android:paddingStart="@dimen/space_default"
-                android:paddingEnd="@dimen/space_default"/>
+                android:paddingEnd="@dimen/space_default"
+                android:measureAllChildren="false"/>
 
             <TextSwitcher
                 android:id="@+id/feed_text_content_footer"
@@ -107,7 +115,8 @@
                 android:layout_below="@id/feed_text_content_text"
                 android:layout_centerHorizontal="true"
                 android:paddingStart="@dimen/space_default"
-                android:paddingEnd="@dimen/space_default"/>
+                android:paddingEnd="@dimen/space_default"
+                android:measureAllChildren="false"/>
 
         </RelativeLayout>
 

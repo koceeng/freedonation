@@ -5,7 +5,6 @@ import android.support.v4.BuildConfig;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.crash.FirebaseCrash;
 import com.google.firebase.database.DatabaseError;
 
@@ -32,11 +31,6 @@ public class DebugUtil {
     }
 
     public void f(Object tag, DatabaseError databaseError) {
-        if ((databaseError.getMessage().toLowerCase().contains("permission denied")
-                || databaseError.getMessage().equalsIgnoreCase("This client does not have permission to perform this operation"))
-                && FirebaseAuth.getInstance().getCurrentUser() == null)
-            return;
-
         String tagDisplay = tag instanceof Activity || tag instanceof Fragment ? tag.getClass().getSimpleName() : tag.toString();
         String string = databaseError.getMessage() + "::" + databaseError;
 

@@ -7,7 +7,7 @@ import com.koceeng.freedonation.util.PreferenceUtil;
 
 public class SettingHelper {
 
-    public enum Type {LANGUAGE, AD_INTERSTITIAL, NOTIFICATION}
+    public enum Type {LANGUAGE, HIDE_CONTENT_DETAIL, AD_INTERSTITIAL, NOTIFICATION}
 
     private HomeActivity context;
 
@@ -16,10 +16,14 @@ public class SettingHelper {
     }
 
     public void changeLanguage() {
-
         LanguageBottomSheet languageBottomSheet = new LanguageBottomSheet();
         languageBottomSheet.setHomeActivity(context);
         languageBottomSheet.show(context.getSupportFragmentManager(), languageBottomSheet.getTag());
+    }
+
+    public void changeHideContentDetail() {
+        PreferenceUtil.getInstance().putBoolean(context, context.getString(R.string.PREFERENCE_HIDE_CONTENT_DETAIL),
+                !PreferenceUtil.getInstance().getBoolean(context, context.getString(R.string.PREFERENCE_HIDE_CONTENT_DETAIL)));
     }
 
     public void changeAdInterstitial() {

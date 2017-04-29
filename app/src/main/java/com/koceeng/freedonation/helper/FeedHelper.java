@@ -1,7 +1,11 @@
 package com.koceeng.freedonation.helper;
 
+import android.os.Handler;
 import android.util.Log;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -9,6 +13,7 @@ import com.koceeng.freedonation.R;
 import com.koceeng.freedonation.home.HomeActivity;
 import com.koceeng.freedonation.object.Content;
 import com.koceeng.freedonation.sqlite.SQLiteUtils;
+import com.koceeng.freedonation.util.AdUtil;
 import com.koceeng.freedonation.util.DataPathUtil;
 import com.koceeng.freedonation.util.DebugUtil;
 import com.koceeng.freedonation.util.PreferenceUtil;
@@ -21,13 +26,26 @@ public class FeedHelper {
     public enum FeedStatus {NO_NEED, START, GETTING_LAST, GENERATING_RANDOM, GETTING_DATA, SUCCESS, SAVING_DATA, FAILED}
 
     HomeActivity activity;
+    InterstitialAd interstitialAd;
+
+    Content result;
+
+    boolean adInterstitialDone;
+    boolean getFeedDataDone;
+
+    int handleCounter = 0;
+    int handleDelay = 500;
+    int handleRepeat = 3;
 
     public FeedHelper(final HomeActivity activity) {
         this.activity = activity;
     }
-
+    
     public void get(Boolean force) {
-        Log.e(TAG, "get: AAAAA " + force);
+        get(force, false);
+    }
+
+    public void get(Boolean force, Boolean showAd) {
         // check last get data
         if (!force) {
             Content content = SQLiteUtils.getInstance(activity).getContent();
@@ -37,9 +55,52 @@ public class FeedHelper {
             }
         }
 
-        Log.e(TAG, "get: DATA");
-
         activity.onFeedChangeStatus(FeedStatus.START);
+        adInterstitialDone = !showAd;
+        getFeedDataDone = false;
+        result = null;
+        doGetFeed();
+
+        if (showAd) {
+            // show ad
+            MobileAds.initialize(activity);
+
+            interstitialAd = new InterstitialAd(activity);
+            interstitialAd.setAdUnitId(activity.getString(R.string.ad_unit_interstitial));
+            interstitialAd.loadAd(AdUtil.getInstance().getAdRequest());
+            interstitialAd.setAdListener(new AdListener() {
+                @Override
+                public void onAdClosed() {
+                    super.onAdClosed();
+                    adInterstitialDone = true;
+                    afterGetFeed();
+                }
+            });
+
+            final Handler handler = new Handler();
+            Runnable runnable = new Runnable() {
+                @Override
+                public void run() {
+                    handleCounter++;
+                    Log.e(TAG, "handle run: " + handleCounter);
+                    if (interstitialAd.isLoaded()) {
+                        interstitialAd.show();
+                    } else if (handleCounter >= handleRepeat) {
+                        adInterstitialDone = true;
+                        afterGetFeed();
+                    } else {
+                        handler.postDelayed(this, handleDelay);
+                    }
+                }
+            };
+
+            handleCounter = 0;
+            handler.postDelayed(runnable, handleDelay);
+        }
+    }
+    
+    private void doGetFeed() {
+
         activity.onFeedChangeStatus(FeedStatus.GETTING_LAST);
 
         // get language
@@ -73,8 +134,10 @@ public class FeedHelper {
 
                                         Content content = dataSnapshot.getValue(Content.class);
                                         content.setTimestamp(System.currentTimeMillis());
-                                        Log.e(TAG, "THIS onDataChange: " + System.currentTimeMillis());
-                                        activity.onFeedChangeStatus(FeedStatus.SUCCESS, null, content);
+                                        result = content;
+
+                                        getFeedDataDone = true;
+                                        afterGetFeed();
 
                                         SQLiteUtils.getInstance(activity).putContent(content);
                                         activity.onFeedChangeStatus(FeedStatus.SAVING_DATA);
@@ -94,5 +157,17 @@ public class FeedHelper {
                         activity.onFeedChangeStatus(FeedStatus.FAILED);
                     }
                 });
+    }
+
+    private void afterGetFeed() {
+        if (!adInterstitialDone || !getFeedDataDone)
+            return;
+
+        if (result != null) {
+            activity.onFeedChangeStatus(FeedStatus.SUCCESS, null, result);
+
+        } else {
+            activity.onFeedChangeStatus(FeedStatus.FAILED);
+        }
     }
 }

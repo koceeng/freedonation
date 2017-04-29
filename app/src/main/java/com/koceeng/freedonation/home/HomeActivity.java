@@ -11,13 +11,14 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 import com.koceeng.freedonation.R;
 import com.koceeng.freedonation.base.BaseActivity;
 import com.koceeng.freedonation.bottomsheet.NotificationBottomSheet;
@@ -30,6 +31,7 @@ import com.koceeng.freedonation.sqlite.SQLiteUtils;
 import com.koceeng.freedonation.util.AdUtil;
 import com.koceeng.freedonation.util.DebugUtil;
 import com.koceeng.freedonation.util.IntentUtil;
+import com.koceeng.freedonation.util.LanguageUtil;
 import com.koceeng.freedonation.util.LayoutUtil;
 import com.koceeng.freedonation.util.PreferenceUtil;
 
@@ -60,13 +62,21 @@ public class HomeActivity extends BaseActivity {
     @BindView(R.id.setting_text_title) TextSwitcher textSettingTitle;
     @BindView(R.id.setting_text_language_label) TextSwitcher textLanguageLabel;
     @BindView(R.id.setting_text_language_value) TextSwitcher textLanguageValue;
+    @BindView(R.id.setting_text_hide_content_detail_labe) TextSwitcher textHideContentDetailLabel;
+    @BindView(R.id.setting_text_hide_content_detail_value) TextSwitcher textHideContentDetailValue;
     @BindView(R.id.setting_text_ad_interstitial_label) TextSwitcher textAdInterstitialLabel;
     @BindView(R.id.setting_text_ad_interstitial_value) TextSwitcher textAdInterstitialValue;
     @BindView(R.id.setting_text_notification_label) TextSwitcher textNotificationLabel;
     @BindView(R.id.setting_text_notification_value) TextSwitcher textNotificationValue;
 
     // share page
+    @BindView(R.id.share_text_title) TextView textShareTitle;
+    @BindView(R.id.share_text_hint) TextView textShareHint;
     @BindView(R.id.share_edittext_comment) EditText editTextShareComment;
+    @BindView(R.id.share_button) Button buttonShare;
+
+    // help page
+    @BindView(R.id.help_text_title) TextView textHelpTitle;
 
     HomeActivity homeActivity;
     HomeMenuList homeMenuList;
@@ -149,15 +159,17 @@ public class HomeActivity extends BaseActivity {
         LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textAppName, R.dimen.text_mid_large, R.color.colorThemeWhite, Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
 
         // feed
-        LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textFeedContentTitle, R.dimen.text_small);
-        LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textFeedContentSubtitle, R.dimen.text_small);
+        LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textFeedContentTitle, R.dimen.text_default, R.color.colorPrimary, Gravity.END);
+        LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textFeedContentSubtitle, R.dimen.text_mini, R.color.colorThemeGrayDark);
         LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textFeedContentText, R.dimen.text_small);
-        LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textFeedContentFooter, R.dimen.text_small);
+        LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textFeedContentFooter, R.dimen.text_mini, R.color.colorThemeGrayDark, Gravity.END);
 
         // setting
         LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textSettingTitle, R.dimen.text_extra_big, R.color.colorPrimary);
         LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textLanguageLabel, R.dimen.text_small);
         LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textLanguageValue, R.dimen.text_small, R.color.colorPrimary, Gravity.CENTER_VERTICAL | Gravity.END);
+        LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textHideContentDetailLabel, R.dimen.text_small);
+        LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textHideContentDetailValue, R.dimen.text_small, R.color.colorPrimary, Gravity.CENTER_VERTICAL | Gravity.END);
         LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textAdInterstitialLabel, R.dimen.text_small);
         LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textAdInterstitialValue, R.dimen.text_small, R.color.colorPrimary, Gravity.CENTER_VERTICAL | Gravity.END);
         LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textNotificationLabel, R.dimen.text_small);
@@ -195,19 +207,16 @@ public class HomeActivity extends BaseActivity {
                 break;
             case SUCCESS:
                 LayoutUtil.getInstance().setVisibility(progressFeed, View.INVISIBLE);
-                if (content != null) {
-                    // onFeedChange(content);
-                }
+                if (content != null)
+                    onFeedChange(content);
                 break;
-            case SAVING_DATA:
-                onFeedChange(null);
         }
 
         // TODO: 27-Apr-17
     }
 
     public void actionReload(View view) {
-        feedHelper.get(true);
+        feedHelper.get(true, true);
     }
 
     public void actionReport(View view) {
@@ -220,6 +229,16 @@ public class HomeActivity extends BaseActivity {
 
         settingHoldChange = true;
         settingHelper.changeLanguage();
+        settingHoldChange = false;
+    }
+
+    public void actionSettingHideContentDetail(View view) {
+        if (settingHoldChange)
+            return;
+
+        settingHoldChange = true;
+        settingHelper.changeHideContentDetail();
+        onLanguageChange(SettingHelper.Type.HIDE_CONTENT_DETAIL);
         settingHoldChange = false;
     }
 
@@ -279,6 +298,8 @@ public class HomeActivity extends BaseActivity {
     }
 
     public void onLanguageChange(SettingHelper.Type type) {
+        LanguageUtil.getInstance().updateLanguageResource(thisContext);
+
         if (type == null) {
             LayoutUtil.getInstance().setText(textAppName, getString(R.string.title));
 
@@ -291,14 +312,29 @@ public class HomeActivity extends BaseActivity {
 
             LayoutUtil.getInstance().setText(textSettingTitle, getString(R.string.setting_title));
             LayoutUtil.getInstance().setText(textLanguageLabel, getString(R.string.setting_language_label));
+            LayoutUtil.getInstance().setText(textHideContentDetailLabel, getString(R.string.setting_hide_content_detail_label));
             LayoutUtil.getInstance().setText(textAdInterstitialLabel, getString(R.string.setting_ad_interstitial_label));
             LayoutUtil.getInstance().setText(textNotificationLabel, getString(R.string.setting_notification_label));
+
+            LayoutUtil.getInstance().setText(textShareTitle, getString(R.string.share_title));
+            LayoutUtil.getInstance().setText(textShareHint, getString(R.string.share_hint));
+            LayoutUtil.getInstance().setText(editTextShareComment, getString(R.string.share_text_default));
+            LayoutUtil.getInstance().setText(buttonShare, getString(R.string.share_button_text));
+
+            LayoutUtil.getInstance().setText(textHelpTitle, getString(R.string.help_title));
         }
 
         if (type == null || type.equals(SettingHelper.Type.LANGUAGE)) {
             LayoutUtil.getInstance().setText(textLanguageValue, getString(
                     (PreferenceUtil.getInstance().getString(thisContext, getString(R.string.PREFERENCE_LANGUAGE), false).equals(getString(R.string.PREFERENCE_LANGUAGE_EN))) ?
                             R.string.PREFERENCE_LANGUAGE_EN_LABEL : R.string.PREFERENCE_LANGUAGE_IN_LABEL));
+        }
+
+        if (type == null || type.equals(SettingHelper.Type.HIDE_CONTENT_DETAIL)) {
+            LayoutUtil.getInstance().setText(textHideContentDetailValue, getString(
+                    !PreferenceUtil.getInstance().getBoolean(thisContext, getString(R.string.PREFERENCE_HIDE_CONTENT_DETAIL)) ?
+                            R.string.yes : R.string.no));
+            onFeedChange(null);
         }
 
         if (type == null || type.equals(SettingHelper.Type.AD_INTERSTITIAL)) {
@@ -318,7 +354,9 @@ public class HomeActivity extends BaseActivity {
         if (content == null)
             content = SQLiteUtils.getInstance(thisContext).getContent();
 
-        if (content != null && content.getTitle() != null) {
+        Boolean showContentDetail = !PreferenceUtil.getInstance().getBoolean(thisContext, getString(R.string.PREFERENCE_HIDE_CONTENT_DETAIL));
+
+        if (showContentDetail && content != null && content.getTitle() != null) {
             LayoutUtil.getInstance().toggleVisibility(textFeedContentTitle, true);
             LayoutUtil.getInstance().setText(textFeedContentTitle, content.getTitle());
             Log.e(TAG, "onFeedChange: "+content.getTitle());
@@ -326,7 +364,7 @@ public class HomeActivity extends BaseActivity {
             LayoutUtil.getInstance().toggleVisibility(textFeedContentTitle, false);
         }
 
-        if (content != null && content.getSubtitle() != null) {
+        if (showContentDetail && content != null && content.getSubtitle() != null) {
             LayoutUtil.getInstance().toggleVisibility(textFeedContentSubtitle, true);
             LayoutUtil.getInstance().setText(textFeedContentSubtitle, content.getSubtitle());
             Log.e(TAG, "onFeedChange: "+content.getSubtitle());
@@ -342,7 +380,7 @@ public class HomeActivity extends BaseActivity {
             LayoutUtil.getInstance().toggleVisibility(textFeedContentText, false);
         }
 
-        if (content != null && content.getFooter() != null) {
+        if (showContentDetail && content != null && content.getFooter() != null) {
             LayoutUtil.getInstance().toggleVisibility(textFeedContentFooter, true);
             LayoutUtil.getInstance().setText(textFeedContentFooter, content.getFooter());
         } else {
