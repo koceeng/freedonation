@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">Free Donation</string>
-    <string name="app_name_in" translatable="false">Donasi Gratis</string>
+    <string name="app_name_in" translatable="false">Sedekah Gratis</string>
     <string name="title">Free Donation</string>
 
     <!--Impression-->
     <string name="impression_title" translatable="false">Bagaimana cara kerjanya?</string>
-    <string name="impression_text_1" translatable="false">Darimana aplikasi ini memperoleh uang untuk didonasikan tanpa ada orang yg mengirimkan uang?</string>
-    <string name="impression_text_2" translatable="false">Aplikasi ini diselipi iklan. Penghasilan dari iklan tersebut akan disumbangkan ke salah satu yayasan penyalur donasi di Indonesia.</string>
-    <string name="impression_text_3" translatable="false">Anda juga dapat melihat laporan penghasilan aplikasi ini serta bukti penyaluran donasi dalam menu "Laporan" pada halaman selanjutnya</string>
+    <string name="impression_text_1" translatable="false">Darimana aplikasi ini memperoleh uang untuk disedekahkan tanpa ada orang yg mengirimkan uang?</string>
+    <string name="impression_text_2" translatable="false">Aplikasi ini diselipi iklan. Penghasilan dari iklan tersebut akan disumbangkan ke salah satu yayasan penyalur sedekah di Indonesia.</string>
+    <string name="impression_text_3" translatable="false">Anda juga dapat melihat laporan penghasilan aplikasi ini serta bukti penyaluran sedekah dalam menu "Laporan" pada halaman utama</string>
     <string name="impression_text_4" translatable="false">Bismillah, semoga aplikasi ini bermanfaat.</string>
 
     <!--Feed-->

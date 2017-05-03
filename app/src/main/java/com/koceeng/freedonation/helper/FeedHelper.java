@@ -35,7 +35,7 @@ public class FeedHelper {
 
     int handleCounter = 0;
     int handleDelay = 500;
-    int handleRepeat = 3;
+    int handleRepeat = 5;
 
     public FeedHelper(final HomeActivity activity) {
         this.activity = activity;

@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Donasi Gratis (Debug)</string>
-    <string name="title">Donasi Gratis</string>
+    <string name="app_name">Sedekah Gratis (Debug)</string>
+    <string name="title">Sedekah Gratis</string>
 
     <!--Feed-->
     <string name="feed_title">Hadits Harian</string>
@@ -9,7 +9,7 @@
     <!--Report-->
     <string name="report_title">Laporan</string>
     <string name="report_button_text">Lihat Laporan</string>
-    <string name="report_note">Anda dapat melihat penghasilan dari aplikasi ini serta detail dan bukti donasi disini</string>
+    <string name="report_note">Anda dapat melihat penghasilan dari aplikasi ini serta detail dan bukti sedekah disini</string>
     <string name="report_note_future_release">Fitur lihat laporan dari aplikasi (tidak melalui web) akan ditambahkan pada perbaruan aplikasi selanjutnya</string>
 
     <!--Setting-->
@@ -21,9 +21,9 @@
 
     <!--Share-->
     <string name="share_title">Bagikan kabar ke teman</string>
-    <string name="share_subject">Aplikasi untuk Donasi Gratis</string>
+    <string name="share_subject">Aplikasi untuk Sedekah Gratis</string>
     <string name="share_hint">Teks yang disertakan</string>
-    <string name="share_text_default">Donasi tanpa mengeluarkan uang dengan menggunakan aplikasi Android ini.</string>
+    <string name="share_text_default">Sedekah tanpa mengeluarkan uang dengan menggunakan aplikasi Android ini.</string>
     <string name="share_button_text">Bagikan</string>
     <string name="share_choose_app">Share/bagikan dengan …</string>
     <string name="share_fail">Aduh, terjadi kesalahan saat hendak membagikan</string>

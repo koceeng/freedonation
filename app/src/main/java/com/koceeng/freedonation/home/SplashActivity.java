@@ -39,7 +39,7 @@ public class SplashActivity extends BaseActivity {
         checkIfActive();
         AppUtil.getInstance().checkVersion(this);
 
-        if (!PreferenceUtil.getInstance().getBoolean(thisContext, getString(R.string.PREFERENCE_NOT_FIRST_LAUNCH))) {
+        if (!PreferenceUtil.getInstance().getBoolean(thisContext, getString(R.string.PREFERENCE_NOT_FIRST_LAUNCH)) || true) {
             startActivity(ImpressionActivity.Factory.getIntent(this));
             return;
         }

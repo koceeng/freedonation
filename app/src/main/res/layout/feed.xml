@@ -50,6 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/feed_text_title"
                 android:layout_alignParentEnd="true"
+                android:paddingTop="@dimen/space_small"
                 android:paddingBottom="@dimen/space_default"
                 android:paddingStart="@dimen/space_default"
                 android:paddingEnd="@dimen/space_default"

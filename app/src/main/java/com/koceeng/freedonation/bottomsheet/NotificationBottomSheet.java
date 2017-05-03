@@ -42,7 +42,7 @@ public class NotificationBottomSheet extends BaseBottomSheet
             Calendar calendar = Calendar.getInstance();
             Log.e(TAG, "onClick: schedule the alarm");
 
-//            calendar.set(Calendar.DAY_OF_YEAR, 1);
+            calendar.set(Calendar.DAY_OF_YEAR, 1);
             calendar.set(Calendar.HOUR_OF_DAY, 19);
             calendar.set(Calendar.MINUTE, 39);
             calendar.set(Calendar.SECOND, 10);

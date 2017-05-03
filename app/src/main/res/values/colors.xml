@@ -8,6 +8,8 @@
     <color name="colorSecondary">#c1d464</color>
     <color name="colorBase">#eeeeee</color>
 
+    <color name="colorDanger">#e95e0d</color>
+
     <color name="colorReadable">#333333</color>
     <color name="colorDivider">#484848</color>
 

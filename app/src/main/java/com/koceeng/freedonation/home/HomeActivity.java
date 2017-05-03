@@ -201,8 +201,7 @@ public class HomeActivity extends BaseActivity {
                 break;
             case FAILED:
                 LayoutUtil.getInstance().setVisibility(progressFeed, View.INVISIBLE);
-                // TODO: 28/04/17 pake toast?
-                if (message != null)
+                if (message != null && !message.isEmpty())
                     Toast.makeText(thisContext, message, Toast.LENGTH_SHORT).show();
                 break;
             case SUCCESS:
@@ -211,8 +210,6 @@ public class HomeActivity extends BaseActivity {
                     onFeedChange(content);
                 break;
         }
-
-        // TODO: 27-Apr-17
     }
 
     public void actionReload(View view) {
@@ -220,7 +217,7 @@ public class HomeActivity extends BaseActivity {
     }
 
     public void actionReport(View view) {
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://freedonation.koceeng.com/report")));
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://freedonation.koceeng.com")));
     }
 
     public void actionSettingLanguage(View view) {

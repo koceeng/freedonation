@@ -17,11 +17,10 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
 
         NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-
         Notification.Builder builder = new Notification.Builder(context);
         builder.setContentTitle("Scheduled Notification");
         builder.setContentText("Test content");
-        builder.setSmallIcon(R.drawable.like);
+        builder.setSmallIcon(R.drawable.icon_vector);
 
         notificationManager.notify(10, builder.build());
 
