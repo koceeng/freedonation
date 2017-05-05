@@ -1,7 +1,7 @@
 package com.koceeng.freedonation.helper;
 
 import com.koceeng.freedonation.R;
-import com.koceeng.freedonation.bottomsheet.LanguageBottomSheet;
+import com.koceeng.freedonation.setting.LanguageBottomSheet;
 import com.koceeng.freedonation.home.HomeActivity;
 import com.koceeng.freedonation.util.PreferenceUtil;
 

@@ -1,4 +1,4 @@
-package com.koceeng.freedonation.bottomsheet;
+package com.koceeng.freedonation.setting;
 
 import android.app.Dialog;
 import android.view.View;

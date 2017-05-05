@@ -43,8 +43,12 @@ public class SQLiteInit extends SQLiteOpenHelper {
                     "footer TEXT " +
                     "); ");
 
-            // create table notification
-            // TODO: 22-Apr-17
+            // create table alarm
+            db.execSQL("CREATE TABLE IF NOT EXISTS alarm(" +
+                    "_id INTEGER PRIMARY KEY, " +
+                    "hour_of_day INTEGER, " +
+                    "minute INTEGER " +
+                    "); ");
         }
     }
 

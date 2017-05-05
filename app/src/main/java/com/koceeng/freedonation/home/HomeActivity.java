@@ -17,11 +17,9 @@ import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.MobileAds;
 import com.koceeng.freedonation.R;
 import com.koceeng.freedonation.base.BaseActivity;
-import com.koceeng.freedonation.bottomsheet.NotificationBottomSheet;
+import com.koceeng.freedonation.alarm.AlarmBottomSheet;
 import com.koceeng.freedonation.helper.FeedHelper;
 import com.koceeng.freedonation.helper.SettingHelper;
 import com.koceeng.freedonation.object.Content;
@@ -251,9 +249,9 @@ public class HomeActivity extends BaseActivity {
 
     public void actionSettingNotification(View view) {
         settingHoldChange = true;
-        NotificationBottomSheet notificationBottomSheet = new NotificationBottomSheet();
-        notificationBottomSheet.setHomeActivity(homeActivity);
-        notificationBottomSheet.show(getSupportFragmentManager(), notificationBottomSheet.getTag());
+        AlarmBottomSheet alarmBottomSheet = new AlarmBottomSheet();
+        alarmBottomSheet.setHomeActivity(homeActivity);
+        alarmBottomSheet.show(getSupportFragmentManager(), alarmBottomSheet.getTag());
         settingHoldChange = false;
     }
 

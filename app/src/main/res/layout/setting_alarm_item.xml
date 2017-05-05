@@ -9,7 +9,7 @@
     android:orientation="vertical" >
 
     <FrameLayout
-        android:id="@+id/setting_notification_item_button"
+        android:id="@+id/setting_alarm_item_button"
         android:layout_width="@dimen/height_small"
         android:layout_height="@dimen/height_small"
         android:layout_centerVertical="true"
@@ -27,12 +27,12 @@
     </FrameLayout>
 
     <TextView
-        android:id="@+id/setting_notification_item_text"
+        android:id="@+id/setting_alarm_item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true"
-        android:layout_toStartOf="@id/setting_notification_item_button"
+        android:layout_toStartOf="@id/setting_alarm_item_button"
         android:layout_gravity="center_vertical"
         android:textSize="@dimen/text_default"/>
 

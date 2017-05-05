@@ -46,6 +46,7 @@
         android:layout_height="3dp"
         android:layout_above="@id/impression_button_next"
         android:layout_centerHorizontal="true"
+        android:background="@color/colorSecondary"
         android:visibility="gone">
 
         <ProgressBar

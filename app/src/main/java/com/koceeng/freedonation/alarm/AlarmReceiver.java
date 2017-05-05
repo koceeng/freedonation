@@ -22,7 +22,7 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
         builder.setContentText("Test content");
         builder.setSmallIcon(R.drawable.icon_vector);
 
-        notificationManager.notify(10, builder.build());
+        notificationManager.notify(0, builder.build());
 
 //        if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
 //            Log.e("AlarmReceiver", "onReceive: RESET ALARM");

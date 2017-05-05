@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.provider.BaseColumns;
 
+import com.koceeng.freedonation.alarm.AlarmObject;
 import com.koceeng.freedonation.object.Content;
 import com.koceeng.freedonation.util.DebugUtil;
 
@@ -130,6 +131,22 @@ public class SQLiteUtils {
         c.close();
 
         return result;
+    }
+
+    public AlarmObject putAlarm(AlarmObject alarmObject) {
+        openWritable();
+        if (alarmObject == null)
+            return null;
+
+        ContentValues cv = new ContentValues();
+        cv.put(BaseColumns._ID, 0);
+        cv.put("hour_of_day", alarmObject.getHourOfDay());
+        cv.put("minute", alarmObject.getMinute());
+
+        Long result = sqLiteDatabase.insertWithOnConflict("content_active", "_id", cv, SQLiteDatabase.CONFLICT_REPLACE);
+        alarmObject.setPendingIntentRequestCode(result.intValue());
+
+        return alarmObject;
     }
 
     private static SQLiteUtils sqLiteDatabaseHelper = null;
