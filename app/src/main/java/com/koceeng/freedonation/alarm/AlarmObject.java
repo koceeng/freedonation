@@ -1,5 +1,10 @@
 package com.koceeng.freedonation.alarm;
 
+import android.content.Context;
+
+import com.koceeng.freedonation.util.AppUtil;
+import com.koceeng.freedonation.util.LanguageUtil;
+
 public class AlarmObject {
 
     private Integer id;
@@ -12,16 +17,45 @@ public class AlarmObject {
         this.minute = minute;
     }
 
-    public String getDisplay() {
+    public int compare(Context context, AlarmObject compared) {
+        if (compared == null)
+            return -1;
+
+        int result = getId().compareTo(compared.getId());
+        if (result != 0) {
+            result = getDisplay(context).compareTo(compared.getDisplay(context));
+        }
+
+        return result;
+    }
+
+    public boolean areContentsTheSame(Context context, AlarmObject compared) {
+        if (compared == null)
+            return false;
+
+        if ((getDisplay(context) == null ? "" : getDisplay(context)).equals(compared.getDisplay(context) == null ? "" : compared.getDisplay(context))) {
+            return false;
+        } else if ((getPendingIntentRequestCode() == null ? -1 : getPendingIntentRequestCode()) == (compared.getPendingIntentRequestCode() == null ? -1 : getPendingIntentRequestCode())) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean areItemsTheSame(AlarmObject compared) {
+        return getId().equals(compared.getId());
+    }
+
+    public String getDisplay(Context context) {
         if (getHourOfDay() != null && getMinute() != null) {
-            return getHourOfDay() + ":" + getMinute();
+            return String.format(LanguageUtil.getInstance().getCurrentLocale(context), "%02d", getHourOfDay())
+                    + ":" + String.format(LanguageUtil.getInstance().getCurrentLocale(context), "%02d", getMinute());
         } else {
             return null;
         }
     }
 
     public Integer getId() {
-        return id;
+        return (id != null) ? id : getPendingIntentRequestCode();
     }
 
     public void setId(Integer id) {

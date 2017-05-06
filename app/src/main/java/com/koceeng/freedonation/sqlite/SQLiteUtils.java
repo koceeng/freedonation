@@ -12,6 +12,9 @@ import com.koceeng.freedonation.alarm.AlarmObject;
 import com.koceeng.freedonation.object.Content;
 import com.koceeng.freedonation.util.DebugUtil;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SQLiteUtils {
 
     public static final String PARAM_CONTENT_UPDATE_CODE = "PARAM_CONTENT_UPDATE_CODE";
@@ -143,10 +146,31 @@ public class SQLiteUtils {
         cv.put("hour_of_day", alarmObject.getHourOfDay());
         cv.put("minute", alarmObject.getMinute());
 
-        Long result = sqLiteDatabase.insertWithOnConflict("content_active", "_id", cv, SQLiteDatabase.CONFLICT_REPLACE);
+        Long result = sqLiteDatabase.insertWithOnConflict("alarm", "_id", cv, SQLiteDatabase.CONFLICT_REPLACE);
         alarmObject.setPendingIntentRequestCode(result.intValue());
 
         return alarmObject;
+    }
+
+    public List<AlarmObject> getAlarms() {
+        openReadable();
+
+        List<AlarmObject> result = new ArrayList<>();
+
+        Cursor c = sqLiteDatabase.rawQuery("SELECT _id, hour_of_day, minute FROM alarm", null);
+        while (c.moveToNext()) {
+            AlarmObject alarmObject = new AlarmObject(c.getInt(c.getColumnIndex("hour_of_day")), c.getInt(c.getColumnIndex("minute")));
+            alarmObject.setPendingIntentRequestCode(c.getInt(c.getColumnIndex("_id")));
+            result.add(alarmObject);
+        }
+        c.close();
+
+        return result;
+    }
+
+    public void removeAlarm(Integer id) {
+        openWritable();
+        sqLiteDatabase.delete("alarm", "_id = @id", new String[]{id.toString()});
     }
 
     private static SQLiteUtils sqLiteDatabaseHelper = null;

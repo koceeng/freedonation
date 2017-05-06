@@ -1,5 +1,6 @@
 package com.koceeng.freedonation.alarm;
 
+import android.content.Context;
 import android.support.v4.util.SparseArrayCompat;
 import android.support.v7.util.SortedList;
 import android.support.v7.widget.RecyclerView;
@@ -11,51 +12,61 @@ import android.widget.TextView;
 import com.koceeng.freedonation.R;
 import com.koceeng.freedonation.util.LayoutUtil;
 
+import java.util.List;
+
 public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdapter.ViewHolder> {
 
+    Context context;
     AlarmBottomSheet alarmBottomSheet;
 
     private SortedList<AlarmObject> alarmList;
     private SparseArrayCompat<AlarmObject> alarmIndex = new SparseArrayCompat<>();
 
-    public AlarmRecyclerAdapter(AlarmBottomSheet alarmBottomSheet) {
+    public AlarmRecyclerAdapter(Context contextIn, AlarmBottomSheet alarmBottomSheet) {
+        this.context = contextIn;
         this.alarmBottomSheet = alarmBottomSheet;
         alarmList = new SortedList<>(AlarmObject.class, new SortedList.Callback<AlarmObject>() {
             @Override
             public int compare(AlarmObject o1, AlarmObject o2) {
-                return 0;
-            }
-
-            @Override
-            public void onChanged(int position, int count) {
-
+                return o1.compare(context, o2);
             }
 
             @Override
             public boolean areContentsTheSame(AlarmObject oldItem, AlarmObject newItem) {
-                return false;
+                return oldItem.areContentsTheSame(context, newItem);
             }
 
             @Override
             public boolean areItemsTheSame(AlarmObject item1, AlarmObject item2) {
-                return false;
+                return item1.areItemsTheSame(item2);
             }
 
             @Override
             public void onInserted(int position, int count) {
+                notifyItemRangeInserted(position, count);
+            }
 
+            @Override
+            public void onChanged(int position, int count) {
+                notifyItemRangeInserted(position, count);
             }
 
             @Override
             public void onRemoved(int position, int count) {
-
+                notifyItemRangeRemoved(position, count);
             }
 
             @Override
             public void onMoved(int fromPosition, int toPosition) {
-
+                notifyItemMoved(fromPosition, toPosition);
             }
         });
+    }
+
+    public void putData(List<AlarmObject> alarmObjects) {
+        for (AlarmObject alarmObject : alarmObjects) {
+            putData(alarmObject);
+        }
     }
 
     public void putData(AlarmObject alarmObject) {
@@ -73,7 +84,7 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
 
         for (int i = 0; i < alarmList.size(); i++) {
             AlarmObject alarmObject = alarmList.get(i);
-            if (alarmObject.getId() == key) {
+            if (alarmObject.getId().equals(key)) {
                 alarmList.remove(alarmObject);
                 return;
             }
@@ -89,7 +100,7 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
     public void onBindViewHolder(final ViewHolder holder, int position) {
         AlarmObject alarmObject = alarmList.get(position);
 
-        LayoutUtil.getInstance().setText(holder.textView, alarmObject.getDisplay());
+        LayoutUtil.getInstance().setText(holder.textView, alarmObject.getDisplay(context));
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

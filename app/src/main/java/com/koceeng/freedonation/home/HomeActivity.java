@@ -21,7 +21,7 @@ import com.koceeng.freedonation.R;
 import com.koceeng.freedonation.base.BaseActivity;
 import com.koceeng.freedonation.alarm.AlarmBottomSheet;
 import com.koceeng.freedonation.helper.FeedHelper;
-import com.koceeng.freedonation.helper.SettingHelper;
+import com.koceeng.freedonation.setting.SettingHelper;
 import com.koceeng.freedonation.object.Content;
 import com.koceeng.freedonation.object.HomeMenu;
 import com.koceeng.freedonation.object.HomeMenuList;

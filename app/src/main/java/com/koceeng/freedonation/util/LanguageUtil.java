@@ -9,6 +9,10 @@ import java.util.Locale;
 
 public class LanguageUtil {
 
+    public Locale getCurrentLocale(Context context) {
+        return context.getResources().getConfiguration().locale;
+    }
+
     public void updateLanguageResource(Context context) {
         this.updateLanguageResource(context, PreferenceUtil.getInstance().getString(context, context.getString(R.string.PREFERENCE_LANGUAGE)));
     }

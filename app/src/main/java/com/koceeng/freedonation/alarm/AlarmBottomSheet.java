@@ -40,7 +40,8 @@ public class AlarmBottomSheet extends BaseBottomSheet
         View view = View.inflate(getContext(), R.layout.setting_alarm, null);
         setContentView(dialog, view);
 
-        alarmRecyclerAdapter = new AlarmRecyclerAdapter(this);
+        alarmRecyclerAdapter = new AlarmRecyclerAdapter(getContext(), this);
+        alarmRecyclerAdapter.putData(SQLiteUtils.getInstance(homeActivity).getAlarms());
 
         recyclerView = (RecyclerView) view.findViewById(R.id.setting_alarm_recyclerview_main);
 
@@ -96,9 +97,18 @@ public class AlarmBottomSheet extends BaseBottomSheet
     }
 
     public void removeAlarm(AlarmObject alarmObject) {
-        // TODO: 05/05/17
+        if (alarmObject.getPendingIntentRequestCode() != null) {
 
+            Intent intent = new Intent(homeActivity, AlarmReceiver.class);
+            PendingIntent sender = PendingIntent.getBroadcast(homeActivity,
+                    alarmObject.getPendingIntentRequestCode(), intent, 0);
+            AlarmManager alarmManager = (AlarmManager) homeActivity.getSystemService(Context.ALARM_SERVICE);
+            alarmManager.cancel(sender);
+        }
 
+        // remove alarm from database
+        SQLiteUtils.getInstance(homeActivity).removeAlarm(alarmObject.getId());
+        alarmRecyclerAdapter.removeData(alarmObject.getId());
     }
 
     @Override
