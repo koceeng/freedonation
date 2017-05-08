@@ -142,11 +142,10 @@ public class SQLiteUtils {
             return null;
 
         ContentValues cv = new ContentValues();
-        cv.put(BaseColumns._ID, 0);
         cv.put("hour_of_day", alarmObject.getHourOfDay());
         cv.put("minute", alarmObject.getMinute());
 
-        Long result = sqLiteDatabase.insertWithOnConflict("alarm", "_id", cv, SQLiteDatabase.CONFLICT_REPLACE);
+        Long result = sqLiteDatabase.insert("alarm", null, cv);
         alarmObject.setPendingIntentRequestCode(result.intValue());
 
         return alarmObject;

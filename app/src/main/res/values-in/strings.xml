@@ -18,6 +18,8 @@
     <string name="setting_hide_content_detail_label">Tampilkan detail hadits (judul, perawi hadits, dll)</string>
     <string name="setting_ad_interstitial_label">Tampilkan iklan saat membuka aplikasi (pada internet lancar)</string>
     <string name="setting_notification_label">Setel pengingat/notifikasi</string>
+    <string name="setting_notification_text_title">Jangan lupa membuka aplikasi sedekah gratis ya :D</string>
+    <string name="setting_notification_text_content">Sering buka aplikasi sedekah gratis untuk memaksimalkan sedekah</string>
 
     <!--Share-->
     <string name="share_title">Bagikan kabar ke teman</string>

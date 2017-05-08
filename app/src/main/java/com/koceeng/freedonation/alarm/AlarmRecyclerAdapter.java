@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.util.SparseArrayCompat;
 import android.support.v7.util.SortedList;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,13 +19,15 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
 
     Context context;
     AlarmBottomSheet alarmBottomSheet;
+    AlarmHelper alarmHelper;
 
     private SortedList<AlarmObject> alarmList;
     private SparseArrayCompat<AlarmObject> alarmIndex = new SparseArrayCompat<>();
 
-    public AlarmRecyclerAdapter(Context contextIn, AlarmBottomSheet alarmBottomSheet) {
+    public AlarmRecyclerAdapter(Context contextIn, AlarmBottomSheet alarmBottomSheet, AlarmHelper alarmHelper) {
         this.context = contextIn;
         this.alarmBottomSheet = alarmBottomSheet;
+        this.alarmHelper = alarmHelper;
         alarmList = new SortedList<>(AlarmObject.class, new SortedList.Callback<AlarmObject>() {
             @Override
             public int compare(AlarmObject o1, AlarmObject o2) {
@@ -61,10 +64,10 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
                 notifyItemMoved(fromPosition, toPosition);
             }
         });
-    }
 
-    public void putData(List<AlarmObject> alarmObjects) {
+        List<AlarmObject> alarmObjects = alarmHelper.getAllData();
         for (AlarmObject alarmObject : alarmObjects) {
+            Log.e("NOTE", "AlarmRecyclerAdapter: " + alarmObject.getHourOfDay());
             putData(alarmObject);
         }
     }
@@ -93,7 +96,7 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.setting_alarm, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.setting_alarm_item, parent, false));
     }
 
     @Override
@@ -104,7 +107,9 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                alarmBottomSheet.removeAlarm(alarmList.get(holder.getAdapterPosition()));
+                AlarmObject alarmObjectLocal = alarmList.get(holder.getAdapterPosition());
+                removeData(alarmObjectLocal.getId());
+                alarmHelper.removeAlarmData(alarmObjectLocal);
             }
         });
     }

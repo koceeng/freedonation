@@ -18,14 +18,10 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
         NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         Notification.Builder builder = new Notification.Builder(context);
-        builder.setContentTitle("Scheduled Notification");
-        builder.setContentText("Test content");
+        builder.setContentTitle(context.getString(R.string.setting_notification_text_title));
+        builder.setContentText(context.getString(R.string.setting_notification_text_content));
         builder.setSmallIcon(R.drawable.icon_vector);
 
         notificationManager.notify(0, builder.build());
-
-//        if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
-//            Log.e("AlarmReceiver", "onReceive: RESET ALARM");
-//        }
     }
 }
