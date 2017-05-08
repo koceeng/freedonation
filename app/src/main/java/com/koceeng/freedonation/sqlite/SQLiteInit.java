@@ -40,7 +40,8 @@ public class SQLiteInit extends SQLiteOpenHelper {
                     "title TEXT, " +
                     "subtitle TEXT, " +
                     "text TEXT, " +
-                    "footer TEXT " +
+                    "footer TEXT, " +
+                    "source TEXT " +
                     "); ");
 
             // create table alarm

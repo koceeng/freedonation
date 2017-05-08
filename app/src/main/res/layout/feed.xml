@@ -67,6 +67,7 @@
                     android:contentDescription="@null"/>
 
                 <TextView
+                    android:id="@+id/feed_text_reload"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/space_small"
@@ -111,6 +112,17 @@
 
             <TextSwitcher
                 android:id="@+id/feed_text_content_footer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/feed_text_content_title"
+                android:layout_centerHorizontal="true"
+                android:paddingBottom="@dimen/space_tiny"
+                android:paddingStart="@dimen/space_default"
+                android:paddingEnd="@dimen/space_default"
+                android:measureAllChildren="false"/>
+
+            <TextSwitcher
+                android:id="@+id/feed_text_content_source"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/feed_text_content_text"

@@ -27,6 +27,7 @@
     <string name="setting_ad_interstitial_label">Show ad on startup (on stable connection)</string>
     <string name="setting_notification_label">Scheduled reminder</string>
     <string name="setting_notification_text_title">Don\t forget to open me :D</string>
+    <string name="setting_notification_count">%1$d reminder set</string>
     <string name="setting_notification_text_content">Free Donation for sure, let\'s open now</string>
 
     <!--Share-->

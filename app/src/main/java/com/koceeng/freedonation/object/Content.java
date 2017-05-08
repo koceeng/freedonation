@@ -9,6 +9,7 @@ public class Content extends FirebaseObject {
     private String subtitle;
     private String text;
     private String footer;
+    private String source;
 
     public Content() {
     }
@@ -51,6 +52,14 @@ public class Content extends FirebaseObject {
 
     public void setFooter(String footer) {
         this.footer = footer;
+    }
+
+    public String getSource() {
+        return trim(source);
+    }
+
+    public void setSource(String source) {
+        this.source = source;
     }
 
     private String trim(String value) {

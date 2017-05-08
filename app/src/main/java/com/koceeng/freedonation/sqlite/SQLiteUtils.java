@@ -113,6 +113,8 @@ public class SQLiteUtils {
             cv.put("text", content.getText());
         if (!(content.getFooter() != null ? content.getFooter() : "").equals(""))
             cv.put("footer", content.getFooter());
+        if (!(content.getSource() != null ? content.getSource() : "").equals(""))
+            cv.put("source", content.getSource());
 
         sqLiteDatabase.insertWithOnConflict("content_active", "_id", cv, SQLiteDatabase.CONFLICT_REPLACE);
     }
@@ -122,7 +124,7 @@ public class SQLiteUtils {
 
         Content result = null;
 
-        Cursor c = sqLiteDatabase.rawQuery("SELECT timestamp, title, subtitle, text, footer FROM content_active WHERE _id = 0;", null);
+        Cursor c = sqLiteDatabase.rawQuery("SELECT timestamp, title, subtitle, text, footer, source FROM content_active WHERE _id = 0;", null);
         while (c.moveToNext()) {
             result = new Content();
             result.setTimestamp(c.getLong(c.getColumnIndex("timestamp")));
@@ -130,6 +132,7 @@ public class SQLiteUtils {
             result.setSubtitle(c.getString(c.getColumnIndex("subtitle")));
             result.setText(c.getString(c.getColumnIndex("text")));
             result.setFooter(c.getString(c.getColumnIndex("footer")));
+            result.setSource(c.getString(c.getColumnIndex("source")));
         }
         c.close();
 
@@ -149,6 +152,20 @@ public class SQLiteUtils {
         alarmObject.setPendingIntentRequestCode(result.intValue());
 
         return alarmObject;
+    }
+
+    public Integer getAlarmCount() {
+        openReadable();
+
+        Integer result = 0;
+
+        Cursor c = sqLiteDatabase.rawQuery("SELECT COUNT(_id) AS count FROM alarm", null);
+        while (c.moveToNext()) {
+            result = c.getInt(0);
+        }
+        c.close();
+
+        return result;
     }
 
     public List<AlarmObject> getAlarms() {

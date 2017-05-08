@@ -45,10 +45,12 @@ public class HomeActivity extends BaseActivity {
     // feed page
     @BindView(R.id.feed_progress) View progressFeed;
     @BindView(R.id.feed_text_title) TextView textFeedTitle;
+    @BindView(R.id.feed_text_reload) TextView textFeedReload;
     @BindView(R.id.feed_text_content_title) TextSwitcher textFeedContentTitle;
     @BindView(R.id.feed_text_content_subtitle) TextSwitcher textFeedContentSubtitle;
     @BindView(R.id.feed_text_content_text) TextSwitcher textFeedContentText;
     @BindView(R.id.feed_text_content_footer) TextSwitcher textFeedContentFooter;
+    @BindView(R.id.feed_text_content_source) TextSwitcher textFeedContentSource;
 
     // report page
     @BindView(R.id.report_text_title) TextView textReportTitle;
@@ -160,7 +162,8 @@ public class HomeActivity extends BaseActivity {
         LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textFeedContentTitle, R.dimen.text_default, R.color.colorPrimary, Gravity.END);
         LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textFeedContentSubtitle, R.dimen.text_mini, R.color.colorThemeGrayDark);
         LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textFeedContentText, R.dimen.text_small);
-        LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textFeedContentFooter, R.dimen.text_mini, R.color.colorThemeGrayDark, Gravity.END);
+        LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textFeedContentFooter, R.dimen.text_mini, R.color.colorThemeGrayDark);
+        LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textFeedContentSource, R.dimen.text_mini, R.color.colorThemeGrayDark, Gravity.END);
 
         // setting
         LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textSettingTitle, R.dimen.text_extra_big, R.color.colorPrimary);
@@ -299,6 +302,7 @@ public class HomeActivity extends BaseActivity {
             LayoutUtil.getInstance().setText(textAppName, getString(R.string.title));
 
             LayoutUtil.getInstance().setText(textFeedTitle, getString(R.string.feed_title));
+            LayoutUtil.getInstance().setText(textFeedReload, getString(R.string.feed_reload));
 
             LayoutUtil.getInstance().setText(textReportTitle, getString(R.string.report_title));
             LayoutUtil.getInstance().setText(textReportNote, getString(R.string.report_note));
@@ -339,8 +343,8 @@ public class HomeActivity extends BaseActivity {
         }
 
         if (type == null || type.equals(SettingHelper.Type.NOTIFICATION)) {
-            // TODO: 22-Apr-17 from sqlite
-            LayoutUtil.getInstance().setText(textNotificationValue, "TODO");
+            LayoutUtil.getInstance().setText(textNotificationValue, getString(R.string.setting_notification_count,
+                    SQLiteUtils.getInstance(thisContext).getAlarmCount()));
         }
     }
 
@@ -380,6 +384,13 @@ public class HomeActivity extends BaseActivity {
             LayoutUtil.getInstance().setText(textFeedContentFooter, content.getFooter());
         } else {
             LayoutUtil.getInstance().toggleVisibility(textFeedContentFooter, false);
+        }
+
+        if (showContentDetail && content != null && content.getSource() != null) {
+            LayoutUtil.getInstance().toggleVisibility(textFeedContentSource, true);
+            LayoutUtil.getInstance().setText(textFeedContentSource, content.getFooter());
+        } else {
+            LayoutUtil.getInstance().toggleVisibility(textFeedContentSource, false);
         }
     }
 }
