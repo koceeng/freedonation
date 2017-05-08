@@ -6,6 +6,12 @@
     android:gravity="bottom"
     android:orientation="vertical">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/space_mini"
+        android:text="@string/setting_notification_list_title"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/setting_alarm_recyclerview_main"
         android:layout_width="match_parent"

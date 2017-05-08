@@ -38,11 +38,22 @@ public class LayoutUtil {
     }
 
     public void setText(View view, CharSequence text) {
+        setText(view, text, false);
+    }
+
+    public void setText(View view, CharSequence text, Boolean skipIfNoChange) {
         if (view != null) {
             if (view instanceof TextView) {
                 ((TextView) view).setText(text);
             } else if (view instanceof TextSwitcher) {
-                ((TextSwitcher) view).setText(text);
+                if (skipIfNoChange) {
+                    TextView currentTextView = (TextView) ((TextSwitcher) view).getCurrentView();
+                    if (currentTextView.getText() != null && !currentTextView.getText().equals(text))
+                        ((TextSwitcher) view).setText(text);
+
+                } else {
+                    ((TextSwitcher) view).setText(text);
+                }
             }
         }
     }

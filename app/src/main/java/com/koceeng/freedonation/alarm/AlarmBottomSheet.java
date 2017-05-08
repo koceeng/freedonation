@@ -10,6 +10,7 @@ import android.widget.TimePicker;
 import com.koceeng.freedonation.R;
 import com.koceeng.freedonation.base.BaseBottomSheet;
 import com.koceeng.freedonation.home.HomeActivity;
+import com.koceeng.freedonation.setting.SettingHelper;
 
 import java.util.Calendar;
 
@@ -46,6 +47,7 @@ public class AlarmBottomSheet extends BaseBottomSheet
         recyclerView.setHasFixedSize(false);
 
         view.findViewById(R.id.setting_alarm_button_add).setOnClickListener(this);
+        view.findViewById(R.id.setting_alarm_button_cancel).setOnClickListener(this);
     }
 
     @Override
@@ -64,11 +66,17 @@ public class AlarmBottomSheet extends BaseBottomSheet
                 }
             }, hour, minutes, false);
             timePickerDialog.show();
+
+        } else if (view.getId() == R.id.setting_alarm_button_cancel) {
+            dismiss();
         }
     }
 
     @Override
-    public void inputFieldAction() {
-        super.inputFieldAction();
+    public void onDestroy() {
+        if (homeActivity != null)
+            homeActivity.onLanguageChange(SettingHelper.Type.NOTIFICATION, true);
+
+        super.onDestroy();
     }
 }

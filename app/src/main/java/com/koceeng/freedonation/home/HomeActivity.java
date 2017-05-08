@@ -326,7 +326,7 @@ public class HomeActivity extends BaseActivity {
         if (type == null || type.equals(SettingHelper.Type.LANGUAGE)) {
             LayoutUtil.getInstance().setText(textLanguageValue, getString(
                     (PreferenceUtil.getInstance().getString(thisContext, getString(R.string.PREFERENCE_LANGUAGE), false).equals(getString(R.string.PREFERENCE_LANGUAGE_EN))) ?
-                            R.string.PREFERENCE_LANGUAGE_EN_LABEL : R.string.PREFERENCE_LANGUAGE_IN_LABEL));
+                            R.string.PREFERENCE_LANGUAGE_EN_LABEL : R.string.PREFERENCE_LANGUAGE_IN_LABEL), true);
         }
 
         if (type == null || type.equals(SettingHelper.Type.HIDE_CONTENT_DETAIL)) {
@@ -344,7 +344,7 @@ public class HomeActivity extends BaseActivity {
 
         if (type == null || type.equals(SettingHelper.Type.NOTIFICATION)) {
             LayoutUtil.getInstance().setText(textNotificationValue, getString(R.string.setting_notification_count,
-                    SQLiteUtils.getInstance(thisContext).getAlarmCount()));
+                    SQLiteUtils.getInstance(thisContext).getAlarmCount()), true);
         }
     }
 
