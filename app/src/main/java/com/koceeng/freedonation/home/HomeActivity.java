@@ -388,7 +388,7 @@ public class HomeActivity extends BaseActivity {
 
         if (showContentDetail && content != null && content.getSource() != null) {
             LayoutUtil.getInstance().toggleVisibility(textFeedContentSource, true);
-            LayoutUtil.getInstance().setText(textFeedContentSource, content.getFooter());
+            LayoutUtil.getInstance().setText(textFeedContentSource, content.getSource());
         } else {
             LayoutUtil.getInstance().toggleVisibility(textFeedContentSource, false);
         }
