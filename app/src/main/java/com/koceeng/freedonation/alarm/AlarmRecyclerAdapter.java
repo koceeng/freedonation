@@ -11,11 +11,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.koceeng.freedonation.R;
+import com.koceeng.freedonation.util.DebugUtil;
 import com.koceeng.freedonation.util.LayoutUtil;
 
 import java.util.List;
 
 public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdapter.ViewHolder> {
+
+    private final String TAG = "AlarmRecyclerAdapter";
 
     Context context;
     AlarmBottomSheet alarmBottomSheet;
@@ -107,9 +110,17 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlarmObject alarmObjectLocal = alarmList.get(holder.getAdapterPosition());
-                removeData(alarmObjectLocal.getId());
-                alarmHelper.removeAlarmData(alarmObjectLocal);
+                try {
+                    if (holder.getAdapterPosition() >= alarmList.size())
+                        return;
+
+                    AlarmObject alarmObjectLocal = alarmList.get(holder.getAdapterPosition());
+                    removeData(alarmObjectLocal.getId());
+                    alarmHelper.removeAlarmData(alarmObjectLocal);
+
+                } catch (Exception e) {
+                    DebugUtil.getInstance().e(TAG, "onBindViewHolder button click: " + e.getMessage());
+                }
             }
         });
     }

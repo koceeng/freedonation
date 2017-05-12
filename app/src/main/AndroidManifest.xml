@@ -44,9 +44,9 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:theme="@android:style/Theme.Translucent" />
 
+        <service android:name=".alarm.AlarmNotificationHandleService" />
         <receiver android:name=".alarm.AlarmReceiver" />
-        <receiver android:name=".base.BaseBroadcastReceiver"
-            android:enabled="false">
+        <receiver android:name=".base.BaseBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>

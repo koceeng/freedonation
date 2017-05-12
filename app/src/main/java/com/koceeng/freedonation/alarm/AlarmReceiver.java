@@ -5,14 +5,12 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.WakefulBroadcastReceiver;
 import android.util.Log;
 
 import com.koceeng.freedonation.R;
-import com.koceeng.freedonation.home.SplashActivity;
+import com.koceeng.freedonation.util.AppUtil;
 import com.koceeng.freedonation.util.LanguageUtil;
 
 public class AlarmReceiver extends WakefulBroadcastReceiver {
@@ -21,24 +19,31 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Log.e("AlarmReceiver", "onReceive: ");
 
+        // skip if app is in foreground
+        if (AppUtil.getInstance().isAppOnForeground(context))
+            return;
+
         LanguageUtil.getInstance().updateLanguageResource(context);
 
         NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-        Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
-        Intent intentNotification = new Intent(context, SplashActivity.class);
-        intentNotification.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intentNotification,
-                PendingIntent.FLAG_ONE_SHOT);
+        Intent intentNotification = new Intent(context, AlarmNotificationHandleService.class);
+        // intentNotification.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        PendingIntent pendingIntent = PendingIntent.getService(context, 0, intentNotification,
+                PendingIntent.FLAG_CANCEL_CURRENT);
+
+        // get defaults
+        Notification notificationDefaults = new Notification();
+        notificationDefaults.defaults |= Notification.DEFAULT_SOUND;
+        notificationDefaults.defaults |= Notification.DEFAULT_VIBRATE;
 
         Notification notification = new NotificationCompat.Builder(context)
+                .setDefaults(notificationDefaults.defaults)
                 .setContentTitle(context.getString(R.string.setting_notification_text_title))
                 .setContentText(context.getString(R.string.setting_notification_text_content))
                 .setSmallIcon(R.drawable.icon_vector)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setAutoCancel(true)
-                .setSound(defaultSoundUri)
-                .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000})
                 .setContentIntent(pendingIntent)
                 .build();
 

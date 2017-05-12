@@ -1,5 +1,7 @@
 package com.koceeng.freedonation.home;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -29,6 +31,12 @@ public class SplashActivity extends BaseActivity {
     int handleCounter = 0;
     int handleDelay = 500;
     int handleRepeat = 10;
+
+    public static class Factory {
+        public static Intent getIntent(Context context) {
+            return new Intent(context, SplashActivity.class);
+        }
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

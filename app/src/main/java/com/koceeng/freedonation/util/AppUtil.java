@@ -1,6 +1,9 @@
 package com.koceeng.freedonation.util;
 
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -17,6 +20,7 @@ import com.koceeng.freedonation.update.UpdateActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class AppUtil {
@@ -116,6 +120,20 @@ public class AppUtil {
             googleApiAvailability.makeGooglePlayServicesAvailable(activity);
             return false;
         }
+        return true;
+    }
+
+    public boolean isAppOnForeground(Context context) {
+
+        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> tasks = activityManager.getRunningTasks(1);
+        if (!tasks.isEmpty()) {
+            ComponentName topActivity = tasks.get(0).topActivity;
+            if (!topActivity.getPackageName().equals(context.getPackageName())) {
+                return false;
+            }
+        }
+
         return true;
     }
 

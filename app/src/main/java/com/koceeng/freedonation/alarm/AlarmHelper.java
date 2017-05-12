@@ -4,6 +4,8 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.koceeng.freedonation.sqlite.SQLiteUtils;
 import com.koceeng.freedonation.util.DebugUtil;
@@ -51,7 +53,7 @@ public class AlarmHelper {
 
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                AlarmManager.INTERVAL_HOUR, pendingIntent);
+                AlarmManager.INTERVAL_DAY, pendingIntent);
     }
 
     public void removeAlarmData(AlarmObject alarmObject) {
@@ -72,9 +74,14 @@ public class AlarmHelper {
         }
     }
 
-    public void reAppplyAlarm() {
+    public void reApplyAlarm(Context context) {
+        // TODO: 12/05/17 remove context
+        Toast.makeText(context, "reApplyAlarm do", Toast.LENGTH_SHORT).show();
+        Log.e(TAG, "reApplyAlarm: do");
         List<AlarmObject> alarmObjects = getAllData();
         for (AlarmObject alarmObject : alarmObjects) {
+            Toast.makeText(context, "reApplyAlarm for " + alarmObject.getId()+ "|" + alarmObject.getDisplay(context), Toast.LENGTH_SHORT).show();
+            Log.e(TAG, "reApplyAlarm: for "  + alarmObject.getId()+ "|" + alarmObject.getDisplay(context));
             addAlarm(alarmObject);
         }
     }
