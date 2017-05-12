@@ -20,6 +20,10 @@ import uk.co.chrisjenx.calligraphy.CalligraphyUtils;
 
 public class LayoutUtil {
 
+    public void toggleVisibility(View view) {
+        toggleVisibility(view, !isVisible(view));
+    }
+
     public void toggleVisibility(View view, Boolean isVisible) {
         int visibility = (isVisible) ? View.VISIBLE : View.GONE;
         setVisibility(view, visibility);

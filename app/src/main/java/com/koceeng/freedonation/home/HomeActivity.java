@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -20,6 +22,9 @@ import com.google.android.gms.ads.AdView;
 import com.koceeng.freedonation.R;
 import com.koceeng.freedonation.base.BaseActivity;
 import com.koceeng.freedonation.alarm.AlarmBottomSheet;
+import com.koceeng.freedonation.help.Faq;
+import com.koceeng.freedonation.help.FaqHelper;
+import com.koceeng.freedonation.help.FaqRecyclerAdapter;
 import com.koceeng.freedonation.helper.FeedHelper;
 import com.koceeng.freedonation.setting.SettingHelper;
 import com.koceeng.freedonation.object.Content;
@@ -32,6 +37,8 @@ import com.koceeng.freedonation.util.IntentUtil;
 import com.koceeng.freedonation.util.LanguageUtil;
 import com.koceeng.freedonation.util.LayoutUtil;
 import com.koceeng.freedonation.util.PreferenceUtil;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -77,6 +84,8 @@ public class HomeActivity extends BaseActivity {
 
     // help page
     @BindView(R.id.help_text_title) TextView textHelpTitle;
+    @BindView(R.id.help_progress) View progressHelp;
+    @BindView(R.id.help_recyclerview_faq) RecyclerView recyclerViewFaq;
 
     HomeActivity homeActivity;
     HomeMenuList homeMenuList;
@@ -84,6 +93,7 @@ public class HomeActivity extends BaseActivity {
     // setting
     FeedHelper feedHelper;
     SettingHelper settingHelper;
+    FaqHelper faqHelper;
     boolean settingHoldChange = false;
 
     public static class Factory {
@@ -105,6 +115,7 @@ public class HomeActivity extends BaseActivity {
 
         feedHelper = new FeedHelper(this);
         settingHelper = new SettingHelper(this);
+        faqHelper = new FaqHelper(this);
 
         viewFlipper.setInAnimation(thisContext, R.anim.activity_reversed_in);
         viewFlipper.setOutAnimation(thisContext, R.anim.activity_reversed_out);
@@ -149,10 +160,15 @@ public class HomeActivity extends BaseActivity {
 
         homeMenuList.setActive(HomeMenuList.Name.FEED, false);
 
+        // set faq recyclerview
+        recyclerViewFaq.setLayoutManager(new LinearLayoutManager(thisContext));
+        recyclerViewFaq.setHasFixedSize(false);
+
         prepareTextSwitcher();
         onLanguageChange(null);
 
         feedHelper.get(false);
+        faqHelper.get();
     }
 
     private void prepareTextSwitcher() {
@@ -209,6 +225,26 @@ public class HomeActivity extends BaseActivity {
                 LayoutUtil.getInstance().setVisibility(progressFeed, View.INVISIBLE);
                 if (content != null)
                     onFeedChange(content);
+                break;
+        }
+    }
+
+    public void onFaqChangeStatus(FaqHelper.FaqStatus faqStatus) {
+        onFaqChangeStatus(faqStatus, null);
+    }
+
+    public void onFaqChangeStatus(FaqHelper.FaqStatus faqStatus, List<Faq> faqs) {
+        switch (faqStatus) {
+            case GETTING_DATA:
+                LayoutUtil.getInstance().setVisibility(progressHelp, View.VISIBLE);
+                break;
+            case SUCCESS:
+                LayoutUtil.getInstance().setVisibility(progressHelp, View.INVISIBLE);
+                if (faqs != null && faqs.size() > 0)
+                    recyclerViewFaq.setAdapter(new FaqRecyclerAdapter(faqs));
+                break;
+            case FAILED:
+                LayoutUtil.getInstance().setVisibility(progressHelp, View.INVISIBLE);
                 break;
         }
     }

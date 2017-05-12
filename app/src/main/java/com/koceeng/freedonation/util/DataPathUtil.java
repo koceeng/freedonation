@@ -5,6 +5,10 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class DataPathUtil {
 
+    public DatabaseReference getIsActive() {
+        return FirebaseDatabase.getInstance().getReference("is-active");
+    }
+
     public DatabaseReference getContentLast(String lang) {
         return FirebaseDatabase.getInstance().getReference("/content-" + lang + "/last");
     }
@@ -13,8 +17,8 @@ public class DataPathUtil {
         return FirebaseDatabase.getInstance().getReference("/content-" + lang + "/data/" + contentId);
     }
 
-    public DatabaseReference getIsActive() {
-        return FirebaseDatabase.getInstance().getReference("is-active");
+    public DatabaseReference getFaq() {
+        return FirebaseDatabase.getInstance().getReference("/faq");
     }
 
     private static DataPathUtil dataPathUtil = null;

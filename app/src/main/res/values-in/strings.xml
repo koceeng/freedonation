@@ -34,6 +34,8 @@
 
     <!--Help-->
     <string name="help_title">Bantuan</string>
+    <string name="help_faq_subtitle">Pertanyaan (F.A.Q)</string>
+    <string name="help_about_subtitle">Tentang</string>
 
     <!--Update-->
     <string name="update_check_fail_message">Tidak bisa melakukan pengecekan versi terbaru. Beberapa fitur mungkin tidak maksimal.</string>

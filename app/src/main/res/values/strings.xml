@@ -42,6 +42,8 @@
 
     <!--Help-->
     <string name="help_title">Help</string>
+    <string name="help_faq_subtitle">F.A.Q</string>
+    <string name="help_about_subtitle">About</string>
 
     <!--Update-->
     <string name="update_check_fail_message">Cannot check latest version of this application. Some features may cause errors</string>
