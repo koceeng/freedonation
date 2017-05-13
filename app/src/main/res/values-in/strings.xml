@@ -36,6 +36,11 @@
     <string name="help_title">Bantuan</string>
     <string name="help_faq_subtitle">Pertanyaan (F.A.Q)</string>
     <string name="help_about_subtitle">Tentang</string>
+    <string name="help_about_version_label">Versi Aplikasi</string>
+    <string name="help_about_team_label">Tim Developer (Pembuat Aplikasi)</string>
+    <string name="help_about_email_label">Email Developer</string>
+    <string name="help_about_email_subject">Bantun tentang aplikasi Sedekah Gratis</string>
+    <string name="help_about_email_choose_note">Pilih aplikasi email yang hendak dipakai</string>
 
     <!--Update-->
     <string name="update_check_fail_message">Tidak bisa melakukan pengecekan versi terbaru. Beberapa fitur mungkin tidak maksimal.</string>

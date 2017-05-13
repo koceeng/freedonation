@@ -32,6 +32,7 @@ import com.koceeng.freedonation.object.HomeMenu;
 import com.koceeng.freedonation.object.HomeMenuList;
 import com.koceeng.freedonation.sqlite.SQLiteUtils;
 import com.koceeng.freedonation.util.AdUtil;
+import com.koceeng.freedonation.util.AppUtil;
 import com.koceeng.freedonation.util.DebugUtil;
 import com.koceeng.freedonation.util.IntentUtil;
 import com.koceeng.freedonation.util.LanguageUtil;
@@ -85,7 +86,13 @@ public class HomeActivity extends BaseActivity {
     // help page
     @BindView(R.id.help_text_title) TextView textHelpTitle;
     @BindView(R.id.help_progress) View progressHelp;
+    @BindView(R.id.help_text_faq) TextView textHelpFaq;
     @BindView(R.id.help_recyclerview_faq) RecyclerView recyclerViewFaq;
+    @BindView(R.id.help_text_about) TextView textHelpAbout;
+    @BindView(R.id.help_text_version_label) TextView textHelpVersionLabel;
+    @BindView(R.id.help_text_version_value) TextView textHelpVersionValue;
+    @BindView(R.id.help_text_team_label) TextView textHelpTeamLabel;
+    @BindView(R.id.help_text_email_label) TextView textHelpEmailLabel;
 
     HomeActivity homeActivity;
     HomeMenuList homeMenuList;
@@ -315,6 +322,15 @@ public class HomeActivity extends BaseActivity {
         }
     }
 
+    public void actionSendEmailDeveloper(View view) {
+        Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+        emailIntent.setType("plain/text");
+        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{getString(R.string.help_about_email_address)});
+        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, getString(R.string.help_about_email_subject));
+
+        startActivity(Intent.createChooser(emailIntent, getString(R.string.help_about_email_choose_note)));
+    }
+
     public void onLanguageChange(final SettingHelper.Type type, boolean handle) {
         if (handle) {
             new Handler().postDelayed(new Runnable() {
@@ -357,6 +373,13 @@ public class HomeActivity extends BaseActivity {
             LayoutUtil.getInstance().setText(buttonShare, getString(R.string.share_button_text));
 
             LayoutUtil.getInstance().setText(textHelpTitle, getString(R.string.help_title));
+            LayoutUtil.getInstance().setText(textHelpFaq, getString(R.string.help_faq_subtitle));
+            LayoutUtil.getInstance().setText(textHelpAbout, getString(R.string.help_about_subtitle));
+            LayoutUtil.getInstance().setText(textHelpVersionLabel, getString(R.string.help_about_version_label));
+            LayoutUtil.getInstance().setText(textHelpTeamLabel, getString(R.string.help_about_team_label));
+            LayoutUtil.getInstance().setText(textHelpEmailLabel, getString(R.string.help_about_email_label));
+
+            LayoutUtil.getInstance().setText(textHelpVersionValue, AppUtil.getInstance().getAppVersion());
         }
 
         if (type == null || type.equals(SettingHelper.Type.LANGUAGE)) {

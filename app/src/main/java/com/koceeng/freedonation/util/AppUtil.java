@@ -27,6 +27,10 @@ public class AppUtil {
 
     private final String TAG = getClass().getSimpleName();
 
+    public String getAppVersion() {
+        return BuildConfig.VERSION_NAME;
+    }
+
     public void checkVersion(final BaseActivity activity) {
         FirebaseDatabase.getInstance().getReference("version").addValueEventListener(new ValueEventListener() {
 
@@ -39,7 +43,7 @@ public class AppUtil {
                 */
 
                 VersionData versionData = dataSnapshot.getValue(VersionData.class);
-                String appVersion = BuildConfig.VERSION_NAME.replace(".", "-");
+                String appVersion = getAppVersion().replace(".", "-");
 
                 boolean updateCritical = (!versionData.getSupported().containsKey(appVersion) || !versionData.getSupported().get(appVersion));
                 boolean updateNotLatest = (versionCompare(versionData.getCurrent(), appVersion) > 0);

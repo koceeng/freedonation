@@ -44,6 +44,13 @@
     <string name="help_title">Help</string>
     <string name="help_faq_subtitle">F.A.Q</string>
     <string name="help_about_subtitle">About</string>
+    <string name="help_about_version_label">App Version</string>
+    <string name="help_about_team_label">Developer Team</string>
+    <string name="help_about_team_value" translatable="false">Koceeng Dev.</string>
+    <string name="help_about_email_label">Developer Email</string>
+    <string name="help_about_email_address" translatable="false">developer@koceeng.com</string>
+    <string name="help_about_email_subject">Help about Free Donation app</string>
+    <string name="help_about_email_choose_note">Choose your preferred email app</string>
 
     <!--Update-->
     <string name="update_check_fail_message">Cannot check latest version of this application. Some features may cause errors</string>
