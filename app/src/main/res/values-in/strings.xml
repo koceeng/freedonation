@@ -39,7 +39,7 @@
     <string name="help_about_version_label">Versi Aplikasi</string>
     <string name="help_about_team_label">Tim Developer (Pembuat Aplikasi)</string>
     <string name="help_about_email_label">Email Developer</string>
-    <string name="help_about_email_subject">Bantun tentang aplikasi Sedekah Gratis</string>
+    <string name="help_about_email_subject">Bantuan tentang aplikasi Sedekah Gratis</string>
     <string name="help_about_email_choose_note">Pilih aplikasi email yang hendak dipakai</string>
 
     <!--Update-->
