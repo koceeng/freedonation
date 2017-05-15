@@ -29,8 +29,9 @@ public class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        DebugUtil.getInstance().v(TAG, "onCreate");
         super.onCreate(savedInstanceState);
+
+        DebugUtil.getInstance().v(TAG, "onCreate");
 
         thisActivity = this;
         thisAppCompatActivity = this;
@@ -109,6 +110,7 @@ public class BaseActivity extends AppCompatActivity {
 
     public void setTag(String tag) {
         this.TAG = tag;
+        DebugUtil.getInstance().v(TAG, "setTag: " + tag);
     }
 
     protected void registerEventBus() {

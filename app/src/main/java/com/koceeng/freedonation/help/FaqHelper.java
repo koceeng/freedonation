@@ -16,8 +16,6 @@ import java.util.List;
 public class FaqHelper {
 
     private final String TAG = "FaqHelper";
-    public enum FaqStatus {NO_NEED, START, SAVING_DATA, SUCCESS, FAILED}
-
     HomeActivity activity;
 
     public FaqHelper(HomeActivity activity) {
@@ -31,7 +29,8 @@ public class FaqHelper {
             String lastFaqTimestampString = SQLiteUtils.getInstance(activity).getStringParam(SQLiteUtils.PARAM_LAST_FAQ_TIMESTAMP);
             Long lastFaqTimestamp = 0L;
             try {
-                lastFaqTimestamp = Long.parseLong(lastFaqTimestampString);
+                if (lastFaqTimestampString != null)
+                    lastFaqTimestamp = Long.parseLong(lastFaqTimestampString);
             } catch (Exception e) {
                 DebugUtil.getInstance().e(TAG, "lastFaqTimestamp String to Long conversion error: " + e.getMessage());
             }
@@ -74,4 +73,6 @@ public class FaqHelper {
                     }
                 });
     }
+
+    public enum FaqStatus {NO_NEED, START, SAVING_DATA, SUCCESS, FAILED}
 }
