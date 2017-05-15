@@ -7,17 +7,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.WakefulBroadcastReceiver;
-import android.util.Log;
 
 import com.koceeng.freedonation.R;
 import com.koceeng.freedonation.util.AppUtil;
+import com.koceeng.freedonation.util.DebugUtil;
 import com.koceeng.freedonation.util.LanguageUtil;
 
 public class AlarmReceiver extends WakefulBroadcastReceiver {
 
+    private final String TAG = "AlarmReceiver";
+
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.e("AlarmReceiver", "onReceive: ");
+        DebugUtil.getInstance().v(TAG, "onReceive");
 
         // skip if app is in foreground
         if (AppUtil.getInstance().isAppOnForeground(context))

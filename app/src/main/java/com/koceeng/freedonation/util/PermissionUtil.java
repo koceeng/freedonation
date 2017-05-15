@@ -21,17 +21,6 @@ public class PermissionUtil {
 
     private static final String TAG = "PermissionUtil";
 
-    public interface PermissionCallbacks extends ActivityCompat.OnRequestPermissionsResultCallback {
-
-        void onShowPermissionRationale();
-
-        void onShowPermissionPermanentDeny();
-
-        void onPermissionsDenied(int requestCode, List<String> perms);
-
-        void onPermissionsGranted(int requestCode, List<String> perms);
-    }
-
     public static boolean hasPermissions(Context context, String... perms) {
         // Always return true for SDK < M, let the system deal with the permissions
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
@@ -132,11 +121,8 @@ public class PermissionUtil {
             return ActivityCompat.shouldShowRequestPermissionRationale((Activity) object, perm);
         } else if (object instanceof Fragment) {
             return ((Fragment) object).shouldShowRequestPermissionRationale(perm);
-        } else if (object instanceof android.app.Fragment) {
-            return ((android.app.Fragment) object).shouldShowRequestPermissionRationale(perm);
-        } else {
-            return false;
-        }
+        } else
+            return object instanceof android.app.Fragment && ((android.app.Fragment) object).shouldShowRequestPermissionRationale(perm);
     }
 
     @TargetApi(23)
@@ -188,9 +174,9 @@ public class PermissionUtil {
                         }
                         method.invoke(object);
                     } catch (IllegalAccessException e) {
-                        Log.e(TAG, "runDefaultMethod:IllegalAccessException", e);
+                        DebugUtil.getInstance().e(TAG, "runDefaultMethod:IllegalAccessException: " + e.getMessage());
                     } catch (InvocationTargetException e) {
-                        Log.e(TAG, "runDefaultMethod:InvocationTargetException", e);
+                        DebugUtil.getInstance().e(TAG, "runDefaultMethod:InvocationTargetException: " + e.getMessage());
                     }
                 }
             }
@@ -225,5 +211,16 @@ public class PermissionUtil {
         } catch (ClassNotFoundException e) {
             return false;
         }
+    }
+
+    public interface PermissionCallbacks extends ActivityCompat.OnRequestPermissionsResultCallback {
+
+        void onShowPermissionRationale();
+
+        void onShowPermissionPermanentDeny();
+
+        void onPermissionsDenied(int requestCode, List<String> perms);
+
+        void onPermissionsGranted(int requestCode, List<String> perms);
     }
 }

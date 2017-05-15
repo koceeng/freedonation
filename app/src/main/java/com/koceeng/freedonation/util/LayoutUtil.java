@@ -2,7 +2,6 @@ package com.koceeng.freedonation.util;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -19,6 +18,12 @@ import com.koceeng.freedonation.R;
 import uk.co.chrisjenx.calligraphy.CalligraphyUtils;
 
 public class LayoutUtil {
+
+    private static LayoutUtil layoutUtil = null;
+
+    public static LayoutUtil getInstance() {
+        return layoutUtil == null ? new LayoutUtil() : layoutUtil;
+    }
 
     public void toggleVisibility(View view) {
         toggleVisibility(view, !isVisible(view));
@@ -101,11 +106,9 @@ public class LayoutUtil {
     public void prepareTextSwitcher(final Context context, TextSwitcher textSwitcher, Integer size, Integer color,
                                     Integer gravity, String fontPath,
                                     Integer animationIn, Integer animationOut) {
-        Log.e("NOTE", "prepareTextSwitcher: do");
         if (context == null || textSwitcher == null)
             return;
 
-        Log.e("NOTE", "prepareTextSwitcher: do ok");
         if (size == null)
             size = R.dimen.text_default;
         if (color == null)
@@ -151,11 +154,5 @@ public class LayoutUtil {
         imageSwitcher.setInAnimation(AnimationUtils.loadAnimation(context, android.R.anim.fade_in));
         imageSwitcher.setOutAnimation(AnimationUtils.loadAnimation(context, android.R.anim.fade_out));
 
-    }
-
-    private static LayoutUtil layoutUtil = null;
-
-    public static LayoutUtil getInstance() {
-        return layoutUtil == null ? new LayoutUtil() : layoutUtil;
     }
 }

@@ -1,7 +1,6 @@
 package com.koceeng.freedonation.helper;
 
 import android.os.Handler;
-import android.util.Log;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.InterstitialAd;
@@ -23,24 +22,18 @@ import java.util.Random;
 public class FeedHelper {
 
     private final String TAG = "FeedHelper";
-    public enum FeedStatus {NO_NEED, START, GETTING_LAST, GENERATING_RANDOM, GETTING_DATA, SUCCESS, SAVING_DATA, FAILED}
-
     HomeActivity activity;
     InterstitialAd interstitialAd;
-
     Content result;
-
     boolean adInterstitialDone;
     boolean getFeedDataDone;
-
     int handleCounter = 0;
     int handleDelay = 500;
     int handleRepeat = 5;
-
     public FeedHelper(final HomeActivity activity) {
         this.activity = activity;
     }
-    
+
     public void get(Boolean force) {
         get(force, false);
     }
@@ -82,7 +75,7 @@ public class FeedHelper {
                 @Override
                 public void run() {
                     handleCounter++;
-                    Log.e(TAG, "handle run: " + handleCounter);
+                    DebugUtil.getInstance().v(TAG, "handle run: " + handleCounter);
                     if (interstitialAd.isLoaded()) {
                         interstitialAd.show();
                     } else if (handleCounter >= handleRepeat) {
@@ -98,7 +91,7 @@ public class FeedHelper {
             handler.postDelayed(runnable, handleDelay);
         }
     }
-    
+
     private void doGetFeed() {
 
         activity.onFeedChangeStatus(FeedStatus.GETTING_LAST);
@@ -170,4 +163,6 @@ public class FeedHelper {
             activity.onFeedChangeStatus(FeedStatus.FAILED);
         }
     }
+
+    public enum FeedStatus {NO_NEED, START, GETTING_LAST, GENERATING_RANDOM, GETTING_DATA, SUCCESS, SAVING_DATA, FAILED}
 }

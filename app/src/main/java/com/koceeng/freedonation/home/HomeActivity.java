@@ -8,7 +8,6 @@ import android.os.Handler;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -46,7 +45,8 @@ import butterknife.ButterKnife;
 
 public class HomeActivity extends BaseActivity {
 
-    @BindView(R.id.home_text_app_name) TextSwitcher textAppName;
+    @BindView(R.id.home_text_app_name)
+    TextSwitcher textHomeAppName;
     @BindView(R.id.home_adview_bottom) AdView adViewBottom;
     @BindView(R.id.home_viewflipper) ViewFlipper viewFlipper;
 
@@ -102,12 +102,6 @@ public class HomeActivity extends BaseActivity {
     SettingHelper settingHelper;
     FaqHelper faqHelper;
     boolean settingHoldChange = false;
-
-    public static class Factory {
-        public static Intent getIntent(Context context) {
-            return new Intent(context, HomeActivity.class);
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,7 +173,7 @@ public class HomeActivity extends BaseActivity {
     }
 
     private void prepareTextSwitcher() {
-        LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textAppName, R.dimen.text_mid_large, R.color.colorThemeWhite, Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
+        LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textHomeAppName, R.dimen.text_mid_large, R.color.colorThemeWhite, Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
 
         // feed
         LayoutUtil.getInstance().prepareTextSwitcher(thisContext, textFeedContentTitle, R.dimen.text_default, R.color.colorPrimary, Gravity.END);
@@ -345,7 +339,7 @@ public class HomeActivity extends BaseActivity {
         faqHelper.get(true);
 
         if (type == null) {
-            LayoutUtil.getInstance().setText(textAppName, getString(R.string.title));
+            LayoutUtil.getInstance().setText(textHomeAppName, getString(R.string.title));
 
             LayoutUtil.getInstance().setText(textFeedTitle, getString(R.string.feed_title));
             LayoutUtil.getInstance().setText(textFeedReload, getString(R.string.feed_reload));
@@ -428,7 +422,7 @@ public class HomeActivity extends BaseActivity {
             if (message != null) {
                 LayoutUtil.getInstance().toggleVisibility(textSwitcher, true);
                 LayoutUtil.getInstance().setText(textSwitcher, message);
-                Log.e(TAG, "onFeedChange: " + message);
+                DebugUtil.getInstance().v(TAG, "onFeedChange: " + message);
             }
             return;
         }
@@ -440,5 +434,11 @@ public class HomeActivity extends BaseActivity {
         List<Faq> faqs = SQLiteUtils.getInstance(thisContext).getFaqs();
         if (faqs != null)
             recyclerViewFaq.setAdapter(new FaqRecyclerAdapter(faqs));
+    }
+
+    public static class Factory {
+        public static Intent getIntent(Context context) {
+            return new Intent(context, HomeActivity.class);
+        }
     }
 }

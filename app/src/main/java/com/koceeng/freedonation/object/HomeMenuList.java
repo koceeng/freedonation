@@ -11,14 +11,10 @@ import java.util.HashMap;
 public class HomeMenuList {
 
     private final String TAG = "HomeMenuList";
-
-    public enum Name { FEED, REPORT, SETTING, OTHER_APP, SHARE, HELP }
-
     private Context context;
     private ViewFlipper viewFlipper;
     private HashMap<Name, HomeMenu> itemMap;
     private Name selected;
-
     public HomeMenuList(Context context, ViewFlipper viewFlipper) {
         this.context = context;
         this.viewFlipper = viewFlipper;
@@ -56,7 +52,7 @@ public class HomeMenuList {
     }
 
     public void setActive(Name name, boolean withAnimation) {
-        if (name == null || name.equals(selected))
+        if (itemMap == null || name == null || name.equals(selected))
             return;
 
         if (itemMap.containsKey(name))
@@ -67,4 +63,6 @@ public class HomeMenuList {
 
         selected = name;
     }
+
+    public enum Name {FEED, REPORT, SETTING, OTHER_APP, SHARE, HELP}
 }

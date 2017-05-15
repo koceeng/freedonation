@@ -3,14 +3,16 @@ package com.koceeng.freedonation.object;
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatImageView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ViewFlipper;
 
 import com.koceeng.freedonation.R;
+import com.koceeng.freedonation.util.DebugUtil;
 import com.koceeng.freedonation.util.LayoutUtil;
 
 public class HomeMenu {
+
+    public final String TAG = "HomeMenu";
 
     private View layout;
     private View indicator;
@@ -46,7 +48,7 @@ public class HomeMenu {
     }
 
     public void toggleActive(Context context, boolean active, boolean withAnimation) {
-        Log.e("NOTE", "toggleActive " + active);
+        DebugUtil.getInstance().v(TAG, "toggleActive " + active);
         LayoutUtil.getInstance().toggleVisibility(indicator, active);
         image.setColorFilter(ContextCompat.getColor(context, (active ? R.color.colorThemeWhite : R.color.colorAccentDark)));
 

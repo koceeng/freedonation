@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.InterstitialAd;
@@ -31,12 +30,6 @@ public class SplashActivity extends BaseActivity {
     int handleCounter = 0;
     int handleDelay = 500;
     int handleRepeat = 10;
-
-    public static class Factory {
-        public static Intent getIntent(Context context) {
-            return new Intent(context, SplashActivity.class);
-        }
-    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,7 +69,6 @@ public class SplashActivity extends BaseActivity {
             @Override
             public void run() {
                 handleCounter++;
-                Log.e(TAG, "handle run: " + handleCounter);
                 if (interstitialAd.isLoaded()) {
                     interstitialAd.show();
                 } else if (handleCounter >= handleRepeat) {
@@ -109,5 +101,11 @@ public class SplashActivity extends BaseActivity {
     private void showHomeActivity() {
         startActivity(HomeActivity.Factory.getIntent(splashActivity));
         overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+    }
+
+    public static class Factory {
+        public static Intent getIntent(Context context) {
+            return new Intent(context, SplashActivity.class);
+        }
     }
 }
