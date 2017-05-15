@@ -2,7 +2,6 @@ package com.koceeng.freedonation.alarm;
 
 import android.content.Context;
 
-import com.koceeng.freedonation.util.AppUtil;
 import com.koceeng.freedonation.util.LanguageUtil;
 
 public class AlarmObject {

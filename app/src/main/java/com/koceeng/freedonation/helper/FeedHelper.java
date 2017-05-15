@@ -164,7 +164,7 @@ public class FeedHelper {
             return;
 
         if (result != null) {
-            activity.onFeedChangeStatus(FeedStatus.SUCCESS, null, result);
+            activity.onFeedChangeStatus(FeedStatus.SUCCESS);
 
         } else {
             activity.onFeedChangeStatus(FeedStatus.FAILED);

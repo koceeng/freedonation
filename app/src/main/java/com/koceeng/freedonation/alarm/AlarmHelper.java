@@ -4,8 +4,6 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.koceeng.freedonation.sqlite.SQLiteUtils;
 import com.koceeng.freedonation.util.DebugUtil;
@@ -41,7 +39,7 @@ public class AlarmHelper {
 
     public void addAlarm(AlarmObject alarmObject) {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.DAY_OF_YEAR, 1);
+        calendar.set(Calendar.DATE, 1);
         calendar.set(Calendar.HOUR_OF_DAY, alarmObject.getHourOfDay());
         calendar.set(Calendar.MINUTE, alarmObject.getMinute());
         calendar.set(Calendar.SECOND, 0);
@@ -74,15 +72,9 @@ public class AlarmHelper {
         }
     }
 
-    public void reApplyAlarm(Context context) {
-        // TODO: 12/05/17 remove context
-        Toast.makeText(context, "reApplyAlarm do", Toast.LENGTH_SHORT).show();
-        Log.e(TAG, "reApplyAlarm: do");
+    public void reApplyAlarm() {
         List<AlarmObject> alarmObjects = getAllData();
-        for (AlarmObject alarmObject : alarmObjects) {
-            Toast.makeText(context, "reApplyAlarm for " + alarmObject.getId()+ "|" + alarmObject.getDisplay(context), Toast.LENGTH_SHORT).show();
-            Log.e(TAG, "reApplyAlarm: for "  + alarmObject.getId()+ "|" + alarmObject.getDisplay(context));
+        for (AlarmObject alarmObject : alarmObjects)
             addAlarm(alarmObject);
-        }
     }
 }

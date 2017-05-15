@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteException;
 import android.provider.BaseColumns;
 
 import com.koceeng.freedonation.alarm.AlarmObject;
+import com.koceeng.freedonation.help.Faq;
 import com.koceeng.freedonation.object.Content;
 import com.koceeng.freedonation.util.DebugUtil;
 
@@ -17,7 +18,7 @@ import java.util.List;
 
 public class SQLiteUtils {
 
-    public static final String PARAM_CONTENT_UPDATE_CODE = "PARAM_CONTENT_UPDATE_CODE";
+    public static final String PARAM_LAST_FAQ_TIMESTAMP = "PARAM_LAST_FAQ_TIMESTAMP";
 
     private SQLiteInit sqLiteHelper = null;
     private SQLiteDatabase sqLiteDatabase = null;
@@ -187,6 +188,38 @@ public class SQLiteUtils {
     public void removeAlarm(Integer id) {
         openWritable();
         sqLiteDatabase.delete("alarm", "_id = @id", new String[]{id.toString()});
+    }
+
+    public void putFaqs(List<Faq> faqs) {
+        openWritable();
+
+        // clear data
+        sqLiteDatabase.delete("faq", null, null);
+
+        if (faqs == null || faqs.size() <= 0)
+            return;
+
+        ContentValues cv;
+        for (Faq faq : faqs) {
+            cv = new ContentValues();
+            cv.put("question", faq.getQuestion());
+            cv.put("answer", faq.getAnswer());
+
+            sqLiteDatabase.insertWithOnConflict("faq", "question", cv, SQLiteDatabase.CONFLICT_REPLACE);
+        }
+    }
+
+    public List<Faq> getFaqs() {
+        openReadable();
+
+        List<Faq> result = new ArrayList<>();
+
+        Cursor c = sqLiteDatabase.rawQuery("SELECT question, answer FROM faq", null);
+        while (c.moveToNext())
+            result.add(new Faq(c.getString(c.getColumnIndex("question")), c.getString(c.getColumnIndex("answer"))));
+        c.close();
+
+        return result;
     }
 
     private static SQLiteUtils sqLiteDatabaseHelper = null;

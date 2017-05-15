@@ -20,16 +20,16 @@ import android.widget.ViewFlipper;
 
 import com.google.android.gms.ads.AdView;
 import com.koceeng.freedonation.R;
-import com.koceeng.freedonation.base.BaseActivity;
 import com.koceeng.freedonation.alarm.AlarmBottomSheet;
+import com.koceeng.freedonation.base.BaseActivity;
 import com.koceeng.freedonation.help.Faq;
 import com.koceeng.freedonation.help.FaqHelper;
 import com.koceeng.freedonation.help.FaqRecyclerAdapter;
 import com.koceeng.freedonation.helper.FeedHelper;
-import com.koceeng.freedonation.setting.SettingHelper;
 import com.koceeng.freedonation.object.Content;
 import com.koceeng.freedonation.object.HomeMenu;
 import com.koceeng.freedonation.object.HomeMenuList;
+import com.koceeng.freedonation.setting.SettingHelper;
 import com.koceeng.freedonation.sqlite.SQLiteUtils;
 import com.koceeng.freedonation.util.AdUtil;
 import com.koceeng.freedonation.util.AppUtil;
@@ -175,7 +175,7 @@ public class HomeActivity extends BaseActivity {
         onLanguageChange(null);
 
         feedHelper.get(false);
-        faqHelper.get();
+        faqHelper.get(false);
     }
 
     private void prepareTextSwitcher() {
@@ -205,20 +205,16 @@ public class HomeActivity extends BaseActivity {
     }
 
     public void onFeedChangeStatus(FeedHelper.FeedStatus feedStatus, String message) {
-        onFeedChangeStatus(feedStatus, message, null);
-    }
-
-    public void onFeedChangeStatus(FeedHelper.FeedStatus feedStatus, String message, Content content) {
         if (feedStatus == null) {
             DebugUtil.getInstance().e(TAG, "FeedChangeStatus: feedStatus is empty");
             return;
         }
 
-        DebugUtil.getInstance().v(TAG, "FeedChangeStatus: " + feedStatus + (content != null ? "|content:" + content : ""));
+        DebugUtil.getInstance().v(TAG, "FeedChangeStatus: " + feedStatus);
 
         switch (feedStatus) {
             case NO_NEED:
-                onFeedChange(null);
+                onFeedChange();
                 break;
             case START:
                 LayoutUtil.getInstance().setVisibility(progressFeed, View.VISIBLE);
@@ -230,25 +226,22 @@ public class HomeActivity extends BaseActivity {
                 break;
             case SUCCESS:
                 LayoutUtil.getInstance().setVisibility(progressFeed, View.INVISIBLE);
-                if (content != null)
-                    onFeedChange(content);
+                onFeedChange();
                 break;
         }
     }
 
     public void onFaqChangeStatus(FaqHelper.FaqStatus faqStatus) {
-        onFaqChangeStatus(faqStatus, null);
-    }
-
-    public void onFaqChangeStatus(FaqHelper.FaqStatus faqStatus, List<Faq> faqs) {
         switch (faqStatus) {
-            case GETTING_DATA:
+            case NO_NEED:
+                onFaqChange();
+                break;
+            case START:
                 LayoutUtil.getInstance().setVisibility(progressHelp, View.VISIBLE);
                 break;
             case SUCCESS:
                 LayoutUtil.getInstance().setVisibility(progressHelp, View.INVISIBLE);
-                if (faqs != null && faqs.size() > 0)
-                    recyclerViewFaq.setAdapter(new FaqRecyclerAdapter(faqs));
+                onFaqChange();
                 break;
             case FAILED:
                 LayoutUtil.getInstance().setVisibility(progressHelp, View.INVISIBLE);
@@ -342,13 +335,14 @@ public class HomeActivity extends BaseActivity {
         } else {
             onLanguageChange(type);
         }
-
-        // load new feed based on language
-        feedHelper.get(true);
     }
 
     public void onLanguageChange(SettingHelper.Type type) {
         LanguageUtil.getInstance().updateLanguageResource(thisContext);
+
+        // load new data based on language
+        feedHelper.get(true);
+        faqHelper.get(true);
 
         if (type == null) {
             LayoutUtil.getInstance().setText(textAppName, getString(R.string.title));
@@ -392,7 +386,6 @@ public class HomeActivity extends BaseActivity {
             LayoutUtil.getInstance().setText(textHideContentDetailValue, getString(
                     !PreferenceUtil.getInstance().getBoolean(thisContext, getString(R.string.PREFERENCE_HIDE_CONTENT_DETAIL)) ?
                             R.string.yes : R.string.no));
-            onFeedChange(null);
         }
 
         if (type == null || type.equals(SettingHelper.Type.AD_INTERSTITIAL)) {
@@ -407,49 +400,45 @@ public class HomeActivity extends BaseActivity {
         }
     }
 
-    private void onFeedChange(Content content) {
+    private void onFeedChange() {
 
-        if (content == null)
-            content = SQLiteUtils.getInstance(thisContext).getContent();
-
+        Content content = SQLiteUtils.getInstance(thisContext).getContent();
         Boolean showContentDetail = !PreferenceUtil.getInstance().getBoolean(thisContext, getString(R.string.PREFERENCE_HIDE_CONTENT_DETAIL));
 
-        if (showContentDetail && content != null && content.getTitle() != null) {
-            LayoutUtil.getInstance().toggleVisibility(textFeedContentTitle, true);
-            LayoutUtil.getInstance().setText(textFeedContentTitle, content.getTitle());
-            Log.e(TAG, "onFeedChange: "+content.getTitle());
-        } else {
-            LayoutUtil.getInstance().toggleVisibility(textFeedContentTitle, false);
+        feedChangeShowHide(content, "text", textFeedContentText);
+        if (showContentDetail) {
+            feedChangeShowHide(content, "title", textFeedContentTitle);
+            feedChangeShowHide(content, "subtitle", textFeedContentSubtitle);
+            feedChangeShowHide(content, "footer", textFeedContentFooter);
+            feedChangeShowHide(content, "source", textFeedContentSource);
+        }
+    }
+
+    private void feedChangeShowHide(Content content, String messageIndicator, TextSwitcher textSwitcher) {
+        if (content != null) {
+            String message = null;
+            switch (messageIndicator) {
+                case "title": message = content.getTitle(); break;
+                case "subtitle": message = content.getSubtitle(); break;
+                case "text": message = content.getText(); break;
+                case "footer": message = content.getFooter(); break;
+                case "source": message = content.getSource(); break;
+            }
+
+            if (message != null) {
+                LayoutUtil.getInstance().toggleVisibility(textSwitcher, true);
+                LayoutUtil.getInstance().setText(textSwitcher, message);
+                Log.e(TAG, "onFeedChange: " + message);
+            }
+            return;
         }
 
-        if (showContentDetail && content != null && content.getSubtitle() != null) {
-            LayoutUtil.getInstance().toggleVisibility(textFeedContentSubtitle, true);
-            LayoutUtil.getInstance().setText(textFeedContentSubtitle, content.getSubtitle());
-            Log.e(TAG, "onFeedChange: "+content.getSubtitle());
-        } else {
-            LayoutUtil.getInstance().toggleVisibility(textFeedContentSubtitle, false);
-        }
+        LayoutUtil.getInstance().toggleVisibility(textSwitcher, false);
+    }
 
-        if (content != null && content.getText() != null) {
-            LayoutUtil.getInstance().toggleVisibility(textFeedContentText, true);
-            LayoutUtil.getInstance().setText(textFeedContentText, content.getText());
-            Log.e(TAG, "onFeedChange: "+content.getText());
-        } else {
-            LayoutUtil.getInstance().toggleVisibility(textFeedContentText, false);
-        }
-
-        if (showContentDetail && content != null && content.getFooter() != null) {
-            LayoutUtil.getInstance().toggleVisibility(textFeedContentFooter, true);
-            LayoutUtil.getInstance().setText(textFeedContentFooter, content.getFooter());
-        } else {
-            LayoutUtil.getInstance().toggleVisibility(textFeedContentFooter, false);
-        }
-
-        if (showContentDetail && content != null && content.getSource() != null) {
-            LayoutUtil.getInstance().toggleVisibility(textFeedContentSource, true);
-            LayoutUtil.getInstance().setText(textFeedContentSource, content.getSource());
-        } else {
-            LayoutUtil.getInstance().toggleVisibility(textFeedContentSource, false);
-        }
+    private void onFaqChange() {
+        List<Faq> faqs = SQLiteUtils.getInstance(thisContext).getFaqs();
+        if (faqs != null)
+            recyclerViewFaq.setAdapter(new FaqRecyclerAdapter(faqs));
     }
 }

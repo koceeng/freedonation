@@ -10,15 +10,15 @@ public class DataPathUtil {
     }
 
     public DatabaseReference getContentLast(String lang) {
-        return FirebaseDatabase.getInstance().getReference("/content-" + lang + "/last");
+        return FirebaseDatabase.getInstance().getReference("/content/" + lang + "/last");
     }
 
     public DatabaseReference getContentById(String lang, String contentId) {
-        return FirebaseDatabase.getInstance().getReference("/content-" + lang + "/data/" + contentId);
+        return FirebaseDatabase.getInstance().getReference("/content/" + lang + "/data/" + contentId);
     }
 
-    public DatabaseReference getFaq() {
-        return FirebaseDatabase.getInstance().getReference("/faq");
+    public DatabaseReference getFaq(String lang) {
+        return FirebaseDatabase.getInstance().getReference("/faq/" + lang);
     }
 
     private static DataPathUtil dataPathUtil = null;

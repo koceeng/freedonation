@@ -47,8 +47,15 @@ public class SQLiteInit extends SQLiteOpenHelper {
             // create table alarm
             db.execSQL("CREATE TABLE IF NOT EXISTS alarm(" +
                     "_id INTEGER PRIMARY KEY, " +
-                    "hour_of_day INTEGER, " +
-                    "minute INTEGER " +
+                    "hour_of_day INTEGER NOT NULL, " +
+                    "minute INTEGER NOT NULL " +
+                    "); ");
+
+            // create table faq
+            db.execSQL("CREATE TABLE IF NOT EXISTS faq(" +
+                    "_id INTEGER PRIMARY KEY, " +
+                    "question TEXT NOT NULL UNIQUE, " +
+                    "answer TEXT NOT NULL" +
                     "); ");
         }
     }
