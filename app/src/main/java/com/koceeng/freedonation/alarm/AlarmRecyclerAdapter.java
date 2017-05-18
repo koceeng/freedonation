@@ -49,21 +49,33 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
             @Override
             public void onInserted(int position, int count) {
                 notifyItemRangeInserted(position, count);
+
+                // notify data count change
+                alarmBottomSheet.onAlarmDataCountChange(alarmList.size());
             }
 
             @Override
             public void onChanged(int position, int count) {
                 notifyItemRangeInserted(position, count);
+
+                // notify data count change
+                alarmBottomSheet.onAlarmDataCountChange(alarmList.size());
             }
 
             @Override
             public void onRemoved(int position, int count) {
                 notifyItemRangeRemoved(position, count);
+
+                // notify data count change
+                alarmBottomSheet.onAlarmDataCountChange(alarmList.size());
             }
 
             @Override
             public void onMoved(int fromPosition, int toPosition) {
                 notifyItemMoved(fromPosition, toPosition);
+
+                // notify data count change
+                alarmBottomSheet.onAlarmDataCountChange(alarmList.size());
             }
         });
 
@@ -135,6 +147,9 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
 
     @Override
     public int getItemCount() {
+        // notify data count change
+        alarmBottomSheet.onAlarmDataCountChange(alarmList.size());
+
         return alarmList.size();
     }
 

@@ -50,9 +50,9 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
                 .build();
 
         notification.flags = Notification.FLAG_SHOW_LIGHTS;
-        notification.ledARGB = 0xFFff0000;
-        notification.ledOnMS = 100;
-        notification.ledOffMS = 100;
+        notification.ledARGB = 0xFF00ff00;
+        notification.ledOnMS = 1700;
+        notification.ledOffMS = 800;
 
         notificationManager.notify(0, notification);
     }
