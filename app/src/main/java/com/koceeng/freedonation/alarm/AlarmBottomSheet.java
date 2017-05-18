@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TimePicker;
 
@@ -11,17 +12,21 @@ import com.koceeng.freedonation.R;
 import com.koceeng.freedonation.base.BaseBottomSheet;
 import com.koceeng.freedonation.home.HomeActivity;
 import com.koceeng.freedonation.setting.SettingHelper;
+import com.koceeng.freedonation.util.LayoutUtil;
 
 import java.util.Calendar;
 
 public class AlarmBottomSheet extends BaseBottomSheet
         implements View.OnClickListener {
 
+    View emptyText;
     RecyclerView recyclerView;
     AlarmRecyclerAdapter alarmRecyclerAdapter;
 
     AlarmHelper alarmHelper;
     HomeActivity homeActivity;
+
+    Integer handleAlarmCountBeforeLoad = null;
 
     public void setHomeActivity(HomeActivity homeActivity) {
         this.homeActivity = homeActivity;
@@ -40,6 +45,7 @@ public class AlarmBottomSheet extends BaseBottomSheet
 
         alarmRecyclerAdapter = new AlarmRecyclerAdapter(getContext(), this, alarmHelper);
 
+        emptyText = view.findViewById(R.id.setting_alarm_empty_text);
         recyclerView = (RecyclerView) view.findViewById(R.id.setting_alarm_recyclerview_main);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(homeActivity));
@@ -48,6 +54,25 @@ public class AlarmBottomSheet extends BaseBottomSheet
 
         view.findViewById(R.id.setting_alarm_button_add).setOnClickListener(this);
         view.findViewById(R.id.setting_alarm_button_cancel).setOnClickListener(this);
+    }
+
+    public void onAlarmDataCountChange(final Integer count) {
+        if (emptyText == null || recyclerView == null) {
+            handleAlarmCountBeforeLoad = count;
+        } else {
+            Log.e(TAG, "onAlarmDataCountChange: " + count);
+            LayoutUtil.getInstance().toggleVisibility(emptyText, count <= 0);
+            LayoutUtil.getInstance().toggleVisibility(recyclerView, count > 0);
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        if (handleAlarmCountBeforeLoad != null) {
+            onAlarmDataCountChange(handleAlarmCountBeforeLoad);
+        }
     }
 
     @Override
@@ -62,7 +87,8 @@ public class AlarmBottomSheet extends BaseBottomSheet
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                     AlarmObject alarmObject = alarmHelper.addAlarmData(hourOfDay, minute);
-                    alarmRecyclerAdapter.putData(alarmObject);
+                    if (alarmObject != null)
+                        alarmRecyclerAdapter.putData(alarmObject);
                 }
             }, hour, minutes, false);
             timePickerDialog.show();

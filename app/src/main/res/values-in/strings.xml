@@ -22,6 +22,7 @@
     <string name="setting_notification_text_title">Jangan lupa membuka aplikasi sedekah gratis ya :D</string>
     <string name="setting_notification_count">%1$d pengingat tersimpan</string>
     <string name="setting_notification_text_content">Sering buka aplikasi sedekah gratis untuk memaksimalkan sedekah</string>
+    <string name="setting_notification_text_empty">(Kosong)</string>
 
     <!--Share-->
     <string name="share_title">Bagikan kabar ke teman</string>

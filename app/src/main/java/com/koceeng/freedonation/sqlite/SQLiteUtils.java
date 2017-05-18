@@ -19,13 +19,25 @@ import java.util.List;
 public class SQLiteUtils {
 
     public static final String PARAM_LAST_FAQ_TIMESTAMP = "PARAM_LAST_FAQ_TIMESTAMP";
-
+    private static SQLiteUtils sqLiteDatabaseHelper = null;
     private SQLiteInit sqLiteHelper = null;
     private SQLiteDatabase sqLiteDatabase = null;
 
     public SQLiteUtils(Context context) {
         if (sqLiteHelper == null)
             sqLiteHelper = new SQLiteInit(context);
+    }
+
+    public static SQLiteUtils getInstance(Context context) {
+        if (sqLiteDatabaseHelper == null) {
+            if (context != null) {
+                sqLiteDatabaseHelper = new SQLiteUtils(context);
+            } else {
+                DebugUtil.getInstance().e("SQLiteUtils", "SQLite creation cancelled, context is null");
+            }
+        }
+
+        return sqLiteDatabaseHelper;
     }
 
     public void openReadable() throws SQLiteException {
@@ -169,6 +181,23 @@ public class SQLiteUtils {
         return result;
     }
 
+    public AlarmObject getAlarmByHourAndMinute(int hourOfDay, int minute) {
+        openReadable();
+
+        AlarmObject result = null;
+
+        Cursor c = sqLiteDatabase.rawQuery("SELECT _id, hour_of_day, minute FROM alarm WHERE hour_of_day = @hour AND minute = @minute LIMIT 1",
+                new String[]{String.valueOf(hourOfDay), String.valueOf(minute)});
+        while (c.moveToNext()) {
+            result = new AlarmObject(c.getInt(c.getColumnIndex("hour_of_day")), c.getInt(c.getColumnIndex("minute")));
+            result.setId(c.getInt(c.getColumnIndex("_id")));
+            result.setPendingIntentRequestCode(c.getInt(c.getColumnIndex("_id")));
+        }
+        c.close();
+
+        return result;
+    }
+
     public List<AlarmObject> getAlarms() {
         openReadable();
 
@@ -177,6 +206,7 @@ public class SQLiteUtils {
         Cursor c = sqLiteDatabase.rawQuery("SELECT _id, hour_of_day, minute FROM alarm", null);
         while (c.moveToNext()) {
             AlarmObject alarmObject = new AlarmObject(c.getInt(c.getColumnIndex("hour_of_day")), c.getInt(c.getColumnIndex("minute")));
+            alarmObject.setId(c.getInt(c.getColumnIndex("_id")));
             alarmObject.setPendingIntentRequestCode(c.getInt(c.getColumnIndex("_id")));
             result.add(alarmObject);
         }
@@ -220,19 +250,5 @@ public class SQLiteUtils {
         c.close();
 
         return result;
-    }
-
-    private static SQLiteUtils sqLiteDatabaseHelper = null;
-
-    public static SQLiteUtils getInstance(Context context) {
-        if (sqLiteDatabaseHelper == null) {
-            if (context != null) {
-                sqLiteDatabaseHelper = new SQLiteUtils(context);
-            } else {
-                DebugUtil.getInstance().e("SQLiteUtils", "SQLite creation cancelled, context is null");
-            }
-        }
-
-        return sqLiteDatabaseHelper;
     }
 }

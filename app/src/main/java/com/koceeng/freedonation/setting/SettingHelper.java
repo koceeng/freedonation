@@ -6,8 +6,6 @@ import com.koceeng.freedonation.util.PreferenceUtil;
 
 public class SettingHelper {
 
-    public enum Type {LANGUAGE, HIDE_CONTENT_DETAIL, AD_INTERSTITIAL, NOTIFICATION}
-
     private HomeActivity context;
 
     public SettingHelper(HomeActivity context) {
@@ -29,4 +27,6 @@ public class SettingHelper {
         PreferenceUtil.getInstance().putBoolean(context, context.getString(R.string.PREFERENCE_HIDE_INTERSTITIAL_AD),
                 !PreferenceUtil.getInstance().getBoolean(context, context.getString(R.string.PREFERENCE_HIDE_INTERSTITIAL_AD)));
     }
+
+    public enum Type {APP_OPEN, LANGUAGE, HIDE_CONTENT_DETAIL, AD_INTERSTITIAL, NOTIFICATION}
 }

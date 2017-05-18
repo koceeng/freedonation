@@ -166,10 +166,7 @@ public class HomeActivity extends BaseActivity {
         recyclerViewFaq.setHasFixedSize(false);
 
         prepareTextSwitcher();
-        onLanguageChange(null);
-
-        feedHelper.get(false);
-        faqHelper.get(false);
+        onLanguageChange(SettingHelper.Type.APP_OPEN);
     }
 
     private void prepareTextSwitcher() {
@@ -335,8 +332,15 @@ public class HomeActivity extends BaseActivity {
         LanguageUtil.getInstance().updateLanguageResource(thisContext);
 
         // load new data based on language
-        feedHelper.get(true);
-        faqHelper.get(true);
+        if (type == SettingHelper.Type.APP_OPEN) {
+            type = null;
+            feedHelper.get(false);
+            faqHelper.get(false);
+
+        } else {
+            feedHelper.get(true);
+            faqHelper.get(true);
+        }
 
         if (type == null) {
             LayoutUtil.getInstance().setText(textHomeAppName, getString(R.string.title));
@@ -423,7 +427,9 @@ public class HomeActivity extends BaseActivity {
                 LayoutUtil.getInstance().toggleVisibility(textSwitcher, true);
                 LayoutUtil.getInstance().setText(textSwitcher, message);
                 DebugUtil.getInstance().v(TAG, "onFeedChange: " + message);
-            }
+            } else
+                LayoutUtil.getInstance().toggleVisibility(textSwitcher, false);
+
             return;
         }
 

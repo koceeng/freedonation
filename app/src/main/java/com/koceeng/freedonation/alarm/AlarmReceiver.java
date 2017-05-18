@@ -49,6 +49,11 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
                 .setContentIntent(pendingIntent)
                 .build();
 
+        notification.flags = Notification.FLAG_SHOW_LIGHTS;
+        notification.ledARGB = 0xFFff0000;
+        notification.ledOnMS = 100;
+        notification.ledOffMS = 100;
+
         notificationManager.notify(0, notification);
     }
 }

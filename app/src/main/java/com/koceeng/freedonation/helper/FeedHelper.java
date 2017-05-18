@@ -130,10 +130,11 @@ public class FeedHelper {
                                         result = content;
 
                                         getFeedDataDone = true;
-                                        afterGetFeed();
 
                                         SQLiteUtils.getInstance(activity).putContent(content);
                                         activity.onFeedChangeStatus(FeedStatus.SAVING_DATA);
+
+                                        afterGetFeed();
                                     }
 
                                     @Override

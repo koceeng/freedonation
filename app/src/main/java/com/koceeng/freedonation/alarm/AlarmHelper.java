@@ -28,6 +28,10 @@ public class AlarmHelper {
     public AlarmObject addAlarmData(int hourOfDay, int minute) {
         DebugUtil.getInstance().v(TAG, "prepare alarm on " + hourOfDay + ":" + minute);
 
+        // check if already exist
+        if (SQLiteUtils.getInstance(context).getAlarmByHourAndMinute(hourOfDay, minute) != null)
+            return null;
+
         AlarmObject alarmObject = new AlarmObject(hourOfDay, minute);
         alarmObject = SQLiteUtils.getInstance(context).putAlarm(alarmObject);
 
@@ -39,11 +43,11 @@ public class AlarmHelper {
 
     public void addAlarm(AlarmObject alarmObject) {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.DATE, 1);
         calendar.set(Calendar.HOUR_OF_DAY, alarmObject.getHourOfDay());
         calendar.set(Calendar.MINUTE, alarmObject.getMinute());
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
+        calendar.add(Calendar.DATE, 1);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
                 alarmObject.getPendingIntentRequestCode(),
                 new Intent(context, AlarmReceiver.class),

@@ -26,11 +26,11 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
     private SortedList<AlarmObject> alarmList;
     private SparseArrayCompat<AlarmObject> alarmIndex = new SparseArrayCompat<>();
 
-    public AlarmRecyclerAdapter(Context contextIn, AlarmBottomSheet alarmBottomSheet, AlarmHelper alarmHelper) {
+    public AlarmRecyclerAdapter(Context contextIn, AlarmBottomSheet alarmBottomSheetLocal, AlarmHelper alarmHelper) {
         this.context = contextIn;
-        this.alarmBottomSheet = alarmBottomSheet;
+        this.alarmBottomSheet = alarmBottomSheetLocal;
         this.alarmHelper = alarmHelper;
-        alarmList = new SortedList<>(AlarmObject.class, new SortedList.Callback<AlarmObject>() {
+        this.alarmList = new SortedList<>(AlarmObject.class, new SortedList.Callback<AlarmObject>() {
             @Override
             public int compare(AlarmObject o1, AlarmObject o2) {
                 return o1.compare(context, o2);
@@ -72,6 +72,9 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
             DebugUtil.getInstance().v(TAG, "AlarmRecyclerAdapter: " + alarmObject.getHourOfDay());
             putData(alarmObject);
         }
+
+        // notify data count change
+        alarmBottomSheet.onAlarmDataCountChange(alarmList.size());
     }
 
     public void putData(AlarmObject alarmObject) {
@@ -82,6 +85,9 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
             alarmList.updateItemAt(alarmList.indexOf(existing), alarmObject);
         }
         alarmIndex.put(alarmObject.getId(), alarmObject);
+
+        // notify data count change
+        alarmBottomSheet.onAlarmDataCountChange(alarmList.size());
     }
 
     public void removeData(Integer key) {
@@ -94,6 +100,9 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
                 return;
             }
         }
+
+        // notify data count change
+        alarmBottomSheet.onAlarmDataCountChange(alarmList.size());
     }
 
     @Override
