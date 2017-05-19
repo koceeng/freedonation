@@ -21,6 +21,7 @@ import com.google.android.gms.ads.AdView;
 import com.koceeng.freedonation.R;
 import com.koceeng.freedonation.alarm.AlarmBottomSheet;
 import com.koceeng.freedonation.base.BaseActivity;
+import com.koceeng.freedonation.changelog.ChangelogActivity;
 import com.koceeng.freedonation.help.Faq;
 import com.koceeng.freedonation.help.FaqHelper;
 import com.koceeng.freedonation.help.FaqRecyclerAdapter;
@@ -29,7 +30,7 @@ import com.koceeng.freedonation.object.Content;
 import com.koceeng.freedonation.object.HomeMenu;
 import com.koceeng.freedonation.object.HomeMenuList;
 import com.koceeng.freedonation.setting.SettingHelper;
-import com.koceeng.freedonation.sqlite.SQLiteUtils;
+import com.koceeng.freedonation.sqlite.SQLiteUtil;
 import com.koceeng.freedonation.util.AdUtil;
 import com.koceeng.freedonation.util.AppUtil;
 import com.koceeng.freedonation.util.DebugUtil;
@@ -306,6 +307,10 @@ public class HomeActivity extends BaseActivity {
         }
     }
 
+    public void actionShowChangelog(View view) {
+        startActivity(ChangelogActivity.Factory.getIntent(thisContext));
+    }
+
     public void actionSendEmailDeveloper(View view) {
         Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
         emailIntent.setType("plain/text");
@@ -394,13 +399,13 @@ public class HomeActivity extends BaseActivity {
 
         if (type == null || type.equals(SettingHelper.Type.NOTIFICATION)) {
             LayoutUtil.getInstance().setText(textNotificationValue, getString(R.string.setting_notification_count,
-                    SQLiteUtils.getInstance(thisContext).getAlarmCount()), true);
+                    SQLiteUtil.getInstance(thisContext).getAlarmCount()), true);
         }
     }
 
     private void onFeedChange() {
 
-        Content content = SQLiteUtils.getInstance(thisContext).getContent();
+        Content content = SQLiteUtil.getInstance(thisContext).getContent();
         Boolean showContentDetail = !PreferenceUtil.getInstance().getBoolean(thisContext, getString(R.string.PREFERENCE_HIDE_CONTENT_DETAIL));
 
         feedChangeShowHide(content, "text", textFeedContentText);
@@ -437,7 +442,7 @@ public class HomeActivity extends BaseActivity {
     }
 
     private void onFaqChange() {
-        List<Faq> faqs = SQLiteUtils.getInstance(thisContext).getFaqs();
+        List<Faq> faqs = SQLiteUtil.getInstance(thisContext).getFaqs();
         if (faqs != null)
             recyclerViewFaq.setAdapter(new FaqRecyclerAdapter(faqs));
     }

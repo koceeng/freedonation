@@ -37,11 +37,17 @@
     <string name="help_title">Bantuan</string>
     <string name="help_faq_subtitle">Pertanyaan (F.A.Q)</string>
     <string name="help_about_subtitle">Tentang</string>
-    <string name="help_about_version_label">Versi Aplikasi</string>
+    <string name="help_about_version_label">Versi Aplikasi (sentuh untuk melihat perubahan)</string>
     <string name="help_about_team_label">Tim Developer (Pembuat Aplikasi)</string>
     <string name="help_about_email_label">Email Developer</string>
     <string name="help_about_email_subject">Bantuan tentang aplikasi Sedekah Gratis</string>
     <string name="help_about_email_choose_note">Pilih aplikasi email yang hendak dipakai</string>
+
+    <!--Changelog-->
+    <string name="changelog_title">Versi dan Perubahan</string>
+    <string name="changelog_header">Untuk orang-orang yang keren</string>
+    <string name="changelog_loading">Mohon tunggu selagi kita mengintip di database</string>
+    <string name="changelog_error_message">Aduh, terjadi kesalahan saat mengecek versi dan perubahan</string>
 
     <!--Update-->
     <string name="update_check_fail_message">Tidak bisa melakukan pengecekan versi terbaru. Beberapa fitur mungkin tidak maksimal.</string>

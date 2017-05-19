@@ -196,3 +196,4 @@
 -keepclassmembers class com.koceeng.freedonation.object.Content { *; }
 -keepnames class com.koceeng.freedonation.object.VersionData { *; }
 -keepclassmembers class com.koceeng.freedonation.object.VersionData { *; }
+-keepclassmembers class com.koceeng.freedonation.changelog.ChangelogEntry { *; }

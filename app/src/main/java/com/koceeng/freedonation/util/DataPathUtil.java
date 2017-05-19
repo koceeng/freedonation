@@ -5,6 +5,14 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class DataPathUtil {
 
+    private static DataPathUtil dataPathUtil = null;
+
+    public static DataPathUtil getInstance() {
+        if (dataPathUtil == null)
+            dataPathUtil = new DataPathUtil();
+        return dataPathUtil;
+    }
+
     public DatabaseReference getIsActive() {
         return FirebaseDatabase.getInstance().getReference("is-active");
     }
@@ -21,11 +29,11 @@ public class DataPathUtil {
         return FirebaseDatabase.getInstance().getReference("/faq/" + lang);
     }
 
-    private static DataPathUtil dataPathUtil = null;
+    public DatabaseReference getChangelogUpdateCode() {
+        return FirebaseDatabase.getInstance().getReference("changelog/updatecode");
+    }
 
-    public static DataPathUtil getInstance() {
-        if (dataPathUtil == null)
-            dataPathUtil = new DataPathUtil();
-        return dataPathUtil;
+    public DatabaseReference getChangelog() {
+        return FirebaseDatabase.getInstance().getReference("changelog");
     }
 }

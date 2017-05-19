@@ -1,10 +1,15 @@
 package com.koceeng.freedonation.util;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Build;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.NestedScrollView;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageSwitcher;
@@ -154,5 +159,28 @@ public class LayoutUtil {
         imageSwitcher.setInAnimation(AnimationUtils.loadAnimation(context, android.R.anim.fade_in));
         imageSwitcher.setOutAnimation(AnimationUtils.loadAnimation(context, android.R.anim.fade_out));
 
+    }
+
+    public void autoElevateToolbar(final AppBarLayout appBarLayout, final NestedScrollView scrollView) {
+
+        if (scrollView == null)
+            return;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+                @SuppressLint("NewApi")
+                @Override
+                public void onScrollChanged() {
+                    if (appBarLayout == null)
+                        return;
+
+                    if (scrollView.getScrollY() == 0) {
+                        appBarLayout.setElevation(0);
+                    } else {
+                        appBarLayout.setElevation(10);
+                    }
+                }
+            });
+        }
     }
 }

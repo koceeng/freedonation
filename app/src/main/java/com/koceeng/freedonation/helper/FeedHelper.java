@@ -11,7 +11,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.koceeng.freedonation.R;
 import com.koceeng.freedonation.home.HomeActivity;
 import com.koceeng.freedonation.object.Content;
-import com.koceeng.freedonation.sqlite.SQLiteUtils;
+import com.koceeng.freedonation.sqlite.SQLiteUtil;
 import com.koceeng.freedonation.util.AdUtil;
 import com.koceeng.freedonation.util.DataPathUtil;
 import com.koceeng.freedonation.util.DebugUtil;
@@ -41,7 +41,7 @@ public class FeedHelper {
     public void get(Boolean force, Boolean showAd) {
         // check last get data
         if (!force) {
-            Content content = SQLiteUtils.getInstance(activity).getContent();
+            Content content = SQLiteUtil.getInstance(activity).getContent();
             if (content != null && System.currentTimeMillis() - content.getTimestamp() < 86400000) { // 86400000 is one day
                 activity.onFeedChangeStatus(FeedStatus.NO_NEED);
                 return;
@@ -131,7 +131,7 @@ public class FeedHelper {
 
                                         getFeedDataDone = true;
 
-                                        SQLiteUtils.getInstance(activity).putContent(content);
+                                        SQLiteUtil.getInstance(activity).putContent(content);
                                         activity.onFeedChangeStatus(FeedStatus.SAVING_DATA);
 
                                         afterGetFeed();

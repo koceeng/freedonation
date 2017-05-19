@@ -5,7 +5,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 
-import com.koceeng.freedonation.sqlite.SQLiteUtils;
+import com.koceeng.freedonation.sqlite.SQLiteUtil;
 import com.koceeng.freedonation.util.DebugUtil;
 
 import java.util.Calendar;
@@ -22,18 +22,18 @@ public class AlarmHelper {
     }
 
     public List<AlarmObject> getAllData() {
-        return SQLiteUtils.getInstance(context).getAlarms();
+        return SQLiteUtil.getInstance(context).getAlarms();
     }
 
     public AlarmObject addAlarmData(int hourOfDay, int minute) {
         DebugUtil.getInstance().v(TAG, "prepare alarm on " + hourOfDay + ":" + minute);
 
         // check if already exist
-        if (SQLiteUtils.getInstance(context).getAlarmByHourAndMinute(hourOfDay, minute) != null)
+        if (SQLiteUtil.getInstance(context).getAlarmByHourAndMinute(hourOfDay, minute) != null)
             return null;
 
         AlarmObject alarmObject = new AlarmObject(hourOfDay, minute);
-        alarmObject = SQLiteUtils.getInstance(context).putAlarm(alarmObject);
+        alarmObject = SQLiteUtil.getInstance(context).putAlarm(alarmObject);
 
         addAlarm(alarmObject);
 
@@ -62,7 +62,7 @@ public class AlarmHelper {
         removeAlarm(alarmObject);
 
         // remove alarm from database
-        SQLiteUtils.getInstance(context).removeAlarm(alarmObject.getId());
+        SQLiteUtil.getInstance(context).removeAlarm(alarmObject.getId());
     }
 
     public void removeAlarm(AlarmObject alarmObject) {

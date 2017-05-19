@@ -6,7 +6,7 @@ import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.koceeng.freedonation.R;
 import com.koceeng.freedonation.home.HomeActivity;
-import com.koceeng.freedonation.sqlite.SQLiteUtils;
+import com.koceeng.freedonation.sqlite.SQLiteUtil;
 import com.koceeng.freedonation.util.DataPathUtil;
 import com.koceeng.freedonation.util.DebugUtil;
 import com.koceeng.freedonation.util.PreferenceUtil;
@@ -26,7 +26,7 @@ public class FaqHelper {
 
         // check last get data
         if (!force) {
-            String lastFaqTimestampString = SQLiteUtils.getInstance(activity).getStringParam(SQLiteUtils.PARAM_LAST_FAQ_TIMESTAMP);
+            String lastFaqTimestampString = SQLiteUtil.getInstance(activity).getStringParam(SQLiteUtil.PARAM_LAST_FAQ_TIMESTAMP);
             Long lastFaqTimestamp = 0L;
             try {
                 if (lastFaqTimestampString != null)
@@ -60,8 +60,8 @@ public class FaqHelper {
                         List<Faq> faqs = dataSnapshot.getValue(new GenericTypeIndicator<List<Faq>>() {});
                         activity.onFaqChangeStatus(FaqStatus.SAVING_DATA);
 
-                        SQLiteUtils.getInstance(activity).putFaqs(faqs);
-                        SQLiteUtils.getInstance(activity).putStringParam(SQLiteUtils.PARAM_LAST_FAQ_TIMESTAMP, String.valueOf(System.currentTimeMillis()));
+                        SQLiteUtil.getInstance(activity).putFaqs(faqs);
+                        SQLiteUtil.getInstance(activity).putStringParam(SQLiteUtil.PARAM_LAST_FAQ_TIMESTAMP, String.valueOf(System.currentTimeMillis()));
 
                         activity.onFaqChangeStatus(FaqStatus.SUCCESS);
                     }

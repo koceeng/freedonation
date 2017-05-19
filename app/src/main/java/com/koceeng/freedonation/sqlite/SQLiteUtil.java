@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteException;
 import android.provider.BaseColumns;
 
 import com.koceeng.freedonation.alarm.AlarmObject;
+import com.koceeng.freedonation.changelog.ChangelogEntry;
 import com.koceeng.freedonation.help.Faq;
 import com.koceeng.freedonation.object.Content;
 import com.koceeng.freedonation.util.DebugUtil;
@@ -16,24 +17,26 @@ import com.koceeng.freedonation.util.DebugUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SQLiteUtils {
+public class SQLiteUtil {
 
     public static final String PARAM_LAST_FAQ_TIMESTAMP = "PARAM_LAST_FAQ_TIMESTAMP";
-    private static SQLiteUtils sqLiteDatabaseHelper = null;
+    public static final String PARAM_CHANGELOG_UPDATE_CODE = "PARAM_CHANGELOG_UPDATE_CODE";
+
+    private static SQLiteUtil sqLiteDatabaseHelper = null;
     private SQLiteInit sqLiteHelper = null;
     private SQLiteDatabase sqLiteDatabase = null;
 
-    public SQLiteUtils(Context context) {
+    public SQLiteUtil(Context context) {
         if (sqLiteHelper == null)
             sqLiteHelper = new SQLiteInit(context);
     }
 
-    public static SQLiteUtils getInstance(Context context) {
+    public static SQLiteUtil getInstance(Context context) {
         if (sqLiteDatabaseHelper == null) {
             if (context != null) {
-                sqLiteDatabaseHelper = new SQLiteUtils(context);
+                sqLiteDatabaseHelper = new SQLiteUtil(context);
             } else {
-                DebugUtil.getInstance().e("SQLiteUtils", "SQLite creation cancelled, context is null");
+                DebugUtil.getInstance().e("SQLiteUtil", "SQLite creation cancelled, context is null");
             }
         }
 
@@ -250,5 +253,49 @@ public class SQLiteUtils {
         c.close();
 
         return result;
+    }
+
+
+    public void addChangelogEntry(ChangelogEntry changelogEntry) {
+        openWritable();
+
+        if (changelogEntry == null)
+            return;
+
+        ContentValues cv = new ContentValues();
+        cv.put("version_code", changelogEntry.versionCode);
+        cv.put("version_name", changelogEntry.versionName);
+        cv.put("version_critical", changelogEntry.versionCritical ? 1 : 0);
+        cv.put("kind", changelogEntry.kind);
+        cv.put("type", changelogEntry.type);
+        cv.put("note", changelogEntry.note);
+
+        sqLiteDatabase.insert("changelog", null, cv);
+    }
+
+    public List<ChangelogEntry> getChangelogEntries() {
+        openReadable();
+
+        List<ChangelogEntry> result = new ArrayList<>();
+
+        Cursor c = sqLiteDatabase.rawQuery("SELECT version_code, version_name, version_critical, kind, type, note FROM changelog ORDER BY version_code DESC", null);
+        while (c.moveToNext()) {
+            result.add(new ChangelogEntry(
+                    c.getString(c.getColumnIndex("version_code")),
+                    c.getString(c.getColumnIndex("version_name")),
+                    (c.getInt(c.getColumnIndex("version_critical")) == 1),
+                    c.getString(c.getColumnIndex("kind")),
+                    c.getString(c.getColumnIndex("type")),
+                    c.getString(c.getColumnIndex("note"))
+            ));
+        }
+        c.close();
+
+        return result;
+    }
+
+    public void clearChangelog() {
+        openWritable();
+        sqLiteDatabase.delete("changelog", null, null);
     }
 }

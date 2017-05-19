@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class SQLiteInit extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static final String DATABASE_NAME = "koceeng.free.donation.db";
 
     SQLiteInit(Context context) {
@@ -56,6 +56,19 @@ public class SQLiteInit extends SQLiteOpenHelper {
                     "_id INTEGER PRIMARY KEY, " +
                     "question TEXT NOT NULL UNIQUE, " +
                     "answer TEXT NOT NULL" +
+                    "); ");
+        }
+
+        if (oldVersion <= 1) {
+            // create table changelist
+            db.execSQL("CREATE TABLE IF NOT EXISTS changelog(" +
+                    "_id INTEGER PRIMARY KEY, " +
+                    "version_code TEXT NOT NULL, " +
+                    "version_name TEXT NOT NULL, " +
+                    "version_critical BOOLEAN, " +
+                    "kind TEXT NOT NULL, " +
+                    "type TEXT NOT NULL, " +
+                    "note TEXT NOT NULL " +
                     "); ");
         }
     }

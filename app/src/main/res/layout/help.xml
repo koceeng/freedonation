@@ -26,19 +26,19 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/help_progress"
         android:layout_centerHorizontal="true"
-        android:paddingBottom="@dimen/space_triple"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/space_triple">
 
         <TextView
             android:id="@+id/help_text_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/space_small"
-            android:paddingStart="@dimen/space_default"
             android:paddingEnd="@dimen/space_default"
-            android:textSize="@dimen/text_extra_big"
+            android:paddingStart="@dimen/space_default"
+            android:paddingTop="@dimen/space_small"
+            android:text="@string/help_title"
             android:textColor="@color/colorPrimary"
-            android:text="@string/help_title"/>
+            android:textSize="@dimen/text_extra_big" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -49,21 +49,21 @@
                 android:id="@+id/help_text_faq"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
-                android:paddingStart="@dimen/space_default"
+                android:layout_centerVertical="true"
                 android:paddingEnd="@dimen/space_default"
+                android:paddingStart="@dimen/space_default"
+                android:text="@string/help_faq_subtitle"
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/text_default"
-                android:text="@string/help_faq_subtitle"/>
+                android:textSize="@dimen/text_default" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
+                android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:layout_toStartOf="@id/help_text_faq"
-                android:background="@color/colorPrimary"
-                android:layout_alignParentStart="true" />
+                android:background="@color/colorPrimary" />
 
         </RelativeLayout>
 
@@ -81,44 +81,45 @@
                 android:id="@+id/help_text_about"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
-                android:paddingStart="@dimen/space_default"
+                android:layout_centerVertical="true"
                 android:paddingEnd="@dimen/space_default"
+                android:paddingStart="@dimen/space_default"
+                android:text="@string/help_about_subtitle"
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/text_default"
-                android:text="@string/help_about_subtitle"/>
+                android:textSize="@dimen/text_default" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
+                android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:layout_toStartOf="@id/help_text_about"
-                android:background="@color/colorPrimary"
-                android:layout_alignParentStart="true" />
+                android:background="@color/colorPrimary" />
 
         </RelativeLayout>
 
         <LinearLayout
             style="@style/settingEntry"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:onClick="actionShowChangelog">
 
             <TextView
                 android:id="@+id/help_text_version_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/space_tiny"
-                android:textSize="@dimen/text_small"
-                android:text="@string/help_about_version_label"/>
+                android:text="@string/help_about_version_label"
+                android:textSize="@dimen/text_small" />
 
             <TextView
                 android:id="@+id/help_text_version_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_small"
+                android:layout_gravity="center_vertical|end"
                 android:textColor="@color/colorPrimary"
-                android:layout_gravity="center_vertical|end"/>
+                android:textSize="@dimen/text_small" />
 
         </LinearLayout>
 
@@ -132,16 +133,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/space_tiny"
-                android:textSize="@dimen/text_small"
-                android:text="@string/help_about_team_label"/>
+                android:text="@string/help_about_team_label"
+                android:textSize="@dimen/text_small" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_small"
-                android:textColor="@color/colorPrimary"
                 android:layout_gravity="center_vertical|end"
-                android:text="@string/help_about_team_value"/>
+                android:text="@string/help_about_team_value"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text_small" />
 
         </LinearLayout>
 
@@ -156,16 +157,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/space_tiny"
-                android:textSize="@dimen/text_small"
-                android:text="@string/help_about_email_label"/>
+                android:text="@string/help_about_email_label"
+                android:textSize="@dimen/text_small" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_small"
-                android:textColor="@color/colorPrimary"
                 android:layout_gravity="center_vertical|end"
-                android:text="@string/help_about_email_address"/>
+                android:text="@string/help_about_email_address"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text_small" />
 
         </LinearLayout>
 
