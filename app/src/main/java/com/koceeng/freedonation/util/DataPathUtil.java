@@ -36,4 +36,8 @@ public class DataPathUtil {
     public DatabaseReference getChangelog() {
         return FirebaseDatabase.getInstance().getReference("changelog");
     }
+
+    public DatabaseReference getBankAccount() {
+        return FirebaseDatabase.getInstance().getReference("bank-account-number");
+    }
 }

@@ -10,14 +10,6 @@ import com.koceeng.freedonation.base.BaseActivity;
 
 public class NotActiveActivity extends BaseActivity {
 
-    public static class Factory {
-        public static Intent getIntent(Context context) {
-            Intent intent = new Intent(context, NotActiveActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            return intent;
-        }
-    }
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,5 +20,13 @@ public class NotActiveActivity extends BaseActivity {
     public void onBackPressed() {
         super.onBackPressed();
         System.exit(0);
+    }
+
+    public static class Factory {
+        public static Intent getIntent(Context context) {
+            Intent intent = new Intent(context, NotActiveActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            return intent;
+        }
     }
 }

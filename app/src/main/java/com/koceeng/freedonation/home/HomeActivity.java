@@ -2,7 +2,6 @@ package com.koceeng.freedonation.home;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.AppCompatImageView;
@@ -20,6 +19,7 @@ import android.widget.ViewFlipper;
 import com.google.android.gms.ads.AdView;
 import com.koceeng.freedonation.R;
 import com.koceeng.freedonation.alarm.AlarmBottomSheet;
+import com.koceeng.freedonation.bank.BankAccountActivity;
 import com.koceeng.freedonation.base.BaseActivity;
 import com.koceeng.freedonation.changelog.ChangelogActivity;
 import com.koceeng.freedonation.help.Faq;
@@ -246,7 +246,9 @@ public class HomeActivity extends BaseActivity {
     }
 
     public void actionReport(View view) {
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://freedonation.koceeng.com")));
+        // TODO: 20/05/17 replace
+        // startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://freedonation.koceeng.com")));
+        startActivity(BankAccountActivity.Factory.getIntent(thisContext));
     }
 
     public void actionSettingLanguage(View view) {

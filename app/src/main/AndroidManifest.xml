@@ -51,6 +51,9 @@
         <activity
             android:name=".changelog.ChangelogActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".bank.BankAccountActivity"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name="com.google.android.gms.ads.AdActivity"

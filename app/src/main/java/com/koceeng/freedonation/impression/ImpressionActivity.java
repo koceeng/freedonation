@@ -19,12 +19,6 @@ public class ImpressionActivity extends BaseActivity {
 
     @BindView(R.id.impression_progress) View progressMain;
 
-    public static class Factory {
-        public static Intent getIntent(Context context) {
-            return new Intent(context, ImpressionActivity.class);
-        }
-    }
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,5 +33,11 @@ public class ImpressionActivity extends BaseActivity {
 
         PreferenceUtil.getInstance().putBoolean(thisContext, getString(R.string.PREFERENCE_NOT_FIRST_LAUNCH), true);
         startActivity(HomeActivity.Factory.getIntent(this));
+    }
+
+    public static class Factory {
+        public static Intent getIntent(Context context) {
+            return new Intent(context, ImpressionActivity.class);
+        }
     }
 }

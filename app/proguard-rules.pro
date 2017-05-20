@@ -197,3 +197,5 @@
 -keepnames class com.koceeng.freedonation.object.VersionData { *; }
 -keepclassmembers class com.koceeng.freedonation.object.VersionData { *; }
 -keepclassmembers class com.koceeng.freedonation.changelog.ChangelogEntry { *; }
+-keepclassmembers class com.koceeng.freedonation.bank.BankAccount { *; }
+-keepclassmembers class com.koceeng.freedonation.bank.BankAccountGroup { *; }
