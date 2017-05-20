@@ -11,24 +11,24 @@ import com.koceeng.freedonation.util.LayoutUtil;
 
 import java.util.List;
 
-public class ChangelogAdapter extends RecyclerView.Adapter<ChangelogAdapter.ViewHolder> {
+public class ChangelogRecyclerAdapter extends RecyclerView.Adapter<ChangelogRecyclerAdapter.ViewHolder> {
 
     String lastVersionName = null;
     String lastKind = null;
     private List<ChangelogEntry> changelistEntries;
 
-    public ChangelogAdapter(List<ChangelogEntry> changelistEntries) {
+    public ChangelogRecyclerAdapter(List<ChangelogEntry> changelistEntries) {
         this.changelistEntries = changelistEntries;
     }
 
     @Override
-    public ChangelogAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ChangelogRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.changelog_item, parent, false);
-        return new ChangelogAdapter.ViewHolder(itemView);
+        return new ChangelogRecyclerAdapter.ViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(ChangelogAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ChangelogRecyclerAdapter.ViewHolder holder, int position) {
         ChangelogEntry changelistEntry = changelistEntries.get(position);
 
         Boolean showVersionName = lastVersionName == null || !lastVersionName.equals(changelistEntry.versionName);

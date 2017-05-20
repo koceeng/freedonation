@@ -161,7 +161,7 @@ public class ChangelogActivity extends BaseActivity {
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.changelog_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(thisContext));
-        recyclerView.setAdapter(new ChangelogAdapter(changelistEntries));
+        recyclerView.setAdapter(new ChangelogRecyclerAdapter(changelistEntries));
         recyclerView.setHasFixedSize(true);
 
         LayoutUtil.getInstance().toggleVisibility(layoutLoading, false);
