@@ -34,16 +34,17 @@ public class BankAccountActivity extends BaseActivity {
 
     private final String TAG = "BankAccountActivity";
 
-    @BindView(R.id.bank_account_toolbar)
-    Toolbar toolbar;
-    @BindView(R.id.bank_account_layout_loading)
-    View layoutLoading;
-    @BindView(R.id.bank_account_layout_main)
-    View layoutMain;
-    @BindView(R.id.bank_account_progressbar)
-    ProgressBar progressBar;
-    @BindView(R.id.bank_account_recyclerview)
-    RecyclerView recyclerView;
+    @BindView(R.id.bank_account_toolbar) Toolbar toolbar;
+    @BindView(R.id.bank_account_layout_loading) View layoutLoading;
+    @BindView(R.id.bank_account_layout_main) View layoutMain;
+    @BindView(R.id.bank_account_progressbar) ProgressBar progressBar;
+    @BindView(R.id.bank_account_recyclerview) RecyclerView recyclerView;
+
+    public static class Factory {
+        public static Intent getIntent(Context context) {
+            return new Intent(context, BankAccountActivity.class);
+        }
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,7 +60,7 @@ public class BankAccountActivity extends BaseActivity {
         }
 
         progressBar.getIndeterminateDrawable()
-                .setColorFilter(ContextCompat.getColor(this, R.color.colorThemeWhite), PorterDuff.Mode.SRC_IN);
+                .setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(thisContext));
 
@@ -91,7 +92,7 @@ public class BankAccountActivity extends BaseActivity {
                             }
                         }
 
-                        recyclerView.setAdapter(new BankAccountRecyclerAdapter(bankAccountPairList));
+                        recyclerView.setAdapter(new BankAccountRecyclerAdapter(thisContext, bankAccountPairList));
 
                         LayoutUtil.getInstance().toggleVisibility(layoutLoading, false);
                         LayoutUtil.getInstance().toggleVisibility(layoutMain, true);
@@ -104,11 +105,5 @@ public class BankAccountActivity extends BaseActivity {
                         finish();
                     }
                 });
-    }
-
-    public static class Factory {
-        public static Intent getIntent(Context context) {
-            return new Intent(context, BankAccountActivity.class);
-        }
     }
 }

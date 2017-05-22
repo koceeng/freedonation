@@ -31,6 +31,12 @@ public class SplashActivity extends BaseActivity {
     int handleDelay = 500;
     int handleRepeat = 10;
 
+    public static class Factory {
+        public static Intent getIntent(Context context) {
+            return new Intent(context, SplashActivity.class);
+        }
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,11 +107,5 @@ public class SplashActivity extends BaseActivity {
     private void showHomeActivity() {
         startActivity(HomeActivity.Factory.getIntent(splashActivity));
         overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
-    }
-
-    public static class Factory {
-        public static Intent getIntent(Context context) {
-            return new Intent(context, SplashActivity.class);
-        }
     }
 }

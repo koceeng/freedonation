@@ -22,14 +22,18 @@ import java.util.Random;
 public class FeedHelper {
 
     private final String TAG = "FeedHelper";
+
     HomeActivity activity;
     InterstitialAd interstitialAd;
     Content result;
+
     boolean adInterstitialDone;
     boolean getFeedDataDone;
+
     int handleCounter = 0;
     int handleDelay = 500;
     int handleRepeat = 5;
+
     public FeedHelper(final HomeActivity activity) {
         this.activity = activity;
     }
@@ -39,6 +43,7 @@ public class FeedHelper {
     }
 
     public void get(Boolean force, Boolean showAd) {
+        DebugUtil.getInstance().v(TAG, "get on " + force + ", " + showAd);
         // check last get data
         if (!force) {
             Content content = SQLiteUtil.getInstance(activity).getContent();

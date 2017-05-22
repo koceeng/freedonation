@@ -1,13 +1,3 @@
 THIS RELEASE
 
-v1.0.0
-^ initial release
-
-v1.0.1
-* reminder bug fix (fired immediately and duplicate data)
-^ reminder list show "(empty)" if no reminder set
-^ reminder LED indicator
-
-
 NEXT RELEASE
-notifikasi

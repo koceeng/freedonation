@@ -40,4 +40,8 @@ public class DataPathUtil {
     public DatabaseReference getBankAccount() {
         return FirebaseDatabase.getInstance().getReference("bank-account-number");
     }
+
+    public DatabaseReference getReportLink() {
+        return FirebaseDatabase.getInstance().getReference("report-link");
+    }
 }

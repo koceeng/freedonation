@@ -2,6 +2,7 @@ package com.koceeng.freedonation.home;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.AppCompatImageView;
@@ -17,6 +18,9 @@ import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.google.android.gms.ads.AdView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.koceeng.freedonation.R;
 import com.koceeng.freedonation.alarm.AlarmBottomSheet;
 import com.koceeng.freedonation.bank.BankAccountActivity;
@@ -33,6 +37,7 @@ import com.koceeng.freedonation.setting.SettingHelper;
 import com.koceeng.freedonation.sqlite.SQLiteUtil;
 import com.koceeng.freedonation.util.AdUtil;
 import com.koceeng.freedonation.util.AppUtil;
+import com.koceeng.freedonation.util.DataPathUtil;
 import com.koceeng.freedonation.util.DebugUtil;
 import com.koceeng.freedonation.util.IntentUtil;
 import com.koceeng.freedonation.util.LanguageUtil;
@@ -104,6 +109,14 @@ public class HomeActivity extends BaseActivity {
     FaqHelper faqHelper;
     boolean settingHoldChange = false;
 
+    String reportLink = "http://sedekahgratis.koceeng.com";
+
+    public static class Factory {
+        public static Intent getIntent(Context context) {
+            return new Intent(context, HomeActivity.class);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,6 +127,7 @@ public class HomeActivity extends BaseActivity {
         setTag("HomeActivity");
 
         adViewBottom.loadAd(AdUtil.getInstance().getAdRequest());
+        getReportLink();
 
         feedHelper = new FeedHelper(this);
         settingHelper = new SettingHelper(this);
@@ -152,6 +166,12 @@ public class HomeActivity extends BaseActivity {
                 (AppCompatImageView) findViewById(R.id.home_image_share),
                 findViewById(R.id.share_layout_parent),
                 editTextShareComment
+        ));
+        homeMenuList.putItem(HomeMenuList.Name.DONATE, new HomeMenu(
+                findViewById(R.id.home_layout_donate),
+                findViewById(R.id.home_layout_donate_indicator),
+                (AppCompatImageView) findViewById(R.id.home_image_donate),
+                findViewById(R.id.donate_layout_parent)
         ));
         homeMenuList.putItem(HomeMenuList.Name.HELP, new HomeMenu(
                 findViewById(R.id.home_layout_help),
@@ -246,9 +266,7 @@ public class HomeActivity extends BaseActivity {
     }
 
     public void actionReport(View view) {
-        // TODO: 20/05/17 replace
-        // startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://freedonation.koceeng.com")));
-        startActivity(BankAccountActivity.Factory.getIntent(thisContext));
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(reportLink)));
     }
 
     public void actionSettingLanguage(View view) {
@@ -309,6 +327,10 @@ public class HomeActivity extends BaseActivity {
         }
     }
 
+    public void actionShowBankAccountNumbers(View view) {
+        startActivity(BankAccountActivity.Factory.getIntent(thisContext));
+    }
+
     public void actionShowChangelog(View view) {
         startActivity(ChangelogActivity.Factory.getIntent(thisContext));
     }
@@ -344,9 +366,13 @@ public class HomeActivity extends BaseActivity {
             feedHelper.get(false);
             faqHelper.get(false);
 
-        } else {
+        } else if (type == SettingHelper.Type.LANGUAGE) {
+            type = null;
             feedHelper.get(true);
             faqHelper.get(true);
+
+        } else {
+            onFeedChange();
         }
 
         if (type == null) {
@@ -411,12 +437,10 @@ public class HomeActivity extends BaseActivity {
         Boolean showContentDetail = !PreferenceUtil.getInstance().getBoolean(thisContext, getString(R.string.PREFERENCE_HIDE_CONTENT_DETAIL));
 
         feedChangeShowHide(content, "text", textFeedContentText);
-        if (showContentDetail) {
-            feedChangeShowHide(content, "title", textFeedContentTitle);
-            feedChangeShowHide(content, "subtitle", textFeedContentSubtitle);
-            feedChangeShowHide(content, "footer", textFeedContentFooter);
-            feedChangeShowHide(content, "source", textFeedContentSource);
-        }
+        feedChangeShowHide(showContentDetail ? content : null, "title", textFeedContentTitle);
+        feedChangeShowHide(showContentDetail ? content : null, "subtitle", textFeedContentSubtitle);
+        feedChangeShowHide(showContentDetail ? content : null, "footer", textFeedContentFooter);
+        feedChangeShowHide(showContentDetail ? content : null, "source", textFeedContentSource);
     }
 
     private void feedChangeShowHide(Content content, String messageIndicator, TextSwitcher textSwitcher) {
@@ -449,9 +473,25 @@ public class HomeActivity extends BaseActivity {
             recyclerViewFaq.setAdapter(new FaqRecyclerAdapter(faqs));
     }
 
-    public static class Factory {
-        public static Intent getIntent(Context context) {
-            return new Intent(context, HomeActivity.class);
-        }
+    private void getReportLink() {
+        DataPathUtil.getInstance().getReportLink()
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (!dataSnapshot.exists())
+                            return;
+
+                        String result = dataSnapshot.getValue(String.class);
+                        if (result == null || result.isEmpty())
+                            return;
+
+                        reportLink = result;
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        DebugUtil.getInstance().f(TAG, databaseError);
+                    }
+                });
     }
 }

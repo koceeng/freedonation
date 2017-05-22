@@ -23,6 +23,15 @@ public class UpdateActivity extends BaseActivity {
 
     boolean isCritical;
 
+    public static class Factory {
+        public static Intent getIntent(Context context, Boolean isCritical) {
+            Intent intent = new Intent(context, UpdateActivity.class);
+            if (isCritical)
+                intent.putExtra(IX_UPDATE_CRITICAL, true);
+            return intent;
+        }
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,14 +55,5 @@ public class UpdateActivity extends BaseActivity {
     public void onBackPressed() {
         if (!isCritical)
             super.onBackPressed();
-    }
-
-    public static class Factory {
-        public static Intent getIntent(Context context, Boolean isCritical) {
-            Intent intent = new Intent(context, UpdateActivity.class);
-            if (isCritical)
-                intent.putExtra(IX_UPDATE_CRITICAL, true);
-            return intent;
-        }
     }
 }

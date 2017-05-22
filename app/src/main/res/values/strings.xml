@@ -60,10 +60,13 @@
     <string name="changelog_error_message">Something goes wrong when checking changelog</string>
 
     <!--Bank Account-->
+    <string name="bank_account_button">View Bank Account Numbers</string>
     <string name="bank_account_title">Bank Account Numbers</string>
     <string name="bank_account_subtitle">Here are some bank account numbers that can be transferred to if you want to donate for charity:</string>
     <string name="bank_account_loading">Please wait while we peek at the cloud</string>
     <string name="bank_account_error_message">Something goes wrong when checking bank account numbers</string>
+    <string name="bank_account_copy_tag">Bank Account Number</string>
+    <string name="bank_account_copied">Detail copied</string>
 
     <!--Update-->
     <string name="update_check_fail_message">Cannot check latest version of this application. Some features may cause errors</string>

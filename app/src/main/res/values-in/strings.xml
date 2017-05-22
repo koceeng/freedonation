@@ -50,10 +50,13 @@
     <string name="changelog_error_message">Aduh, terjadi kesalahan saat mengecek versi dan perubahan</string>
 
     <!--Bank Account-->
+    <string name="bank_account_button">Lihat Nomor Rekening Bank Penyalur Sedekah</string>
     <string name="bank_account_title">Nomor Rekening Bank Penyalur Sedekah</string>
     <string name="bank_account_subtitle">Berikut adalah beberapa nomor rekening yang dapat digunakan untuk tujuan transfer sedekah Anda:</string>
     <string name="bank_account_loading">Mohon tunggu selagi kita mengintip di database</string>
     <string name="bank_account_error_message">Aduh, terjadi kesalahan saat mengecek nomor rekening bank penyalur sedekah</string>
+    <string name="bank_account_copy_tag">Nomor Rekening Bank</string>
+    <string name="bank_account_copied">Data berhasil disalin</string>
 
     <!--Update-->
     <string name="update_check_fail_message">Tidak bisa melakukan pengecekan versi terbaru. Beberapa fitur mungkin tidak maksimal.</string>

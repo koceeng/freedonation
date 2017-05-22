@@ -1,31 +1,33 @@
 package com.koceeng.freedonation.bank;
 
+import com.google.firebase.database.PropertyName;
 import com.koceeng.freedonation.base.FirebaseObject;
 
 public class BankAccount extends FirebaseObject {
 
-    private String bank;
-    private String number;
-    private String name;
+    @PropertyName("1st-line")
+    public String firstLine;
+    @PropertyName("2nd-line")
+    public String secondLine;
+    @PropertyName("3rd-line")
+    public String thirdLine;
 
     public BankAccount() {
     }
 
-    public BankAccount(String bank, String number, String name) {
-        this.bank = bank;
-        this.number = number;
-        this.name = name;
+    public String getAllLines() {
+        return firstLine + "\n" + secondLine + "\n" + thirdLine;
     }
 
-    public String getBank() {
-        return bank;
+    public String getFirstLine() {
+        return firstLine;
     }
 
-    public String getNumber() {
-        return number;
+    public String getSecondLine() {
+        return secondLine;
     }
 
-    public String getName() {
-        return name;
+    public String getThirdLine() {
+        return thirdLine;
     }
 }

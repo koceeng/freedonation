@@ -11,10 +11,13 @@ import java.util.HashMap;
 public class HomeMenuList {
 
     private final String TAG = "HomeMenuList";
+    public enum Name {FEED, REPORT, SETTING, OTHER_APP, SHARE, DONATE, HELP}
+
     private Context context;
     private ViewFlipper viewFlipper;
     private HashMap<Name, HomeMenu> itemMap;
     private Name selected;
+
     public HomeMenuList(Context context, ViewFlipper viewFlipper) {
         this.context = context;
         this.viewFlipper = viewFlipper;
@@ -63,6 +66,4 @@ public class HomeMenuList {
 
         selected = name;
     }
-
-    public enum Name {FEED, REPORT, SETTING, OTHER_APP, SHARE, HELP}
 }

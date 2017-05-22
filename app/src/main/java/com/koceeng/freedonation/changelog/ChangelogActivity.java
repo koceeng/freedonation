@@ -34,16 +34,17 @@ public class ChangelogActivity extends BaseActivity {
 
     private final String TAG = "ChangelogActivity";
 
-    @BindView(R.id.changelog_toolbar)
-    Toolbar toolbar;
-    @BindView(R.id.changelog_appbarlayout)
-    AppBarLayout appBarLayout;
-    @BindView(R.id.changelog_layout_loading)
-    View layoutLoading;
-    @BindView(R.id.changelog_progressbar)
-    ProgressBar progressBar;
-    @BindView(R.id.changelog_scroll)
-    NestedScrollView scrollView;
+    @BindView(R.id.changelog_toolbar) Toolbar toolbar;
+    @BindView(R.id.changelog_appbarlayout) AppBarLayout appBarLayout;
+    @BindView(R.id.changelog_layout_loading) View layoutLoading;
+    @BindView(R.id.changelog_progressbar) ProgressBar progressBar;
+    @BindView(R.id.changelog_scroll) NestedScrollView scrollView;
+
+    public static class Factory {
+        public static Intent getIntent(Context context) {
+            return new Intent(context, ChangelogActivity.class);
+        }
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -166,11 +167,5 @@ public class ChangelogActivity extends BaseActivity {
 
         LayoutUtil.getInstance().toggleVisibility(layoutLoading, false);
         LayoutUtil.getInstance().toggleVisibility(scrollView, true);
-    }
-
-    public static class Factory {
-        public static Intent getIntent(Context context) {
-            return new Intent(context, ChangelogActivity.class);
-        }
     }
 }
