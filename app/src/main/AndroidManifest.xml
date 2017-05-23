@@ -10,6 +10,8 @@
     <!--suppress DeprecatedClassUsageInspection -->
     <uses-permission android:name="android.permission.GET_TASKS" />
 
+    <uses-permission android:name="com.android.vending.BILLING"/>
+
     <application
         android:name=".base.App"
         android:allowBackup="true"
