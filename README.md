@@ -6,7 +6,24 @@ Donation reports and proof of distribution are published back to users inside th
 
 **Package:** `com.koceeng.freedonation`
 
----
+> [!NOTE]
+> **This project now stands as a proof of concept only.** The published APK has been deactivated and the app is no longer distributed.
+>
+> It was initiated and developed at a time when ad provider policies were considerably less strict than they are today. Anyone reusing this code should check the current AdMob / Google Play policies before shipping anything built on the same model.
+
+<details>
+<summary><b>Screenshots</b> — click to expand</summary>
+<br>
+<img src="docs/screenshots/01-splash.png" width="180" alt="Splash screen">
+<img src="docs/screenshots/02-how-it-works.png" width="180" alt="Onboarding explaining how ad revenue becomes charity">
+<img src="docs/screenshots/03-home-feed.png" width="180" alt="Daily hadith feed on the home screen">
+<img src="docs/screenshots/04-report.png" width="180" alt="Donation report screen">
+<img src="docs/screenshots/05-settings-id.png" width="180" alt="Settings screen in Indonesian">
+<img src="docs/screenshots/06-settings-en.png" width="180" alt="Settings screen in English">
+<img src="docs/screenshots/07-share.png" width="180" alt="Share screen with editable message">
+<img src="docs/screenshots/08-reminder.png" width="180" alt="Time picker for scheduling a reminder">
+</details>
+
 
 ## Features
 
@@ -113,7 +130,12 @@ No signing config is committed. Create your own keystore and supply credentials 
 
 ## Status
 
-Archived / released as-is at v1.0.0. Built against the Android Support Library and Firebase 9.8.0 — both predate AndroidX and current Firebase BoM. Expect to modernize dependencies before shipping anything from this tree.
+**Proof of concept — not a live app.** The released APK has been deactivated and the project is archived as-is at v1.0.0. The code is published for reference: how the ad-revenue-to-charity flow was wired up, and how the remote-controlled content, kill switch, and update gate worked.
+
+Two reasons it isn't a template to ship from directly:
+
+- **Policy.** It was built when ad provider policies were far looser than they are now. Donating ad revenue, ad placement density, and incentivized-viewing patterns are all governed by rules that have tightened considerably since. Verify current AdMob and Google Play policy before reusing the model.
+- **Dependencies.** Built against the Android Support Library and Firebase 9.8.0 — both predate AndroidX and the Firebase BoM. Expect a full dependency modernization pass.
 
 ## License
 
