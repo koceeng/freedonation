@@ -1,4 +1,4 @@
-# Free Donation (Sedekah Gratis)
+# <img src="docs/favicon.png" width="42" align="top" alt="" style="margin-right: 5px"> Free Donation (Sedekah Gratis)
 
 An Android app that turns ad revenue into charity. Users read daily hadith content; the ads shown alongside it generate income, and that income is donated to an Indonesian charity foundation (*yayasan penyalur sedekah*). Users donate simply by using the app — no money leaves their pocket.
 
