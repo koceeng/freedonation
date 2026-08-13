@@ -52,6 +52,9 @@ captures/
 *.keystore
 keystore.properties
 
+# Local-only working files (keystore, notes, release assets)
+files/*
+
 # Google Services (contains project config; keep out unless intentionally public)
 # google-services.json
 
