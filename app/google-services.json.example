@@ -1,0 +1,147 @@
+{
+  "project_info": {
+    "project_number": "YOUR_PROJECT_NUMBER",
+    "firebase_url": "https://YOUR_PROJECT.firebaseio.com",
+    "project_id": "YOUR_PROJECT_ID",
+    "storage_bucket": "YOUR_PROJECT.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "YOUR_APP_ID",
+        "android_client_info": {
+          "package_name": "com.koceeng.freedonation.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "YOUR_CLIENT_ID",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.koceeng.freedonation.debug",
+            "certificate_hash": "YOUR_SHA1_HASH"
+          }
+        },
+        {
+          "client_id": "YOUR_CLIENT_ID",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.koceeng.freedonation.debug",
+            "certificate_hash": "YOUR_SHA1_HASH"
+          }
+        },
+        {
+          "client_id": "YOUR_CLIENT_ID",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.koceeng.freedonation.debug",
+            "certificate_hash": "YOUR_SHA1_HASH"
+          }
+        },
+        {
+          "client_id": "YOUR_CLIENT_ID",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.koceeng.freedonation.debug",
+            "certificate_hash": "YOUR_SHA1_HASH"
+          }
+        },
+        {
+          "client_id": "YOUR_CLIENT_ID",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "YOUR_API_KEY_HERE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "YOUR_CLIENT_ID",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "YOUR_APP_ID",
+        "android_client_info": {
+          "package_name": "com.koceeng.freedonation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "YOUR_CLIENT_ID",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.koceeng.freedonation",
+            "certificate_hash": "YOUR_SHA1_HASH"
+          }
+        },
+        {
+          "client_id": "YOUR_CLIENT_ID",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.koceeng.freedonation",
+            "certificate_hash": "YOUR_SHA1_HASH"
+          }
+        },
+        {
+          "client_id": "YOUR_CLIENT_ID",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.koceeng.freedonation",
+            "certificate_hash": "YOUR_SHA1_HASH"
+          }
+        },
+        {
+          "client_id": "YOUR_CLIENT_ID",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.koceeng.freedonation",
+            "certificate_hash": "YOUR_SHA1_HASH"
+          }
+        },
+        {
+          "client_id": "YOUR_CLIENT_ID",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "YOUR_API_KEY_HERE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "YOUR_CLIENT_ID",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -56,7 +56,7 @@ keystore.properties
 files/*
 
 # Google Services (contains project config; keep out unless intentionally public)
-# google-services.json
+app/google-services.json
 
 # External native build folder generated in Android Studio 2.2 and later
 .externalNativeBuild
